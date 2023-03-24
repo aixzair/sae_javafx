@@ -59,7 +59,7 @@ public class GraphIO {
 
       for(int i = 0; i < graph.getNodes().size(); i++){
         for(int j = i; j<graph.getNodes().size()-1; j++){
-          bw.write();
+          
 
         }
       }
