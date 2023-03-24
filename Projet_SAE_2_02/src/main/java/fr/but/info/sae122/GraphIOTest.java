@@ -2,6 +2,8 @@ package main.java.fr.but.info.sae122;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GraphIOTest {
@@ -14,5 +16,6 @@ class GraphIOTest {
 
     @Test
     public void ReadTest(){
+
     }
 }

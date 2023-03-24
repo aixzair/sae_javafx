@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 public class GraphIO {
   public static Graph read(InputStream from) throws IOException {
-    Path file = Path.of("graph.csv");
     Reader r = new InputStreamReader(from);
     Graph g = new Graph();
     String ligne = null;
@@ -31,18 +30,44 @@ public class GraphIO {
           if(!(edges.length > 3)){
             g.addEdge(edges[0], edges[1], edges[2]);
           }else{
-            g.addEdge(edges[0], edges[3], edges[edges.length-1]);
+            int node = 0, arr = 0;
+            for(int i = 0; i < edges.length; i++){
+              if(i%2==0) node = i;
+              else arr = i;
+
+              if(node != 0 && arr != 0) g.addEdge(edges[0], edges[node], edges[arr]);
+            }
             }
           }
         }
       reader.close();
-    }catch (Exception e){
+    }catch (FileNotFoundException e){
       e.printStackTrace();
     }
     return g;
   }
   public static void write(Graph graph, OutputStream from) throws IOException {
+    Path file = Path.of("graph.csv");
+    Writer w = new OutputStreamWriter(from);
+    try {
+      BufferedWriter bw = new BufferedWriter(w);
 
+      for(String s : graph.getNodes()){
+        bw.write(s + ";");
+      }
+      bw.write("\n");
+
+      for(int i = 0; i < graph.getNodes().size(); i++){
+        for(int j = i; j<graph.getNodes().size()-1; j++){
+          bw.write();
+
+        }
+      }
+
+      bw.close();
+    }catch (FileNotFoundException e){
+      e.printStackTrace();
+    }
 
   }
 }
