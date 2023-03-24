@@ -197,8 +197,13 @@ public class Graph {
 	}
 	
 	@Override
+	/*
+	 * @return 
+	 * 		"Arêtes : (arêtes) ; Noeuds : (noeuds)"
+	 * 
+	 */
 	public String toString() {
 		return "Arêtes : " + this.edges
-				+ " ; Noeud : " + this.nodes;
+				+ " ; Noeuds : " + this.nodes;
 	}
 }
