@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class GraphGenerator {
 	
 	/*
-	 * author : Orianne
+	 * @author : Orianne ESSIENTH
 	 */
 	
   public static Graph createLinear(int nbNodes) {
@@ -20,7 +20,6 @@ public class GraphGenerator {
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  if(nbNodes>=1) {
-
 		  graph1.addNode("N1");
 		  nodes.add("N1");
 		  graph1.addNode((nodes.get(0).getName()));
@@ -48,18 +47,19 @@ public class GraphGenerator {
   public static Graph createCircular(int nbNodes) {
 	  
 	  /*
+
 	   * @brief : It creates a circular graph
 	   * 
 	   * @param : int number of nodes in the graph
 	   * 
 	   * @return : It returns the graph that has been created
+
 	   */
 	  
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  
 	  if(nbNodes>=1) {
-		 
 		  graph1.addNode("N1");
 		  nodes.add("N1");
 		  
@@ -104,7 +104,6 @@ public class GraphGenerator {
 		  
 		  int counter = 1;		  
 		  for(int i=nbNodes-1;i>0;i--) {
-			
 			  String nodeName = "N"+(char)i;
 			  graph1.addNode(nodeName);
 			  nodes.add(nodeName); 
@@ -112,6 +111,7 @@ public class GraphGenerator {
 		  
 		  for(int i=0;i<nbNodes-1;i++) {
 			  for(int j=counter;j<nbNodes-1;j++) {
+
 				  graph1.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
 				  counter++;
 			  }
@@ -175,6 +175,7 @@ public class GraphGenerator {
 	   * @param2 : double probability used to create a new edge or not
 	   * 
 	   * @return : It returns the graph that has been created
+	   * 
 	   */
 	  
 	  Graph graph1 = new Graph ();
