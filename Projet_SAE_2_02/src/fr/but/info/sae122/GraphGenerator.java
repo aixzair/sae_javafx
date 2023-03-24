@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class GraphGenerator {
 	
-	/*
+	/**
 	 * @author : Orianne ESSIENTH
 	 */
 	  
-	  /*
+	  /**
 	   * @brief : It creates a linear graph
 	   * 
 	   * @param : int number of nodes in the graph
@@ -76,7 +76,7 @@ public class GraphGenerator {
   
   public static Graph createCircular(int nbNodes) throws AddNodeException, AddEdgeException {
 	  
-	  /*
+	  /**
 
 	   * @brief : It creates a circular graph
 	   * 
@@ -123,20 +123,20 @@ public class GraphGenerator {
   }
   
   
-<<<<<<< HEAD
+
   public static Graph createTriangular(int nbNodes) {
 
 	  
-	  /*
+	  /**
 	   * @brief : It creates a triangular graph
 	   * 
 	   * @param : int number of nodes in the graph
 	   * 
 	   * @return : It returns the graph that has been created
 	   */
-=======
+
   public static Graph createTriangular(int nbNodes) throws AddNodeException, AddEdgeException {
->>>>>>> lukas
+
 	  
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
@@ -192,7 +192,7 @@ public class GraphGenerator {
   
   public static Graph createFullyConnected(int nbNodes) {
 	  
-	  /*
+	  /**
 	   * @brief : It creates a fully-connected graph
 	   * 
 	   * @param : int number of nodes in the graph
@@ -234,7 +234,7 @@ public class GraphGenerator {
 
   public static Graph createRandom(int nbNodes, double probability) {1
 	  
-	  /*
+	  /**
 	   * @brief : It creates a graph randomly
 	   * 
 	   * @param1 : int number of nodes of the graph

@@ -3,7 +3,7 @@ package fr.but.info.sae122;
 
 package src.fr.but.info.sae122;
 
-/*
+/**
  * @author Lukas Siopathis
  */
 
@@ -13,7 +13,7 @@ public final class Edge {
 	private String toNode;
 	private String label;
 
-	/*
+	/**
 	 * Constructeur d'objets arrêtes
 	 * @param fromNode : Noeud de départ
 	 * @param toNode : Noeud de destination
@@ -33,27 +33,28 @@ public final class Edge {
 		}
 	}
 
-	/*
+	/**
 	 * @return le noeud d'origine de l'arrête
 	 */
 	public String getFromNode() {
 		return this.fromNode;
 	}
 
-	/*
+	/**
 	 * @return le noeud de destination de l'arrête
 	 */
 	public String getToNode() {
 		return this.toNode;
 	}
 
-	/*
+	/**
 	 * @return L'étiquette de l'arrête
 	 */
 	public String getLabel() {
 		return this.label;
 	}
-	/*Compare l'égalité entre deux arrêtes
+	/**
+	Compare l'égalité entre deux arrêtes
 	 * @param Deuxième arrête
 	 * @return Si les deux arrêtes sont les mêmes
 	 */
@@ -69,7 +70,7 @@ public final class Edge {
 		return (this.fromNode == ((Edge) obj).getFromNode() && this.toNode == ((Edge) obj).getToNode() && this.label == ((Edge) obj).getLabel() );
 	}
 	
-	/*
+	/**
 	@Override
 	public int hashCode() {
 		throw new UnsupportedOperationException("To be written");

@@ -1,7 +1,7 @@
 package fr.but.info.sae122;
 package src.fr.but.info.sae122;
 
-/*
+/**
  * @author Lukas Siopathis
  */
 
@@ -15,7 +15,7 @@ public class BreadthFirstIterator implements Iterator<Edge> {
 	private Iterator<Edge> itrArr;		//Itérateur de la liste d'arrêtes
 	private int index;					//Index de la liste de noeuds rencontrés
 
-	/*
+	/**
 	 * Constructeur d'objets arrêtes
 	 * Le premier noeud devient le noeud actuel
 	 * @param graph : Graphe à parcourir
@@ -30,7 +30,7 @@ public class BreadthFirstIterator implements Iterator<Edge> {
 		update();
 	}
 
-	/*
+	/**
 	 * Met à jour la liste de Noeuds rencontrés
 	 * @param fromNode : Noeud de départ
 	 * @param toNode : Noeud de destination
@@ -62,7 +62,7 @@ public class BreadthFirstIterator implements Iterator<Edge> {
 		return itrArr.hasNext(); 
 	}
 
-	/*
+	/**
 	 * @return : La prochaine arrête non-explorée 
 	 */
 	@Override

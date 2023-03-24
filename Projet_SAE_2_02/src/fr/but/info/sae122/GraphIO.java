@@ -1,24 +1,19 @@
-
-
 package fr.but.info.sae122;
 
-
 import sae122.SimpleGraphDisplay;
-=======
 package src.fr.but.info.sae122;
->>>>>>> lukas
 
 import java.io.*;
 import java.util.*;
 
 public class GraphIO {
 
-    /*
+    /**
     * Author : Alenso
     * */
 
 
-  /*
+  /**
   * @brief: Read the csv file that describe the graph
   * @params: InputStream from -> allow to read the file
   * @return The graph that has been created
@@ -63,7 +58,7 @@ public class GraphIO {
     return g;
   }
 
-  /*
+  /**
   * @brief Write in the csv file, the function create the file that describe the graph
   * @params Graph graph the graph which is describe
   * @params OutputStream from allow to write in the file
@@ -102,6 +97,12 @@ public class GraphIO {
           }
       }
 
+	/**
+	  * @brief Display with the simpleGraph, a graph with csv information
+	  * @params link to the csv
+	  * @return The display 
+	  * */
+
 
       public static SimpleGraphDisplay readGraphDisplay(InputStream from){
         Reader r = new InputStreamReader(from);
@@ -134,10 +135,4 @@ public class GraphIO {
         }
         return display;
       }
-
-
-  public static void main(String[] args) throws FileNotFoundException {
-      readGraphDisplay(new FileInputStream("graph.csv")).display();
-
-  }
 }
