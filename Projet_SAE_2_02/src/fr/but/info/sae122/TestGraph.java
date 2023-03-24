@@ -238,12 +238,4 @@ class TestGraph {
 		assertEquals(null, graph.getEdge("b", "c"));
 	}
 
-	/**
-	 * Test method for {@link fr.but.info.sae122.Graph#toString()}.
-	 */
-	@Test
-	void testToString() {
-		// fail("Not yet implemented");
-	}
-
 }
