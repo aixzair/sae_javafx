@@ -1,5 +1,6 @@
 package main.java.fr.but.info.sae122;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Graph {
@@ -15,19 +16,19 @@ public class Graph {
     throw new UnsupportedOperationException("To be written");
   }
 
-  public Collection<String> getNodes() {
+  public ArrayList<String> getNodes() {
     throw new UnsupportedOperationException("To be written");
   }
 
-  public Collection<Edge> getEdges() {
+  public ArrayList<Edge> getEdges() {
     throw new UnsupportedOperationException("To be written");
   }
 
-  public Collection<Edge> getEdgesFrom(String node) {
+  public ArrayList<Edge> getEdgesFrom(String node) {
     throw new UnsupportedOperationException("To be written");
   }
 
-  public Collection<Edge> getEdgesTo(String node) {
+  public ArrayList<Edge> getEdgesTo(String node) {
     throw new UnsupportedOperationException("To be written");
   }
 
