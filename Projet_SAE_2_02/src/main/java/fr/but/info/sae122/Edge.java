@@ -1,21 +1,32 @@
 package fr.but.info.sae122;
 
-public class GraphGenerator {
-  public static Graph createLinear(int nbNodes) {
-    throw new UnsupportedOperationException("To be written");
-  }
-  public static Graph createCircular(int nbNodes) {
-    throw new UnsupportedOperationException("To be written");
-  }
-  public static Graph createTriangular(int nbNodes) {
-    throw new UnsupportedOperationException("To be written");
-  }
-  public static Graph createFullyConnected(int nbNodes) {
+public final class Edge {
+  public Edge(
+      String fromNode,
+      String toNode,
+      String label) {
     throw new UnsupportedOperationException("To be written");
   }
 
-  public static Graph createRandom(int nbNodes, double probability) {
+  public String getFromNode() {
     throw new UnsupportedOperationException("To be written");
   }
 
+  public String getToNode() {
+    throw new UnsupportedOperationException("To be written");
+  }
+
+  public String getLabel() {
+    throw new UnsupportedOperationException("To be written");
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    throw new UnsupportedOperationException("To be written");
+  }
+
+  @Override
+  public int hashCode() {
+    throw new UnsupportedOperationException("To be written");
+  }
 }
