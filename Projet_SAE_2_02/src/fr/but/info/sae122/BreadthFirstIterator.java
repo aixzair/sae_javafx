@@ -15,8 +15,8 @@ public class BreadthFirstIterator implements Iterator<Edge> {
 		this.graph = graph;
 		this.currentNode = firstNode;
 		this.index = 0;
-		itrArr = this.graph.
-		update();
+		//itrArr = this.graph.
+		/*update();*/
 		//throw new UnsupportedOperationException("To be written");
 	}
 
@@ -25,10 +25,10 @@ public class BreadthFirstIterator implements Iterator<Edge> {
 		for(int i = 0; i < this.graph.getEdgesFrom(this.currentNode).size(); i++)
 		{
 			//ajouter à la file toutes les arrêtes partant de ce noeud
-			if(!noeudsRencontres.contains(this.graph.getEdgesFrom(this.currentNode).get(i).getFromNode()))
+			/*if(!noeudsRencontres.contains(this.graph.getEdgesFrom(this.currentNode).get(i).getFromNode()))
 			{
 				this.noeudsRencontres.add(this.graph.getEdgesFrom(this.currentNode).get(i).getFromNode());
-			}
+			}*/
 			
 		}
 	}

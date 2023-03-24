@@ -16,7 +16,12 @@ public class GraphGenerator {
 	   * 
 	   * @return : It returns the graph that has been created
 	   */
-	  
+	
+  public static Graph createLinear(int nbNodes) {
+
+	  Graph graphe = new Graph ();
+	  ArrayList<Node> nodes = new ArrayList<Node>();
+	  ArrayList<Edge> edges = new ArrayList<Edge>();
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  if(nbNodes>=1) {
@@ -24,7 +29,9 @@ public class GraphGenerator {
 		  nodes.add("N1");
 		  graph1.addNode((nodes.get(0).getName()));
 
-
+		  
+		  nodes.add(new Node("N1"));
+		  graphe.addNode((nodes.get(0).getName()));
 	  }
 	  if(nbNodes>1) {
 		  
@@ -35,7 +42,13 @@ public class GraphGenerator {
 			  graph1.addEdge(lastNodeName,nodeName,lastNodeName+"-"+nodeName);
 			  nodes.add(nodeName);
 			  
-		  } 
+		  }			  String nom_graphe = "N"+(char)i;
+			  nodes.add(new Node(nom_graphe));
+			  nodes.get(i-1).setVoisin(nodes.get(i));
+			  edges.add(i,new Edge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName()));
+			  /raphe.addNode((nodes.get(i).getName()));
+			  graphe.addEdge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName());
+		  }
 		  
 	  }
     
@@ -72,6 +85,13 @@ public class GraphGenerator {
 			  graph1.addNode(nodeName);
 			  graph1.addEdge(lastNodeName,nodeName,lastNodeName+"-"+nodeName);
 			  nodes.add(nodeName);
+		 for (int i=2; i<=nbNodes; i++) {
+			  String nom_graphe = "N"+(char)i;
+			  nodes.add(new Node(nom_graphe));
+			  nodes.get(i-1).setVoisin(nodes.get(i));
+			  edges.add(i,new Edge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName()));
+			  graphe.addNode((nodes.get(i).getName()));
+			  graphe.addEdge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName());
 		  }		  
 	  }
 	  
@@ -92,6 +112,9 @@ public class GraphGenerator {
 	  
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
+ 
+	  Graph graphe = new Graph ();
+	  ArrayList<Node> nodes = new ArrayList<Node>();
 	  
 	  if(nbNodes>=1) {
 		  
@@ -114,6 +137,9 @@ public class GraphGenerator {
 
 				  graph1.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
 				  counter++;
+		  for(int i=0;i>nbNodes-1;i++) {
+			  for(int j=1;j<nbNodes-1;j++) {
+				  graphe.addEdge(nodes.get(i).getName(),nodes.get(j).getName(),nodes.get(i).getName()+"-"+nodes.get(j).getName());
 			  }
 		  }
 		  
@@ -209,6 +235,7 @@ public class GraphGenerator {
 		}	   
 	  
     return graph1;
+  }
   }
 
 }

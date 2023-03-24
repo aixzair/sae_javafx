@@ -1,6 +1,8 @@
 package fr.but.info.sae122;
 
 
+import sae122.SimpleGraphDisplay;
+
 import java.io.*;
 import java.util.*;
 
@@ -50,7 +52,7 @@ public class GraphIO {
       reader.close();
     }catch (FileNotFoundException e){
       e.printStackTrace();
-    } catch (AddEdgeException | AddNodeException e) {
+    } catch (AddEdgeException | AddNodeException | NoNodeException e) {
       throw new RuntimeException(e);
     }
     return g;
@@ -94,4 +96,43 @@ public class GraphIO {
               e.printStackTrace();
           }
       }
+
+
+      public static SimpleGraphDisplay readGraphDisplay(InputStream from){
+        Reader r = new InputStreamReader(from);
+        String ligne = null;
+        SimpleGraphDisplay display = new SimpleGraphDisplay("Simple display");
+        ArrayList<String> l = new ArrayList<>();
+        try{
+          BufferedReader reader = new BufferedReader(r);
+
+          ligne = reader.readLine();
+          String[] nodes = ligne.split(";");
+
+          for(String s : nodes){
+            display.addNode(s);
+          }
+
+          reader.readLine();
+
+          while((ligne = reader.readLine()) != null){
+              String[] args = ligne.split(";");
+            for (int i = 1; i < args.length; i+=2) {
+              display.addEdge(args[0], args[i], args[i+1]);
+            }
+
+          }
+
+          reader.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return display;
+      }
+
+
+  public static void main(String[] args) throws FileNotFoundException {
+      readGraphDisplay(new FileInputStream("graph.csv")).display();
+
+  }
 }
