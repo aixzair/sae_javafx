@@ -1,4 +1,4 @@
-package fr.but.info.sae122;
+package src.fr.but.info.sae122;
 import java.awt.Label;
 import java.util.ArrayList;
 

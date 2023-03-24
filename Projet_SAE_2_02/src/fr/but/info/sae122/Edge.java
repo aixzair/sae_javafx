@@ -1,4 +1,4 @@
-package fr.but.info.sae122;
+package src.fr.but.info.sae122;
 
 public final class Edge {
 
@@ -68,4 +68,11 @@ public final class Edge {
 		throw new UnsupportedOperationException("To be written");
 	}
 	*/
+	
+	@Override
+	public String toString() {
+		return this.fromNode
+				+ " ; " + this.toNode
+				+ " ; " + this.label;
+	}
 }
