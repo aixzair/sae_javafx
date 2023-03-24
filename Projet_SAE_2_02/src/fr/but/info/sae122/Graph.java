@@ -6,6 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Graph {
+	
+	/** 
+	 * @author alexandre lerosier
+	 * 
+	 * */
+	
 	private ArrayList<Edge> edges;
 	private ArrayList<String> nodes;
 
@@ -14,7 +20,7 @@ public class Graph {
 		this.nodes = new ArrayList<String>();
 	}
 	
-	/*
+	/**
 	 *	Fait :
 	 *		- ajoute un noeud.
 	 *
@@ -33,7 +39,7 @@ public class Graph {
 		}
 	}
 	
-	/*
+	/**
 	 *	Fait :
 	 *		- ajoute une arête.
 	 *
@@ -46,11 +52,18 @@ public class Graph {
 	 *		- l'arête créé.
 	 */
 	public Edge addEdge(String from, String to, String label)
-	throws AddEdgeException {
+	throws 	AddEdgeException,
+			NoNodeException {
+		
+		if (!this.nodes.contains(from)) {
+			throw new NoNodeException(from);
+		} else if (!this.nodes.contains(to)) {
+			throw new NoNodeException(to);
+		}
 		
 		Edge arete = new Edge(from, to, label);
 		
-		if (!this.edges.contains(arete)) {
+		if (this.getEdge(from, to) == null) {
 			this.edges.add(arete);
 		} else {
 			throw new AddEdgeException();
@@ -59,7 +72,7 @@ public class Graph {
 	    return arete;
 	}
 	
-	/*
+	/**
 	 *	@return :
 	 *		- la collection de noeuds.
 	 */
@@ -67,7 +80,7 @@ public class Graph {
 	    return this.nodes;
 	}
 	
-	/*
+	/**
 	 *	@return :
 	 *		- la collection d'arêtes.
 	 */
@@ -75,7 +88,7 @@ public class Graph {
 	    return this.edges;
 	}
 	
-	/*
+	/**
 	 *	Fait :
 	 *		- retourne les arêtes qui partent d'un noeud.
 	 *
@@ -85,7 +98,13 @@ public class Graph {
 	 *	@return :
 	 *		- une colection d'arêtes.
 	 */
-	public Collection<Edge> getEdgesFrom(String node) {
+	public Collection<Edge> getEdgesFrom(String node)
+	throws NoNodeException {
+		
+		if (!this.nodes.contains(node)) {
+			throw new NoNodeException(node);
+		}
+		
 	    Collection<Edge> edgesFrom = new ArrayList<Edge>();
 	    Iterator iterator = this.edges.iterator();
 	    
@@ -100,7 +119,7 @@ public class Graph {
 	    return edgesFrom;
 	}
 	
-	/*
+	/**
 	 *	Fait :
 	 *		- retourne les arêtes qui vont vers un noeud.
 	 *
@@ -110,7 +129,13 @@ public class Graph {
 	 *	@return :
 	 *		- une colection d'arêtes.
 	 */
-	public Collection<Edge> getEdgesTo(String node) {
+	public Collection<Edge> getEdgesTo(String node)
+	throws NoNodeException {
+		
+		if (!this.nodes.contains(node)) {
+			throw new NoNodeException(node);
+		}
+		
 		Collection<Edge> edgesTo = new ArrayList<Edge>();
 	    Iterator iterator = this.edges.iterator();
 	    
@@ -125,7 +150,7 @@ public class Graph {
 	    return edgesTo;
 	}
 	
-	/*
+	/**
 	 *	Fait :
 	 *		- retourne une arête entre deux noeuds.
 	 *
@@ -136,7 +161,16 @@ public class Graph {
 	 *	@return :
 	 *		- une arête.
 	 */
-	public Edge getEdge(String fromNode, String toNode) {
+	public Edge getEdge(String fromNode, String toNode)
+	throws 	AddEdgeException,
+			NoNodeException {
+		
+		if (!this.nodes.contains(fromNode)) {
+			throw new NoNodeException(fromNode);
+		} else if (!this.nodes.contains(toNode)) {
+			throw new NoNodeException(toNode);
+		}
+		
 	    Iterator iterator = this.edges.iterator();
 	    
 	    while (iterator.hasNext()) {
@@ -153,7 +187,7 @@ public class Graph {
 	    return null;
 	}
 	
-	/*
+	/**
 	 *	@return :
 	 *		- une list des noeuds.
 	 */
@@ -169,7 +203,13 @@ public class Graph {
 	}
 	
 	@Override
+	/**
+	 * @return 
+	 * 		"Arêtes : (arêtes) ; Noeuds : (noeuds)"
+	 * 
+	 */
 	public String toString() {
-		throw new UnsupportedOperationException("To be written");
+		return "Arêtes : " + this.edges
+				+ " ; Noeuds : " + this.nodes;
 	}
 }
