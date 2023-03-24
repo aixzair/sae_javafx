@@ -2,6 +2,7 @@ package fr.but.info.sae122;
 import java.util.ArrayList;
 
 public class GraphGenerator {
+<<<<<<< HEAD
 	
 	/*
 	 * @author : Orianne ESSIENTH
@@ -16,19 +17,34 @@ public class GraphGenerator {
 	   * 
 	   * @return : It returns the graph that has been created
 	   */
+=======
+	/*
+  public static Graph createLinear(int nbNodes) {
+
+	  Graph graphe = new Graph ();
+	  ArrayList<Node> nodes = new ArrayList<Node>();
+	  ArrayList<Edge> edges = new ArrayList<Edge>();
+>>>>>>> Alenso
 	  
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  if(nbNodes>=1) {
+<<<<<<< HEAD
 		  graph1.addNode("N1");
 		  nodes.add("N1");
 		  graph1.addNode((nodes.get(0).getName()));
 
+=======
+		  
+		  nodes.add(new Node("N1"));
+		 /* graphe.addNode((nodes.get(0).getName()));
+>>>>>>> Alenso
 
 	  }
 	  if(nbNodes>1) {
 		  
 		  for (int i=2; i<=nbNodes; i++) {
+<<<<<<< HEAD
 			  String nodeName = "N"+(char)i;
 			  String lastNodeName = "N"+(char)i-1;
 			  graph1.addNode(nodeName);
@@ -36,6 +52,15 @@ public class GraphGenerator {
 			  nodes.add(nodeName);
 			  
 		  } 
+=======
+			  String nom_graphe = "N"+(char)i;
+			  nodes.add(new Node(nom_graphe));
+			  nodes.get(i-1).setVoisin(nodes.get(i));
+			  edges.add(i,new Edge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName()));
+			  /*graphe.addNode((nodes.get(i).getName()));
+			  graphe.addEdge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName());
+		  }
+>>>>>>> Alenso
 		  
 	  }
     
@@ -66,12 +91,22 @@ public class GraphGenerator {
 	  }
 	  if(nbNodes>1) {
 		  
+<<<<<<< HEAD
 		  for (int i=2; i<=nbNodes; i++) {
 			  String nodeName = "N"+(char)i;
 			  String lastNodeName = "N"+(char)i-1;
 			  graph1.addNode(nodeName);
 			  graph1.addEdge(lastNodeName,nodeName,lastNodeName+"-"+nodeName);
 			  nodes.add(nodeName);
+=======
+		 /* for (int i=2; i<=nbNodes; i++) {
+			  String nom_graphe = "N"+(char)i;
+			  nodes.add(new Node(nom_graphe));
+			  nodes.get(i-1).setVoisin(nodes.get(i));
+			  edges.add(i,new Edge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName()));
+			  graphe.addNode((nodes.get(i).getName()));
+			  graphe.addEdge(nodes.get(i-1).getName(),nodes.get(i).getName(),nodes.get(i-1).getName()+"-"+nodes.get(i).getName());
+>>>>>>> Alenso
 		  }		  
 	  }
 	  
@@ -81,6 +116,7 @@ public class GraphGenerator {
   
   
   public static Graph createTriangular(int nbNodes) {
+<<<<<<< HEAD
 	  
 	  /*
 	   * @brief : It creates a triangular graph
@@ -92,6 +128,11 @@ public class GraphGenerator {
 	  
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
+=======
+	  /*
+	  Graph graphe = new Graph ();
+	  ArrayList<Node> nodes = new ArrayList<Node>();
+>>>>>>> Alenso
 	  
 	  if(nbNodes>=1) {
 		  
@@ -109,11 +150,17 @@ public class GraphGenerator {
 			  nodes.add(nodeName); 
 		  }
 		  
+<<<<<<< HEAD
 		  for(int i=0;i<nbNodes-1;i++) {
 			  for(int j=counter;j<nbNodes-1;j++) {
 
 				  graph1.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
 				  counter++;
+=======
+		  for(int i=0;i>nbNodes-1;i++) {
+			  for(int j=1;j<nbNodes-1;j++) {
+				  /*graphe.addEdge(nodes.get(i).getName(),nodes.get(j).getName(),nodes.get(i).getName()+"-"+nodes.get(j).getName());
+>>>>>>> Alenso
 			  }
 		  }
 		  
@@ -166,6 +213,7 @@ public class GraphGenerator {
   
 
   public static Graph createRandom(int nbNodes, double probability) {
+<<<<<<< HEAD
 	  
 	  /*
 	   * @brief : It creates a graph randomly
@@ -210,5 +258,9 @@ public class GraphGenerator {
 	  
     return graph1;
   }
+=======
+    throw new UnsupportedOperationException("To be written");
+  }*/
+>>>>>>> Alenso
 
 }
