@@ -1,4 +1,4 @@
-package fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 import java.io.IOException;
 import java.io.InputStream;
