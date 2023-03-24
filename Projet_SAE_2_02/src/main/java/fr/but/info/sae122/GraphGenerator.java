@@ -1,4 +1,4 @@
-package main.java.fr.but.info.sae122;
+package fr.but.info.sae122;
 
 public class GraphGenerator {
   public static Graph createLinear(int nbNodes) {

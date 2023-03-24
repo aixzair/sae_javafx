@@ -1,4 +1,4 @@
-package main.java.fr.but.info.sae122;
+package fr.but.info.sae122;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,13 +46,21 @@ public class Graph {
 	 *		- l'arête créé.
 	 */
 	public Edge addEdge(String from, String to, String label)
-	throws AddEdgeException {
+	throws 	AddEdgeException,
+			NoNodeException {
+		
+		if (!this.nodes.contains(from)) {
+			throw new NoNodeException(from);
+		} else if (!this.nodes.contains(to)) {
+			throw new NoNodeException(to);
+		}
 		
 		Edge arete = new Edge(from, to, label);
 		
-		if (!this.edges.contains(arete)) {
+		if (this.getEdge(from, to) != null) {
 			this.edges.add(arete);
 		} else {
+			System.out.println(from + to);
 			throw new AddEdgeException();
 		}
 	    
