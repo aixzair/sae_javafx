@@ -1,4 +1,4 @@
-package main.java.fr.but.info.sae122;
+package src.fr.but.info.sae122;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,57 +6,51 @@ import java.util.Iterator;
 public class BreadthFirstIterator implements Iterator<Edge> {
 	private Graph graph;
 	private String currentNode;
-	private ArrayList<String> noeudsRencontres;
+	private ArrayList<String> nodesMet;
 	private Iterator<Edge> itrArr;
-	private Iterator<Edge> itrNodes;
 	private int index;
 
 	public BreadthFirstIterator(Graph graph, String firstNode) {
 		this.graph = graph;
 		this.currentNode = firstNode;
 		this.index = 0;
-		itrArr = this.graph.
+		//itrArr = this.graph.
+		nodesMet.add(firstNode);
 		update();
 		//throw new UnsupportedOperationException("To be written");
 	}
 
 	public void update()
 	{
-		for(int i = 0; i < this.graph.getEdgesFrom(this.currentNode).size(); i++)
+		ArrayList<Edge> al = (ArrayList<Edge>)this.graph.getEdgesFrom(this.currentNode);
+		for(int i = 0; i < al.size(); i++)
 		{
-			//ajouter à la file toutes les arrêtes partant de ce noeud
-			if(!noeudsRencontres.contains(this.graph.getEdgesFrom(this.currentNode).get(i).getFromNode()))
+			if(!nodesMet.contains(al.get(i).getFromNode()))
 			{
-				this.noeudsRencontres.add(this.graph.getEdgesFrom(this.currentNode).get(i).getFromNode());
+				this.nodesMet.add(al.get(i).getFromNode());
 			}
-			
 		}
 	}
 
 	@Override
 	public boolean hasNext() {
-		return this.itrArr.hasNext(); 
-		//return graph.getEdgesFrom(this.currentNode).size() != 0;
+		itrArr = this.graph.getEdgesFrom(this.currentNode).iterator();
+		return itrArr.hasNext(); 
 	}
 
 	@Override
 	public Edge next() {
-		if(this.hasNext())
-		{
-			this.itrArr.remove();
-			return this.itrArr.next();
-		}
-		else
-		{
-			while(this.noeudsRencontres.size()< (index))
-			{
-				index +=1;
-				this.currentNode = this.noeudsRencontres.get(index);
-				update();
-				//if(this.hasNext())
-			}
-		}
 
-		throw new UnsupportedOperationException("To be written");
+		itrArr = this.graph.getEdgesFrom(this.currentNode).iterator();
+			
+		while(!this.hasNext())
+		{
+			this.currentNode = this.nodesMet.get(index);
+			update();
+			index +=1;
+			itrArr = this.graph.getEdgesFrom(this.currentNode).iterator();
+		}
+		this.itrArr.remove();
+		return this.itrArr.next();
 	}
 }

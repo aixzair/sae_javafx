@@ -1,4 +1,4 @@
-package main.java.fr.but.info.sae122;
+package src.fr.but.info.sae122;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class GraphIO {
-  public static Graph read(InputStream from) throws IOException {
+  public static Graph read(InputStream from) throws IOException, AddEdgeException, AddNodeException {
     Reader r = new InputStreamReader(from);
     Graph g = new Graph();
     String ligne = null;

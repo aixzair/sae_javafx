@@ -1,10 +1,9 @@
-package fr.but.info.sae122;
-import java.awt.Label;
+package src.fr.but.info.sae122;
 import java.util.ArrayList;
 
 public class GraphGenerator {
 	
-  public static Graph createLinear(int nbNodes) {
+  public static Graph createLinear(int nbNodes) throws AddNodeException, AddEdgeException {
 	  
 	  Graph graphe = new Graph ();
 	  ArrayList<Node> nodes = new ArrayList<Node>();
@@ -34,7 +33,7 @@ public class GraphGenerator {
   
   
   
-  public static Graph createCircular(int nbNodes) {
+  public static Graph createCircular(int nbNodes) throws AddNodeException, AddEdgeException {
 	  
 	  Graph graphe = new Graph ();
 	  ArrayList<Node> nodes = new ArrayList<Node>();
@@ -66,7 +65,7 @@ public class GraphGenerator {
   }
   
   
-  public static Graph createTriangular(int nbNodes) {
+  public static Graph createTriangular(int nbNodes) throws AddNodeException, AddEdgeException {
 	  
 	  Graph graphe = new Graph ();
 	  ArrayList<Node> nodes = new ArrayList<Node>();
