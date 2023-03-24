@@ -49,28 +49,26 @@ public class GraphIO {
     try {
       BufferedWriter bw = new BufferedWriter(w);
 
-      for(String s : graph.getNodes()){
+      for (String s : graph.getNodes()) {
         bw.write(s + ";");
       }
       bw.write("\n");
 
       String[] n = new String[graph.getNodes().size()];
-      for(String s : graph.getNodes()){
-        for(int i = 0; i<graph.getNodes().size(); i++){
+      for (String s : graph.getNodes()) {
+        for (int i = 0; i < graph.getNodes().size(); i++) {
           n[i] = s;
         }
       }
 
-      for(int i = 0; i < graph.getNodes().size(); i++){
-        if(graph.getEdgesFrom(n[i]) > 1)
-        for(int j = i; j<graph.getNodes().size()-1; j++){
+      for (int i = 0; i < graph.getNodes().size(); i++) {
+        for (int j = i; j < graph.getNodes().size() - 1; j++) {
           bw.write(n[i] + n[j] + graph.getEdge(n[i], n[j]));
         }
       }
       bw.close();
-    }catch (FileNotFoundException e){
+    } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
-
   }
 }
