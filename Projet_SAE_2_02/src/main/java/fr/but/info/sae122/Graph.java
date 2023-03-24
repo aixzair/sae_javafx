@@ -153,6 +153,10 @@ public class Graph {
 	    return null;
 	}
 	
+	/*
+	 *	@return :
+	 *		- une list des noeuds.
+	 */
 	public List<String> getNodeList() {
 		List<String> nodeList = new ArrayList<String>();
 		Iterator iterator = this.nodes.iterator();
