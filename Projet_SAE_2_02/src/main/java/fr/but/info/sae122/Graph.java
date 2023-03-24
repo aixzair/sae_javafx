@@ -6,11 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Graph {
-	private Collection<Edge> edges;
-	private Collection<String> nodes;
+	private ArrayList<Edge> edges;
+	private ArrayList<String> nodes;
 
 	public Graph() {
-		// Vide.
+		this.edges = new ArrayList<Edge>();
+		this.nodes = new ArrayList<String>();
 	}
 	
 	/*
@@ -23,12 +24,13 @@ public class Graph {
 	 *	@return :
 	 *		-rien 
 	 */
-	public void addNode(String name) {
-		// vérifier qu'il n'est pas déjà inclu.
-		
+	public void addNode(String name)
+	throws AddNodeException {		
 		if (!this.nodes.contains(name)) {
 			this.nodes.add(name);
-		} // else exception
+		} else {
+			throw new AddNodeException();
+		}
 	}
 	
 	/*
@@ -43,18 +45,16 @@ public class Graph {
 	 *	@return :
 	 *		- l'arête créé.
 	 */
-	public Edge addEdge(String from, String to, String label) {
-		// vérifier qu'il n'est pas déjà inclu.
-		
-		if (!this.nodes.contains(from)) {
-			return null; // Exception
-		} else if (!this.nodes.contains(to)) {
-			return null; // Exception
-		}
+	public Edge addEdge(String from, String to, String label)
+	throws AddEdgeException {
 		
 		Edge arete = new Edge(from, to, label);
-			
-	    this.edges.add(arete);
+		
+		if (!this.edges.contains(arete)) {
+			this.edges.add(arete);
+		} else {
+			throw new AddEdgeException();
+		}
 	    
 	    return arete;
 	}
@@ -86,7 +86,7 @@ public class Graph {
 	 *		- une colection d'arêtes.
 	 */
 	public Collection<Edge> getEdgesFrom(String node) {
-	    Collection<Edge> edgesFrom = null;
+	    Collection<Edge> edgesFrom = new ArrayList<Edge>();
 	    Iterator iterator = this.edges.iterator();
 	    
 	    while (iterator.hasNext()) {
@@ -111,7 +111,7 @@ public class Graph {
 	 *		- une colection d'arêtes.
 	 */
 	public Collection<Edge> getEdgesTo(String node) {
-		Collection<Edge> edgesTo = null;
+		Collection<Edge> edgesTo = new ArrayList<Edge>();
 	    Iterator iterator = this.edges.iterator();
 	    
 	    while (iterator.hasNext()) {
