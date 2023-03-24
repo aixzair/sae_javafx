@@ -3,10 +3,7 @@ package main.java.fr.but.info.sae122;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class GraphIO {
   public static Graph read(InputStream from) throws IOException {
@@ -36,7 +33,7 @@ public class GraphIO {
               else arr = i;
 
               if(node != 0 && arr != 0) g.addEdge(edges[0], edges[node], edges[arr]);
-            }
+              }
             }
           }
         }
@@ -57,13 +54,19 @@ public class GraphIO {
       }
       bw.write("\n");
 
-      for(int i = 0; i < graph.getNodes().size(); i++){
-        for(int j = i; j<graph.getNodes().size()-1; j++){
-          
-
+      String[] n = new String[graph.getNodes().size()];
+      for(String s : graph.getNodes()){
+        for(int i = 0; i<graph.getNodes().size(); i++){
+          n[i] = s;
         }
       }
 
+      for(int i = 0; i < graph.getNodes().size(); i++){
+        if(graph.getEdgesFrom(n[i]) > 1)
+        for(int j = i; j<graph.getNodes().size()-1; j++){
+          bw.write(n[i] + n[j] + graph.getEdge(n[i], n[j]));
+        }
+      }
       bw.close();
     }catch (FileNotFoundException e){
       e.printStackTrace();
