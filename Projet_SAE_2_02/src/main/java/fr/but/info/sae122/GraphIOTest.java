@@ -1,0 +1,18 @@
+package main.java.fr.but.info.sae122;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class GraphIOTest {
+
+
+    @Test
+    public void WriteTest(){
+
+    }
+
+    @Test
+    public void ReadTest(){
+    }
+}
