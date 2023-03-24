@@ -3,9 +3,9 @@ package main.java.fr.but.info.sae122;
 
 public final class Edge {
 
-	String fromNode;
-	String toNode;
-	String label;
+	private String fromNode;
+	private String toNode;
+	private String label;
 
 	/*
 	 * Constructeur d'objets arrêtes
