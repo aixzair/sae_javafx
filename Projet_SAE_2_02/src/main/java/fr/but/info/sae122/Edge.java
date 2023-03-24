@@ -7,7 +7,6 @@ public final class Edge {
 	String toNode;
 	String label;
 
-
 	/*
 	 * Constructeur d'objets arrêtes
 	 * @param fromNode : Noeud de départ
@@ -25,7 +24,6 @@ public final class Edge {
 		else
 		{
 			throw new IllegalArgumentException("The origin and destination of the edge must be different.");
-
 		}
 	}
 
@@ -33,7 +31,6 @@ public final class Edge {
 	 * @return le noeud d'origine de l'arrête
 	 */
 	public String getFromNode() {
-		//throw new UnsupportedOperationException("To be written");
 		return this.fromNode;
 	}
 
@@ -41,7 +38,6 @@ public final class Edge {
 	 * @return le noeud de destination de l'arrête
 	 */
 	public String getToNode() {
-		//throw new UnsupportedOperationException("To be written");
 		return this.toNode;
 	}
 
@@ -50,7 +46,6 @@ public final class Edge {
 	 */
 	public String getLabel() {
 		return this.label;
-		//throw new UnsupportedOperationException("To be written");
 	}
 	/*
 	 * @param Deuxième arrête
@@ -58,15 +53,20 @@ public final class Edge {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Edge) {
-			return (this.fromNode == ((Edge) obj).getFromNode() && this.toNode == ((Edge) obj).getToNode() && this.label == ((Edge) obj).getLabel() );
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if(getClass() != obj.getClass()) {
+			return false;
 		}
-		else return false;
-		//throw new UnsupportedOperationException("To be written");
+		return (this.fromNode == ((Edge) obj).getFromNode() && this.toNode == ((Edge) obj).getToNode() && this.label == ((Edge) obj).getLabel() );
 	}
-
+	
+	/*
 	@Override
 	public int hashCode() {
 		throw new UnsupportedOperationException("To be written");
 	}
+	*/
 }
