@@ -93,7 +93,13 @@ public class Graph {
 	 *	@return :
 	 *		- une colection d'arêtes.
 	 */
-	public Collection<Edge> getEdgesFrom(String node) {
+	public Collection<Edge> getEdgesFrom(String node)
+	throws NoNodeException {
+		
+		if (!this.nodes.contains(node)) {
+			throw new NoNodeException(node);
+		}
+		
 	    Collection<Edge> edgesFrom = new ArrayList<Edge>();
 	    Iterator iterator = this.edges.iterator();
 	    
@@ -118,7 +124,13 @@ public class Graph {
 	 *	@return :
 	 *		- une colection d'arêtes.
 	 */
-	public Collection<Edge> getEdgesTo(String node) {
+	public Collection<Edge> getEdgesTo(String node)
+	throws NoNodeException {
+		
+		if (!this.nodes.contains(node)) {
+			throw new NoNodeException(node);
+		}
+		
 		Collection<Edge> edgesTo = new ArrayList<Edge>();
 	    Iterator iterator = this.edges.iterator();
 	    
