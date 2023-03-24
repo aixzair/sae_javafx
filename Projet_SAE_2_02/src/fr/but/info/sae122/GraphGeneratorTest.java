@@ -1,8 +1,6 @@
 package fr.but.info.sae122;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 class GraphGeneratorTest {
 
