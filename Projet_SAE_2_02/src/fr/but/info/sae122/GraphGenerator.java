@@ -1,5 +1,4 @@
 package fr.but.info.sae122;
-import java.awt.Label;
 import java.util.ArrayList;
 
 public class GraphGenerator {
@@ -14,7 +13,7 @@ public class GraphGenerator {
 		  
 		  nodes.add(new Node("N1"));
 		  graphe.addNode((nodes.get(0).getName()));
-		  
+
 	  }
 	  if(nbNodes>1) {
 		  
@@ -109,7 +108,5 @@ public class GraphGenerator {
   public static Graph createRandom(int nbNodes, double probability) {
     throw new UnsupportedOperationException("To be written");
   }
-  
-  
 
 }
