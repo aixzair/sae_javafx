@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="lib" path="C:/Users/alexl/OneDrive/Documents/AAAA_docs/iut/s2/sae1-2/simpleGraphDisplay.jar">
 		<attributes>
@@ -8,30 +9,44 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 =======
 	<classpathentry kind="src" path="src"/>
->>>>>>> Orianne
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+>>>>>>> lukas
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 <<<<<<< HEAD
 =======
+	<classpathentry kind="src" path="src"/>
+>>>>>>> Orianne
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+=======
+	<classpathentry kind="lib" path="/home/utilisateurs/siopath221/Téléchargements/simpleGraphDisplay.jar">
+>>>>>>> lukas
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> lukas
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/home/utilisateurs/essient221/Téléchargements/simpleGraphDisplay.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 >>>>>>> Orianne
+=======
+>>>>>>> lukas
 	<classpathentry kind="output" path="bin"/>
 </classpath>
