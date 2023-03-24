@@ -6,6 +6,12 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class GraphIO {
+
+  /*
+  * @brief: Read the csv file that describe the graph
+  * @params: InputStream from -> allow to read the file
+  *
+  * */
   public static Graph read(InputStream from) throws IOException {
     Reader r = new InputStreamReader(from);
     Graph g = new Graph();
@@ -40,37 +46,56 @@ public class GraphIO {
       reader.close();
     }catch (FileNotFoundException e){
       e.printStackTrace();
+    } catch (AddEdgeException | AddNodeException e) {
+      throw new RuntimeException(e);
     }
     return g;
   }
+
+  /*
+  * @brief Write in the csv file, the function create the file that describe the graph
+  * @params Graph graph the graph which is describe
+  * @params OutputStream from allow to write in the file
+  * */
   public static void write(Graph graph, OutputStream from) throws IOException {
     Path file = Path.of("graph.csv");
-    Writer w = new OutputStreamWriter(from);
+    Writer writer = new OutputStreamWriter(from);
     try {
-      BufferedWriter bw = new BufferedWriter(w);
+      BufferedWriter bw = new BufferedWriter(writer);
+
+      StringBuilder line = new StringBuilder();
 
       for(String s : graph.getNodes()){
-        bw.write(s + ";");
+        line.append(s).append(";");
       }
-      bw.write("\n");
+      line.append("\n");
 
-      String[] n = new String[graph.getNodes().size()];
+      String[] nodes = new String[graph.getNodes().size()];
       for(String s : graph.getNodes()){
         for(int i = 0; i<graph.getNodes().size(); i++){
-          n[i] = s;
+          nodes[i] = s;
         }
       }
 
       for(int i = 0; i < graph.getNodes().size(); i++){
-        if(graph.getEdgesFrom(n[i]) > 1)
         for(int j = i; j<graph.getNodes().size()-1; j++){
-          bw.write(n[i] + n[j] + graph.getEdge(n[i], n[j]));
+          line.append(nodes[i]).append(nodes[j]).append(graph.getEdge(nodes[i], nodes[j]));
         }
       }
+      bw.write(String.valueOf(line));
       bw.close();
     }catch (FileNotFoundException e){
       e.printStackTrace();
     }
-
   }
+
+  public static void main(String[] args) throws IOException, AddNodeException, AddEdgeException {
+    Graph g = new Graph();
+    g.addNode("A");
+    g.addNode("B");
+    g.addEdge("A", "B", "E");
+    OutputStream o = new FileOutputStream("main/resources/fr/but/info/sae122/seance1/graph.csv");
+    write(g, o);
+  }
+
 }
