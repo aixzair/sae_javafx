@@ -1,18 +1,20 @@
 package fr.but.info.sae122;
 
-import main.java.fr.but.info.sae122.AddNodeException;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.*;
 
 public class GraphIO {
 
+    /*
+    * Author : Alenso
+    * */
+
+
   /*
   * @brief: Read the csv file that describe the graph
   * @params: InputStream from -> allow to read the file
-  *
+  * @return The graph that has been created
   * */
   public static Graph read(InputStream from) throws IOException {
     Reader r = new InputStreamReader(from);
@@ -48,7 +50,7 @@ public class GraphIO {
       reader.close();
     }catch (FileNotFoundException e){
       e.printStackTrace();
-    } catch (AddEdgeException e) {
+    } catch (AddEdgeException | AddNodeException e) {
       throw new RuntimeException(e);
     }
     return g;
@@ -60,7 +62,6 @@ public class GraphIO {
   * @params OutputStream from allow to write in the file
   * */
   public static void write(Graph graph, OutputStream from) throws IOException {
-    Path file = Path.of("graph.csv");
     Writer writer = new OutputStreamWriter(from);
     try {
       BufferedWriter bw = new BufferedWriter(writer);
@@ -70,29 +71,25 @@ public class GraphIO {
       for(String s : graph.getNodes()){
         line.append(s).append(";");
       }
-      line.append("\n");
+      line.append('\n');
 
-      String[] n = new String[graph.getNodes().size()];
-      for (String s : graph.getNodes()) {
-        for (int i = 0; i < graph.getNodes().size(); i++) {
-          n[i] = s;
-        }
+      ArrayList<String> nodes = new ArrayList<>(graph.getNodes());
+
+      for (int i = 0; i < graph.getNodes().size(); i++) {
+          for (int j = 0; j < graph.getNodes().size(); j++) {
+              if(i != j && graph.getEdge(nodes.get(i), nodes.get(j)) != null){
+                  line.append(nodes.get(i))
+                          .append(";")
+                          .append(nodes.get(j))
+                          .append(";")
+                          .append(graph.getEdge(nodes.get(i), nodes.get(j)).getLabel());
+                  line.append("\n");
+              }
+
+          }
       }
-
-              String[] nodes = new String[graph.getNodes().size()];
-              for (String s : graph.getNodes()) {
-                  for (int i = 0; i < graph.getNodes().size(); i++) {
-                      nodes[i] = s;
-                  }
-              }
-
-              for (int i = 0; i < graph.getNodes().size(); i++) {
-                  for (int j = i; j < graph.getNodes().size() - 1; j++) {
-                      line.append(nodes[i]).append(nodes[j]).append(graph.getEdge(nodes[i], nodes[j]));
-                  }
-              }
-              bw.write(String.valueOf(line));
-              bw.close();
+          bw.write(String.valueOf(line));
+          bw.close();
           } catch(FileNotFoundException e){
               e.printStackTrace();
           }
