@@ -1,28 +1,47 @@
 package fr.but.info.sae122;
+package src.fr.but.info.sae122;
+
+/*
+ * @author Lukas Siopathis
+ */
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class BreadthFirstIterator implements Iterator<Edge> {
-	private Graph graph;
-	private String currentNode;
-	private ArrayList<String> noeudsRencontres;
-	private Iterator<Edge> itrArr;
-	private Iterator<Edge> itrNodes;
-	private int index;
+	private Graph graph;				
+	private String currentNode;			//Noeud actuel
+	private ArrayList<String> nodesMet;	//Liste de noeuds rencontrés
+	private Iterator<Edge> itrArr;		//Itérateur de la liste d'arrêtes
+	private int index;					//Index de la liste de noeuds rencontrés
 
+	/*
+	 * Constructeur d'objets arrêtes
+	 * Le premier noeud devient le noeud actuel
+	 * @param graph : Graphe à parcourir
+	 * @param firstNode : Premier noeud
+	 */
 	public BreadthFirstIterator(Graph graph, String firstNode) {
 		this.graph = graph;
 		this.currentNode = firstNode;
 		this.index = 0;
-		//itrArr = this.graph.
-		/*update();*/
-		//throw new UnsupportedOperationException("To be written");
+		nodesMet = new ArrayList<String>();
+		nodesMet.add(firstNode);
+		update();
 	}
 
+	/*
+	 * Met à jour la liste de Noeuds rencontrés
+	 * @param fromNode : Noeud de départ
+	 * @param toNode : Noeud de destination
+	 * @param label : Etiquette
+	 * @exception : Exception si fromNode et toNode ont la même valeur.
+	 * Renvoie une exception si fromNode == toNode
+	 */
 	public void update()
 	{
-		for(int i = 0; i < this.graph.getEdgesFrom(this.currentNode).size(); i++)
+		ArrayList<Edge> al = (ArrayList<Edge>)this.graph.getEdgesFrom(this.currentNode);
+		for(int i = 0; i < al.size(); i++)
 		{
 			//ajouter à la file toutes les arrêtes partant de ce noeud
 			/*if(!noeudsRencontres.contains(this.graph.getEdgesFrom(this.currentNode).get(i).getFromNode()))
@@ -30,33 +49,37 @@ public class BreadthFirstIterator implements Iterator<Edge> {
 				this.noeudsRencontres.add(this.graph.getEdgesFrom(this.currentNode).get(i).getFromNode());
 			}*/
 			
+			if(!nodesMet.contains(al.get(i).getFromNode()))
+			{
+				this.nodesMet.add(al.get(i).getFromNode());
+			}
 		}
 	}
 
 	@Override
 	public boolean hasNext() {
-		return this.itrArr.hasNext(); 
-		//return graph.getEdgesFrom(this.currentNode).size() != 0;
+		itrArr = this.graph.getEdgesFrom(this.currentNode).iterator();
+		return itrArr.hasNext(); 
 	}
 
+	/*
+	 * @return : La prochaine arrête non-explorée 
+	 */
 	@Override
 	public Edge next() {
-		if(this.hasNext())
-		{
-			this.itrArr.remove();
-			return this.itrArr.next();
-		}
-		else
-		{
-			while(this.noeudsRencontres.size()< (index))
-			{
-				index +=1;
-				this.currentNode = this.noeudsRencontres.get(index);
-				update();
-				//if(this.hasNext())
-			}
-		}
 
-		throw new UnsupportedOperationException("To be written");
+		itrArr = this.graph.getEdgesFrom(this.currentNode).iterator();
+			
+		while(!this.hasNext())		
+			//Incrémente l'index de la liste des noeuds rencontrés si le noeud actuel n'a pas de successeur
+		{
+			this.currentNode = this.nodesMet.get(index);
+			update();
+			index +=1;
+			itrArr = this.graph.getEdgesFrom(this.currentNode).iterator();
+		}
+		Edge arr = this.itrArr.next();
+		this.itrArr.remove();
+		return arr;
 	}
 }

@@ -1,4 +1,8 @@
+
 package fr.but.info.sae122;
+
+package src.fr.but.info.sae122;
+
 import java.util.ArrayList;
 
 public class GraphGenerator {
@@ -6,8 +10,6 @@ public class GraphGenerator {
 	/*
 	 * @author : Orianne ESSIENTH
 	 */
-	
-  public static Graph createLinear(int nbNodes) {
 	  
 	  /*
 	   * @brief : It creates a linear graph
@@ -72,7 +74,7 @@ public class GraphGenerator {
   
   
   
-  public static Graph createCircular(int nbNodes) {
+  public static Graph createCircular(int nbNodes) throws AddNodeException, AddEdgeException {
 	  
 	  /*
 
@@ -121,6 +123,7 @@ public class GraphGenerator {
   }
   
   
+<<<<<<< HEAD
   public static Graph createTriangular(int nbNodes) {
 
 	  
@@ -131,6 +134,9 @@ public class GraphGenerator {
 	   * 
 	   * @return : It returns the graph that has been created
 	   */
+=======
+  public static Graph createTriangular(int nbNodes) throws AddNodeException, AddEdgeException {
+>>>>>>> lukas
 	  
 	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();

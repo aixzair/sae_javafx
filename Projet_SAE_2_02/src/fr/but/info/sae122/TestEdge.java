@@ -1,4 +1,8 @@
+
 package fr.but.info.sae122;
+
+package src.fr.but.info.sae122;
+
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,11 @@
+
 package fr.but.info.sae122;
+
+package src.fr.but.info.sae122;
+
+/*
+ * @author Lukas Siopathis
+ */
 
 public final class Edge {
 
@@ -11,7 +18,7 @@ public final class Edge {
 	 * @param fromNode : Noeud de départ
 	 * @param toNode : Noeud de destination
 	 * @param label : Etiquette
-	 * Renvoie une exception si fromNode == toNode
+	 * @exception : Exception si fromNode et toNode ont la même valeur.
 	 */
 	public Edge(String fromNode,String toNode,String label) throws IllegalArgumentException{
 		if(fromNode != toNode)
@@ -46,7 +53,7 @@ public final class Edge {
 	public String getLabel() {
 		return this.label;
 	}
-	/*
+	/*Compare l'égalité entre deux arrêtes
 	 * @param Deuxième arrête
 	 * @return Si les deux arrêtes sont les mêmes
 	 */

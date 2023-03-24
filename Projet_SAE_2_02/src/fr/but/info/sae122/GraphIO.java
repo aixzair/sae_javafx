@@ -1,7 +1,12 @@
+
+
 package fr.but.info.sae122;
 
 
 import sae122.SimpleGraphDisplay;
+=======
+package src.fr.but.info.sae122;
+>>>>>>> lukas
 
 import java.io.*;
 import java.util.*;
