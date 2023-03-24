@@ -1,8 +1,4 @@
-package main.java.fr.but.info.sae122;
-<<<<<<< HEAD:Projet_SAE_2_02/src/fr/but/info/sae122/Edge.java
-=======
-
->>>>>>> lukas:Projet_SAE_2_02/src/main/java/fr/but/info/sae122/Edge.java
+package fr.but.info.sae122;
 
 public final class Edge {
 
