@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author siopath221
+ * @author alexl
  *
  */
 module Projet_SAE_2_02 {
