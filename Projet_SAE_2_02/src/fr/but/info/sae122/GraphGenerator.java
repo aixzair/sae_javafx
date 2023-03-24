@@ -3,15 +3,27 @@ import java.util.ArrayList;
 
 public class GraphGenerator {
 	
+	/*
+	 * author : Orianne
+	 */
+	
   public static Graph createLinear(int nbNodes) {
 	  
-	  Graph graphe = new Graph ();
+	  /*
+	   * @brief : It creates a linear graph
+	   * 
+	   * @param : int number of nodes in the graph
+	   * 
+	   * @return : It returns the graph that has been created
+	   */
+	  
+	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  if(nbNodes>=1) {
 
-		  graphe.addNode("N1");
+		  graph1.addNode("N1");
 		  nodes.add("N1");
-		  graphe.addNode((nodes.get(0).getName()));
+		  graph1.addNode((nodes.get(0).getName()));
 
 
 	  }
@@ -20,27 +32,35 @@ public class GraphGenerator {
 		  for (int i=2; i<=nbNodes; i++) {
 			  String nodeName = "N"+(char)i;
 			  String lastNodeName = "N"+(char)i-1;
-			  graphe.addNode(nodeName);
-			  graphe.addEdge(lastNodeName,nodeName,lastNodeName+"-"+nodeName);
+			  graph1.addNode(nodeName);
+			  graph1.addEdge(lastNodeName,nodeName,lastNodeName+"-"+nodeName);
 			  nodes.add(nodeName);
 			  
 		  } 
 		  
 	  }
     
-    return graphe;
+    return graph1;
   }
   
   
   
   public static Graph createCircular(int nbNodes) {
 	  
-	  Graph graphe = new Graph ();
+	  /*
+	   * @brief : It creates a circular graph
+	   * 
+	   * @param : int number of nodes in the graph
+	   * 
+	   * @return : It returns the graph that has been created
+	   */
+	  
+	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  
 	  if(nbNodes>=1) {
 		 
-		  graphe.addNode("N1");
+		  graph1.addNode("N1");
 		  nodes.add("N1");
 		  
 	  }
@@ -49,60 +69,76 @@ public class GraphGenerator {
 		  for (int i=2; i<=nbNodes; i++) {
 			  String nodeName = "N"+(char)i;
 			  String lastNodeName = "N"+(char)i-1;
-			  graphe.addNode(nodeName);
-			  graphe.addEdge(lastNodeName,nodeName,lastNodeName+"-"+nodeName);
+			  graph1.addNode(nodeName);
+			  graph1.addEdge(lastNodeName,nodeName,lastNodeName+"-"+nodeName);
 			  nodes.add(nodeName);
 		  }		  
 	  }
 	  
-	  graphe.addEdge(nbNodes-1,nodes.get(0),nbNodes-1+"-"+nodes.get(0));
-    return graphe;
+	  graph1.addEdge(nbNodes-1,nodes.get(0),nbNodes-1+"-"+nodes.get(0));
+    return graph1;
   }
   
   
   public static Graph createTriangular(int nbNodes) {
 	  
-	  Graph graphe = new Graph ();
+	  /*
+	   * @brief : It creates a triangular graph
+	   * 
+	   * @param : int number of nodes in the graph
+	   * 
+	   * @return : It returns the graph that has been created
+	   */
+	  
+	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  
 	  if(nbNodes>=1) {
 		  
 		  String nodeName = ("N"+(char)nbNodes);
 		  nodes.add(nodeName);
-		  graphe.addNode(nodeName);
+		  graph1.addNode(nodeName);
 	  }
 	  
 	  if(nbNodes>1) {
 		  
-		  int compt = 1;		  
-		  for(int i=nbNodes-1;i<0;i--) {
+		  int counter = 1;		  
+		  for(int i=nbNodes-1;i>0;i--) {
 			
 			  String nodeName = "N"+(char)i;
-			  graphe.addNode(nodeName);
+			  graph1.addNode(nodeName);
 			  nodes.add(nodeName); 
 		  }
 		  
-		  for(int i=0;i>nbNodes-1;i++) {
-			  for(int j=compt;j<nbNodes-1;j++) {
-				  graphe.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
-				  compt++;
+		  for(int i=0;i<nbNodes-1;i++) {
+			  for(int j=counter;j<nbNodes-1;j++) {
+				  graph1.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
+				  counter++;
 			  }
 		  }
 		  
 	  }	  	  
 	  
-    return graphe;
+    return graph1;
   }
   
   
   public static Graph createFullyConnected(int nbNodes) {
 	  
-	  Graph graphe = new Graph ();
+	  /*
+	   * @brief : It creates a fully-connected graph
+	   * 
+	   * @param : int number of nodes in the graph
+	   * 
+	   * @return : It returns the graph that has been created
+	   */
+	  
+	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  
 	  if(nbNodes>=1) {
 		  
-		  graphe.addNode("N1");
+		  graph1.addNode("N1");
 		  nodes.add("N1");
 		  
 	  }
@@ -111,32 +147,42 @@ public class GraphGenerator {
 		  
 		  for (int i=2; i<=nbNodes; i++) {
 			  String nodeName = "N"+(char)i;
-			  graphe.addNode(nodeName);
+			  graph1.addNode(nodeName);
 			  nodes.add(nodeName);
 			  }
 		  
 		  for (int i=0; i<nbNodes;i++) {
 			  for (int j=0;j<nbNodes;j++) {
 				  if(nodes.get(i)!=nodes.get(j)) {
-					  graphe.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
+					  graph1.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
 				  }
 			  }
 		  }  
 	  
 	  }
-	  return graphe;
+	  return graph1;
   }
   
   
 
   public static Graph createRandom(int nbNodes, double probability) {
 	  
-	  Graph graphe = new Graph ();
+	  /*
+	   * @brief : It creates a graph randomly
+	   * 
+	   * @param1 : int number of nodes of the graph
+	   * 
+	   * @param2 : double probability used to create a new edge or not
+	   * 
+	   * @return : It returns the graph that has been created
+	   */
+	  
+	  Graph graph1 = new Graph ();
 	  ArrayList<String> nodes = new ArrayList<String>();
 	  
 		if(nbNodes>=1) {
 			
-				  graphe.addNode("N1");
+				  graph1.addNode("N1");
 				  nodes.add("N1");				  
 			  }
 			  
@@ -145,7 +191,7 @@ public class GraphGenerator {
 			for (int i=2; i<=nbNodes; i++) {
 
 				  String nodeName = "N"+(char)i;
-				  graphe.addNode(nodeName);
+				  graph1.addNode(nodeName);
 				  nodes.add(nodeName);
 				  }
 			}
@@ -155,13 +201,13 @@ public class GraphGenerator {
 				
 				double na = Math.random();
 				if (na<=probability) {
-					graphe.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
+					graph1.addEdge(nodes.get(i),nodes.get(j),nodes.get(i)+"-"+nodes.get(j));
 				}
 				
 			}
 		}	   
 	  
-    return graphe;
+    return graph1;
   }
 
 }
