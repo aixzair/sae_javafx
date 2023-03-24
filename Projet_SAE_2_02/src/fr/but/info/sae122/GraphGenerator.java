@@ -70,7 +70,6 @@ public class GraphGenerator {
 	  
 	  Graph graphe = new Graph ();
 	  ArrayList<Node> nodes = new ArrayList<Node>();
-	  ArrayList<Edge> edges = new ArrayList<Edge>();
 	  
 	  if(nbNodes>=1) {
 		  
@@ -79,30 +78,29 @@ public class GraphGenerator {
 	  }
 	  
 	  if(nbNodes>1) {
+		  int compt = 0;
+		  
 		  for(int i=nbNodes-1;i<0;i--) {
 			
 			  String nom_graphe = "N"+(char)i;
 			  nodes.add(new Node(nom_graphe)); 
 		  }
-		  for(int i=0; i>nodes.size();i++) {
-			  
-			  
+		  
+		  for(int i=0;i>nbNodes-1;i++) {
+			  for(int j=1;j<nbNodes-1;j++) {
+				  graphe.addEdge(nodes.get(i).getName(),nodes.get(j).getName(),nodes.get(i).getName()+"-"+nodes.get(j).getName());
+			  }
 		  }
-	  }
-	  
-		  	
 		  
-		  
+	  }	  	  
 	  
-	  
-	  
-	  
-	  
-    throw new UnsupportedOperationException("To be written");
+    return graphe;
   }
   
   
   public static Graph createFullyConnected(int nbNodes) {
+	  
+	  
     throw new UnsupportedOperationException("To be written");
   }
   
