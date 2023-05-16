@@ -1,4 +1,4 @@
-package fr.but.info.sae122.seance1;
+package fr.but.info.sae122;
 
 /** Tool class to build standard graphs */
 public class GraphGenerator {

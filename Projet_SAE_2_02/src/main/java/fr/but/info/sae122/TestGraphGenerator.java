@@ -1,4 +1,4 @@
-package fr.but.info.sae122.seance1;
+package fr.but.info.sae122;
 
 public class TestGraphGenerator {
   public static void main(String[] args) {

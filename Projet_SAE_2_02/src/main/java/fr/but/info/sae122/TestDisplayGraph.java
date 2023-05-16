@@ -1,4 +1,4 @@
-package fr.but.info.sae122.seance1;
+package fr.but.info.sae122;
 
 /**
  * Simple test class to check displaying of graphs and iterations

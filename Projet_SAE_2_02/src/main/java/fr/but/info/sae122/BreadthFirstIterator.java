@@ -1,4 +1,4 @@
-package fr.but.info.sae122.seance1;
+package fr.but.info.sae122;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
