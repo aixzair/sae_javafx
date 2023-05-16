@@ -53,25 +53,13 @@ public class MaxFlow {
         }
     }
 
-    private boolean checkIfItsIncreasable(Path path){
-        int nb = 0;
-        for(Edge edge : path.edgeList){
-            if(edge.getFlux() + path.getFlow() >= edge.getCapacity()) nb++;
-        }
-        if(nb != path.edgeList.size()) return false;
-        return true;
-    }
-
-    public int computeMaxFlow() throws IncoherentSuccessivityException {
-        Path path = new Path(graph.getNodes().toArray(new String[0]));
-
+    public int computeMaxFlow() {
+        Path path = new AugmentingPath(graph, sourceNode, sinkNode);
         boolean good = false;
         while(!good){
-            System.out.println(path.getFlow());
-            if(checkIfItsIncreasable(path)) increaseFlow(path);
-            else good = true;
+
         }
-        return path.getFlow();
+
     }
 
     public static void main(String[] args) throws IncoherentSuccessivityException {
