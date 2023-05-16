@@ -14,9 +14,9 @@ public class TestMaxFlow {
         Graph graph = GraphGenerator.createLinear(4);
         String[] nodes = {graph.nodes.get(0), graph.nodes.get(3)};
         MaxFlow maxFlow = new MaxFlow(graph, nodes[0], nodes[1]);
-        assertEquals(maxFlow.getGraph(), graph);
-        assertEquals(maxFlow.getSinkNode(), nodes[0]);
-        assertEquals(maxFlow.getSourceNode(), nodes[1]);
+        assertEquals(graph, maxFlow.getGraph());
+        assertEquals(nodes[0], maxFlow.getSinkNode());
+        assertEquals(nodes[1], maxFlow.getSourceNode());
     }
 
     @Test
