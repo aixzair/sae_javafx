@@ -1,11 +1,11 @@
 package fr.but.info.sae122;
 
 
+public class AugmentingPath extends Path {
+
 	public Graph graph;
 	public String sourceNode;
 	public String sinkNode;
-public class AugmentingPath extends Path {
-
 	
 	public AugmentingPath(Graph _graph, String _sourceNode, String _sinkNode){
 
