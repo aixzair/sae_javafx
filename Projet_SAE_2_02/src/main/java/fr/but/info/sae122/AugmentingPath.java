@@ -7,10 +7,14 @@ public class AugmentingPath extends Path {
 	public String sinkNode;
 
 	Graph residualGraph;
-	
-	/*
-	* Crée un nouveau path
-	* */
+
+	/**
+	 * 
+	 * @param _graph will contain the residual graph needed to get the augmenting path
+	 * @param _sourceNode node from which we start the operation
+	 * @param _sinkNode node to which we want to go
+	 */
+
 
 	public AugmentingPath(Graph _graph, String _sourceNode, String _sinkNode){
 		this.graph=_graph;
@@ -30,18 +34,35 @@ public class AugmentingPath extends Path {
 			addFirstEdge(last.getEdge());
 			last = last.getParent();
 		}
+		/*
+		 * Throws exception if there are no next element
+		 */
+		while(pathElement.getEdge().getToNode() != sinkNode){
+			if(!BFI.hasNext()) throw new IllegalArgumentException("");
+			pathElement = BFI.next();
+		}
 		this.residualGraph = graph;
 
 	}
 	
+	/**
+	 * 
+	 * @return a residual graph created from the graph origin
+	 */
 	public Graph getResidualGraph() {
-		
+
 		ResidualGraph graph1 = new ResidualGraph();
-		
+
 		return graph1.createFromGraph(this.graph); 
 	}
+	/**
+	 * 
+	 * @return the path corresponding to the augmentedPath 
+	 */
 	
+
 	/*public Path getAugmentedPath() {
+
 		BreadthFirstIterator BFI= new BreadthFirstIterator(this.getResidualGraph(),sinkNode);
 		Path path = new Path();
 		while (BFI.hasNext()) {
@@ -50,5 +71,7 @@ public class AugmentingPath extends Path {
 			path.addFirstEdge(element.getEdge());
 		}
 		return path;
+
 	}*/
+
 }

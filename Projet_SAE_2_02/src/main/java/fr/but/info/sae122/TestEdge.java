@@ -56,7 +56,7 @@ class TestEdge {
 	}
 	
 	@Test
-	void testToString() //Erreur : Deux string identiques mais renvoie faux
+	void testToString() //Erreur : Deux strings identiques mais renvoie faux
 	{
 		Edge ed1 = new Edge("N1", "N2", 10);
 		//System.out.println(ed1.toString());

@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- A Breadth-First Iterator that enumerates all edges, starting from a given node.
+ A Breadth-First Iterator that enumerates all PathElement, starting from a given node.
  */
 public class BreadthFirstIterator implements Iterator<PathElement> {
 
@@ -38,8 +38,8 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
         return ! queue.isEmpty();
     }
 
-    /** Gets the next edge of the enumeration.
-     * @return the next edge of the graph.
+    /** Gets the next path element of the enumeration.
+     * @return the next path element of the graph.
      * @throws java.util.NoSuchElementException if there is no more edge to enumerate
      */
     public PathElement next() {

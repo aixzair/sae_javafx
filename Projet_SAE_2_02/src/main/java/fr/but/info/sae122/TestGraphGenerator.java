@@ -19,11 +19,12 @@ public class TestGraphGenerator {
         LibGraph.display(random);
         var large = GraphGenerator.createRandom(50, 0.02);
         LibGraph.display(large);*/
+    	
         try {
-            InputStream stream = new FileInputStream("main/resources/fr/but/info/sae122/seance1/graph.csv");
+            InputStream stream = new FileInputStream("src/main/resources/fr/but/info/sae122/seance1/graph.csv");
             Graph g = GraphIO.read(stream);
             LibGraph.display(g);
-            OutputStream stream1 = new FileOutputStream("main/resources/fr/but/info/sae122/seance1/graph2.csv");
+            OutputStream stream1 = new FileOutputStream("src/main/resources/fr/but/info/sae122/seance1/graph.csv");
             GraphIO.write(g, stream1);
         }catch (Exception e){
             e.printStackTrace();

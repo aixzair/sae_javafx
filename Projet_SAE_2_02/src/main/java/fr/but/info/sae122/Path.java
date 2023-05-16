@@ -6,15 +6,24 @@ import java.util.Random;
 
 public class Path {
 	
-	List<Edge> edgeList;
-	int flow;
+	protected List<Edge> edgeList;
+	protected int flow;
 	
+	/**
+	 * Path constructor without any parameter
+	 */
 	public Path() {
 		this.edgeList=new ArrayList<>();
 		flow = 0;
 	}
-	
+
+	/**
+	 * Path constructor
+	 * @param nodes list used to create edges
+	 * @throws IncoherentSuccessivityException if two successive edges in the edge list are not linked
+	 */
 	public Path(ArrayList<Edge> nodes) throws IncoherentSuccessivityException {
+
 
 		/*this.edgeList=new ArrayList<>();
 		Random r = new Random();
@@ -32,13 +41,27 @@ public class Path {
 		flow = 0;
 	}
 	
+	/**
+	 * Sets the flow of this Path
+	 * @param flow : new value of flow in Path
+	 */
+	
 	public void setFlow(int flow) {
 		this.flow=flow;
 	}
 
+	/**
+	 * Gets the flow of this Path
+	 * @return the flow of the Path
+	 */
 	public int getFlow() {
 		return this.flow;
 	}
+	
+	/**
+	 * Adds an edge at the first place of the edge list
+	 * @param edge added to the first place of the age list
+	 */
 	
 	public void addFirstEdge(Edge edge) {
 		if(edgeList.size() != 0){
@@ -48,6 +71,11 @@ public class Path {
 		}
 		edgeList.add(0, edge);
 	}
+	
+	/**
+	 * Adds an edge at the last place of the edge list
+	 * @param edge added to the last place of the age list
+	 */
 	
 	public void addLastEdge(Edge edge) {
 		if(edgeList.size() != 0){
