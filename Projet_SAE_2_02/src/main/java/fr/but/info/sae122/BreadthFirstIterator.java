@@ -23,7 +23,10 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
         this.queue = new ArrayDeque<>();
         this.visitedNodes = new HashSet<>();
         this.graph = graph;
-        queue.add(new PathElement(null,graph.getEdge(firstNode, firstNode)));
+
+        for(Edge e : graph.getEdgesFrom(firstNode)){
+            queue.add(new PathElement(null, e));
+        }
         visitedNodes.add(firstNode);
     }
 
@@ -39,17 +42,29 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
      * @return the next path element of the graph.
      * @throws java.util.NoSuchElementException if there is no more edge to enumerate
      */
-    @Override
     public PathElement next() {
-        var pathElement = queue.removeFirst();
-        var dest = pathElement.getEdge().getToNode();
-        if(pathElement.getEdge().getCapacity()==0 || pathElement.getEdge().getCapacity()==pathElement.getMaxFlow()) {
-        	return pathElement;
+
+        /*var pathelement = queue.removeFirst();
+
+        var dest = pathelement.getEdge();
+
+        if(!visitedNodes.contains(dest.getToNode())) {
+            for (Edge e : graph.getEdgesFrom(dest.getFromNode())) {
+                if(e.getCapacity() != 0 && e.getCapacity() != e.getFlux()) {
+                    queue.add(new PathElement(pathelement, e));
+                    visitedNodes.add(e.getToNode());
+                }
+            }
         }
-        if (! visitedNodes.contains(dest)) {
-        	queue.add(new PathElement(pathElement,graph.getEdge(pathElement.getEdge().getFromNode(), dest)));
+        return pathelement;*/
+        PathElement element = queue.removeFirst();
+        String dest = element.getEdge().getToNode();
+        if(!visitedNodes.contains(dest)){
+            for(Edge edge : graph.getEdgesFrom(dest)){
+                queue.add(new PathElement(element, edge));
+            }
             visitedNodes.add(dest);
         }
-        return pathElement;
+        return element;
     }
 }

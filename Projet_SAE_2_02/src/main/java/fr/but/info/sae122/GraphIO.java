@@ -38,6 +38,7 @@ public class GraphIO {
         while (lineScanner.hasNext()) {
             graph.addNode(lineScanner.next());
         }
+        lineScanner.close();
     }
     /** Parse a (not first) line from the file and adds to the graph.
      * @param graph the graph to add edges to
@@ -52,6 +53,7 @@ public class GraphIO {
             var capacity = lineScanner.nextInt();
             graph.addEdge(from,to,capacity);
         }
+        lineScanner.close();
     }
 
     /** Writes a graph to the disk.

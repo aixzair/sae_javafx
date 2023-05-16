@@ -12,7 +12,8 @@ class TestEdge {
 		//fail("Not yet implemented");
 		
 		Edge ed1 = new Edge("N1", "N2", 10);
-		
+
+		assertNotNull(ed1);
 		assertTrue(ed1 instanceof Edge && 
 				ed1.getFromNode() == "N1"
 				&& ed1.getToNode() == "N2" 

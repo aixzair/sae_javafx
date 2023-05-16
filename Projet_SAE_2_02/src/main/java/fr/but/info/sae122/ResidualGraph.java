@@ -9,12 +9,17 @@ import java.util.List;
  */
 public class ResidualGraph { 
 	
-	Graph createFromGraph(Graph graph)
+	public Graph createFromGraph(Graph graph)
 	{
 		Graph resGraph = new Graph();
 		/**Fills node list of the residual graph with the original's**/
-		resGraph.nodes.addAll((List<String>) graph.getNodes());
-		
+
+
+		resGraph = graph;
+		for(String s : graph.getNodes()){
+			resGraph.addNode(s);
+		}
+
 
 		for(Edge edge : graph.getEdges())
 
@@ -26,7 +31,7 @@ public class ResidualGraph {
 						edge.getToNode(), 
 						edge.getCapacity() - edge.getFlux()));
 			}
-			/**Fills the edge list with a reversed edge with no flow if the original is at least partially filled and is reduceable**/
+			/**Fills the edge list with a reversed edge with no flow if the original is reduceable**/
 			else if(edge.getFlux() != 0 )
 			{
 				resGraph.edges.add(new Edge(edge.getToNode(), 
@@ -34,6 +39,7 @@ public class ResidualGraph {
 						edge.getFlux()));
 			}
 		}
+		System.out.println(resGraph);
 		return resGraph;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 public class MaxFlow {
 
+
     private Graph graph;
     private String sourceNode;
     private String sinkNode;
@@ -15,6 +16,7 @@ public class MaxFlow {
      * @param sourceNode from which node we start
      * @param sinkNode to which we finish
      */
+
 
     public MaxFlow(Graph graph, String sourceNode, String sinkNode) {
         this.graph = graph;
@@ -81,7 +83,7 @@ public class MaxFlow {
         int flow = path.getFlow();
         for(Edge edge : path.edgeList){
             if(!(edge.getFlux() + flow > edge.getCapacity())){
-                edge.setFlux(edge.getFlux() + flow);
+                graph.getEdge(edge.getFromNode(), edge.getToNode()).setFlux(edge.getFlux() + path.getFlow());
             }
         }
     }
@@ -92,14 +94,20 @@ public class MaxFlow {
      * @return if it's increasable or not
      */
 
-    private boolean checkIfItsIncreasable(Path path){
-        int nb = 0;
-        for(Edge edge : path.edgeList){
-            if(edge.getFlux() + path.getFlow() >= edge.getCapacity()) nb++;
+/*    public int computeMaxFlow() {
+        try{
+            while(true){
+                AugmentingPath path = new AugmentingPath(graph, sourceNode, sinkNode);
+                increaseFlow(path);
+            }
+        }catch (IllegalArgumentException e){
+            return getSinkFlow();
         }
+
         if(nb != path.edgeList.size()) return false;
         return true;
     }
+    */
 
     /**
      * calculs an augmented path and enhance it as possible
@@ -116,13 +124,19 @@ public class MaxFlow {
             else good = true;
         }
         return path.getFlow();
+
     }
 
     public static void main(String[] args) throws IncoherentSuccessivityException {
-        Graph g = GraphGenerator.createLinear(3);
-        g.edges.get(0).setFlux(5);
-        g.edges.get(1).setFlux(6);
-        MaxFlow maxFlow = new MaxFlow(g, g.nodes.get(0), g.nodes.get(2));
+        Graph g = new Graph();
+        g.addNode("N1");
+        g.addNode("N2");
+        g.addNode("N3");
+        Edge e = g.addEdge("N1", "N2", 5);
+        Edge e1 = g.addEdge("N1", "N3", 6);
+        System.out.println(g);
+        e1.setFlux(4);
+        MaxFlow maxFlow = new MaxFlow(g, "N1", "N3");
 
         System.out.println(maxFlow.computeMaxFlow());
     }
