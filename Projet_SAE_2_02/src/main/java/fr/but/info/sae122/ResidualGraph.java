@@ -15,9 +15,11 @@ public class ResidualGraph {
 		/**Fills node list of the residual graph with the original's**/
 
 
+		resGraph = graph;
 		for(String s : graph.getNodes()){
 			resGraph.addNode(s);
 		}
+
 
 		for(Edge edge : graph.getEdges())
 
@@ -37,6 +39,7 @@ public class ResidualGraph {
 						edge.getFlux()));
 			}
 		}
+		System.out.println(resGraph);
 		return resGraph;
 	}
 }
