@@ -108,7 +108,10 @@ public class MaxFlow {
         return getSinkFlow();
     }
 
-
+    /** Test de la fonction computeMaxFlow, afin de tester ajouter des noeuds et des edges avec une capacite et mettre
+     * dans le constructeur de MaxFlox le graph, le noeud de départ et le noeud d'arriver et enfin faire l'appel de la
+     * fonction dans un System.out.println afin d'afficher le résultat
+     * @param args les Arguments passable à la fonction*/
     public static void main(String[] args) throws IncoherentSuccessivityException {
         Graph g = new Graph();
         g.addNode("N1");
