@@ -24,7 +24,7 @@ public class ResidualGraph{
 						edgeList.get(i).getToNode(), 
 						edgeList.get(i).getCapacity() - edgeList.get(i).getFlux()));
 			}
-			/**Fills the edge list with a reversed edge with no flow if the original isn't overflowed and is reduceable**/
+			/**Fills the edge list with a reversed edge with no flow if the original is at least partially filled and is reduceable**/
 			else if(edgeList.get(i).getFlux() != 0 )
 			{
 				resGraph.edges.add(new Edge(edgeList.get(i).getToNode(), 
