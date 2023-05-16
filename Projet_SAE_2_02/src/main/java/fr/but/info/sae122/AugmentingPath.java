@@ -1,4 +1,6 @@
+
 package fr.but.info.sae122;
+
 
 public class AugmentingPath extends Path {
 

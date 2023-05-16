@@ -1,3 +1,4 @@
+
 package fr.but.info.sae122;
 
 /**
@@ -25,14 +26,18 @@ public class TestDisplayGraph {
         var display = LibGraph.display(graph);
         BreadthFirstIterator bfi = new BreadthFirstIterator(graph, "A");
         while (bfi.hasNext()) {
+
             PathElement pathElement = bfi.next();
             System.out.println(pathElement.getEdge().toString());
+
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+
             display.markEdge(pathElement.getEdge().getFromNode(), pathElement.getEdge().getToNode());
+
             //display.getEdge("%s-%s".formatted(edge.getFromNode(),edge.getToNode())).setAttribute("ui.class","marked");
         }
         System.out.println("Done iterating");
