@@ -14,6 +14,7 @@ public class Graph {
   /** Stores all the ingoing edges for ease of use */
   private final Map<String, List<Edge>> mapTo;
 
+
   /** Builds an empty graph with no node nor edge. */
   public Graph() {
     nodes = new ArrayList<>();
@@ -36,18 +37,19 @@ public class Graph {
   /** Adds a new edge to this graph.
    * @param from the node to start from
    * @param to the node to arrive at
-   * @param label the edge's label
+   * @param capacity the edge's capacity
    * @return the newly built edge.
    * @throws IllegalArgumentException if the two nodes are not in this graph
    * @throws IllegalArgumentException if the new edge would link a node to itself
    */
-  public Edge addEdge(String from, String to, String label) {
+  public Edge addEdge(String from, String to, int capacity) {
     if (from.equals(to)) throw new IllegalArgumentException("Autolink are forbidden !");
     List<Edge> fromList = mapFrom.get(from);
     List<Edge> toList = mapTo.get(to);
     if (fromList == null) throw new IllegalArgumentException(from+" node does not exist!");
     if (toList == null) throw new IllegalArgumentException(to+" node does not exist!");
-    Edge edge = new Edge(from, to, label);
+    Edge edge = new Edge(from, to, capacity);
+    edge.setFlux(0);
     edges.add(edge);
     fromList.add(edge);
     toList.add(edge);
@@ -126,4 +128,5 @@ public class Graph {
     }
     return res.toString();
   }
+
 }
