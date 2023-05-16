@@ -34,5 +34,29 @@ class TestPath {
 		}
 		
 	}
+	
+	@Test
+	void testGetFlow()
+	{
+		
+	}
+	
+	@Test
+	void testSetFlow()
+	{
+		
+	}
+	
+	@Test
+	void testAddFirstEdge()
+	{
+		
+	}
+	
+	@Test
+	void testAddLastEdge()
+	{
+		
+	}
 
 }
