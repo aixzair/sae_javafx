@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class TestBFI {
 
 	@Test
-	void testHasNext() {
+	void testConstructor() {
 		Graph graph = new Graph();
 		graph.addNode("N1");
 		graph.addNode("N2");
@@ -17,8 +17,21 @@ class TestBFI {
 		
 		BreadthFirstIterator bfi = new BreadthFirstIterator(graph, firstNode); 
 		
+		assertNotNull(bfi);
 		assertTrue(bfi instanceof BreadthFirstIterator);
-		assertTrue(bfi.hasNext());
+	}
+		@Test
+		void testHasNext() {
+			Graph graph = new Graph();
+			graph.addNode("N1");
+			graph.addNode("N2");
+			graph.addEdge("N1", "N2", 5);
+			
+			String firstNode = "N1";
+			
+			BreadthFirstIterator bfi = new BreadthFirstIterator(graph, firstNode); 
+			
+			assertTrue(bfi.hasNext());
 	}
 
 	@Test

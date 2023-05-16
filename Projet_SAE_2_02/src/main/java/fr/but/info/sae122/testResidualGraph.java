@@ -14,30 +14,39 @@ class TestResidualGraph {
 		graph.addNode("N1");
 		graph.addNode("N2");
 		graph.addNode("N3");
-		graph.addEdge("N1", "N2", 10);
-		graph.addEdge("N1", "N3", 5);
-		graph.addEdge("N1", "N3", 8);
+		graph.addNode("N4");
+		graph.addNode("N5");
+		Edge ed1 = new Edge("N1", "N2", 10);
+		Edge ed2 = new Edge("N2", "N3", 7);
+		Edge ed3 = new Edge("N1", "N3", 8);
+		Edge ed4 = new Edge("N3", "N4", 5);
+		Edge ed5 = new Edge("N5", "N2", 6);
+
+		ed1.setFlux(5);
+		ed2.setFlux(5);
+		ed3.setFlux(5);
+		ed4.setFlux(5);
+		ed5.setFlux(5);
 		
 		Graph resGraph = new ResidualGraph().createFromGraph(graph);
 
-		List<String> graphNodeList = (List<String>) graph.getNodes();
-		List<String> resGraphNodeList = (List<String>) resGraph.getNodes();
-		List<Edge> graphEdgeList = (List<Edge>) graph.getEdges();
-		List<Edge> resGraphEdgeList = (List<Edge>) resGraph.getEdges();
-
+		/*
+		for(Edge edge : graph.getEdges())
+		{
+			System.out.println(edge.getFromNode() + ", " + edge.getToNode() + ", " + edge.getCapacity());
+		}*/
 		
 		for(String node : resGraph.getNodes())
 		{
 			assertTrue(graph.getNodes().contains(node));
 		}
 		
-		for(Edge edge : resGraph.getEdges())
-		{
-			//Problème à 1er assertTrue : contains ne marche pas à cause de la valeur de capacité
-			Edge invEdge = new Edge(edge.getToNode(), edge.getFromNode(), 0);
-			assertTrue(graph.getEdges().contains(edge) || graph.getEdges().contains(invEdge));
-			assertTrue(edge.getFlux() ==0);
-		}
+		assertTrue(graph.getEdges().contains(new Edge("N1", "N2", 5)));
+		assertTrue(graph.getEdges().contains(new Edge("N2", "N3", 2)));
+		assertTrue(graph.getEdges().contains(new Edge("N1", "N3", 3)));
+		assertFalse(graph.getEdges().contains(new Edge("N3", "N4", 0)) || graph.getEdges().contains(new Edge("N4", "N3", 0)));
+		assertTrue(graph.getEdges().contains(new Edge("N2", "N5", 5)));
+		
 	}
 
 }

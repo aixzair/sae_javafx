@@ -22,7 +22,7 @@ public class ResidualGraph{
 						edge.getToNode(), 
 						edge.getCapacity() - edge.getFlux()));
 			}
-			/**Fills the edge list with a reversed edge with no flow if the original is at least partially filled and is reduceable**/
+			/**Fills the edge list with a reversed edge with no flow if the original is reduceable**/
 			else if(edge.getFlux() != 0 )
 			{
 				resGraph.edges.add(new Edge(edge.getToNode(), 
