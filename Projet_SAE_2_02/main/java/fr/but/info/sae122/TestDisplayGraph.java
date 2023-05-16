@@ -1,4 +1,4 @@
-package src.main.java.fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 
 /**
