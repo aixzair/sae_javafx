@@ -1,6 +1,7 @@
 package main.java.fr.but.info.sae122;
 
 import java.util.Collection;
+import java.util.Random;
 
 public class TestPerformances {
 
@@ -76,20 +77,65 @@ public class TestPerformances {
 		}
 		return graphe;
 	}
-	
+
+	/**
+	 * Calcul le temps necessaire pour calculer le flot selon le type de graph
+	 * @param size le nombre de noeud dans le graph
+	 * @param type le type de graph
+	 * @return le temps necessaire pour calculer le flot*/
+
+	public static long nbNodePerf(int size, String type){
+		Graph g = new Graph();
+		switch (type.toLowerCase()){
+			case "linear" -> g = GraphGenerator.createLinear(size);
+			case "full" -> g = GraphGenerator.createFull(size);
+		}
+		long deb = 0, end = 0;
+		MaxFlow maxFlow = new MaxFlow(g, g.nodes.get(0), g.nodes.get(g.nodes.size() - 1));
+		deb = System.currentTimeMillis();
+		maxFlow.computeMaxFlow();
+		end = System.currentTimeMillis();
+		return end-deb;
+	}
+
+
+	/**
+	 * Calcul le temps necessaire pour calculer le flot selon le type de graph et le nombre d'arete à ajouter
+	 * @param size le nombre de noeud de base dans le graph
+	 * @param nbArreteEnPlus le nombre de noeud a ajouter
+	 * @return le temps necessaire pour calculer le flot*/
+	public static long nbArretePerf(int size, int nbArreteEnPlus){
+		Graph g = GraphGenerator.createLinear(size);
+		Random r = new Random();
+		long deb = 0, end = 0;
+		deb = System.currentTimeMillis();
+		for(int i = 0; i<nbArreteEnPlus; i++){
+			int n = g.nodes.size() + i;
+			String nodes = "N" + n;
+			g.addNode(nodes);
+			if(i == 0) g.addEdge(g.nodes.get(g.nodes.size() - 2), nodes, r.nextInt(10)+1);
+			else g.addEdge(g.nodes.get(g.nodes.size() - 2), nodes, r.nextInt(10)+1);
+		}
+		MaxFlow maxFlow = new MaxFlow(g, g.nodes.get(0), g.nodes.get(g.nodes.size() - 1));
+		maxFlow.computeMaxFlow();
+		end = System.currentTimeMillis();
+		return end-deb;
+	}
+
 	/**
 	 * 
 	 * @param args
 	 * sert à appeler les fonctions
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		nbNoeudsFull(2);
+		/*nbNoeudsFull(2);
 		nbNoeudsLin(2);
-		System.out.println(nbAretes(3,3));
+		System.out.println(nbAretes(3,3));*/
 
-		
+		for (int i = 0; i < 10; i++) {
+			System.out.println(nbArretePerf(1000, 1000));
+		}
+
 		
 	}
 

@@ -1,5 +1,7 @@
 package main.java.fr.but.info.sae122;
 
+import java.util.Objects;
+
 public class AugmentingPath extends Path {
 
 	public Graph graph;
@@ -9,13 +11,10 @@ public class AugmentingPath extends Path {
 	Graph residualGraph;
 
 	/**
-	 * 
 	 * @param _graph will contain the residual graph needed to get the augmenting path
 	 * @param _sourceNode node from which we start the operation
 	 * @param _sinkNode node to which we want to go
 	 */
-
-
 	public AugmentingPath(Graph _graph, String _sourceNode, String _sinkNode){
 		this.graph=_graph;
 		this.sourceNode=_sourceNode;
@@ -37,29 +36,25 @@ public class AugmentingPath extends Path {
 		/*
 		 * Throws exception if there are no next element
 		 */
-		while(pathElement.getEdge().getToNode() != sinkNode){
+		while(!Objects.equals(pathElement.getEdge().getToNode(), sinkNode)){
 			if(!BFI.hasNext()) throw new IllegalArgumentException("");
 			pathElement = BFI.next();
 		}
 		this.residualGraph = graph;
-
 	}
 	
 	/**
-	 * 
 	 * @return a residual graph created from the graph origin
 	 */
 	public Graph getResidualGraph() {
-
 		ResidualGraph graph1 = new ResidualGraph();
-
 		return graph1.createFromGraph(this.graph); 
 	}
+
 	/**
 	 * 
 	 * @return the path corresponding to the augmentedPath 
 	 */
-	
 
 	/*public Path getAugmentedPath() {
 

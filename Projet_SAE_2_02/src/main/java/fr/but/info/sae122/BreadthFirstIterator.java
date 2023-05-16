@@ -24,9 +24,7 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
         this.visitedNodes = new HashSet<>();
         this.graph = graph;
 
-        for(Edge e : graph.getEdgesFrom(firstNode)){
-            queue.add(new PathElement(null, e));
-        }
+        graph.getEdgesFrom(firstNode).forEach(edge -> queue.add(new PathElement(null, edge)));
         visitedNodes.add(firstNode);
     }
 
@@ -43,9 +41,7 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
      * @throws java.util.NoSuchElementException if there is no more edge to enumerate
      */
     public PathElement next() {
-
         /*var pathelement = queue.removeFirst();
-
         var dest = pathelement.getEdge();
 
         if(!visitedNodes.contains(dest.getToNode())) {
@@ -57,12 +53,11 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
             }
         }
         return pathelement;*/
+
         PathElement element = queue.removeFirst();
         String dest = element.getEdge().getToNode();
         if(!visitedNodes.contains(dest)){
-            for(Edge edge : graph.getEdgesFrom(dest)){
-                queue.add(new PathElement(element, edge));
-            }
+            graph.getEdgesFrom(dest).forEach(edge -> queue.add(new PathElement(element, edge)));
             visitedNodes.add(dest);
         }
         return element;

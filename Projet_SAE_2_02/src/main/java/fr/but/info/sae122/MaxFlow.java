@@ -96,18 +96,17 @@ public class MaxFlow {
         AugmentingPath path = null;
         boolean good = false;
 
-            while(!good){
-                try {
+        while(!good){
+            try {
                 path = new AugmentingPath(graph, sourceNode, sinkNode);
                 path.getResidualGraph();
                 increaseFlow(path);
             }catch (IllegalArgumentException e){
                 good = true;
-                }
+            }
         }
-            return getSinkFlow();
+        return getSinkFlow();
     }
-
 
 
     public static void main(String[] args) throws IncoherentSuccessivityException {
@@ -120,7 +119,7 @@ public class MaxFlow {
         Edge e = g.addEdge("N1", "N2", 5);
         Edge e1 = g.addEdge("N1", "N3", 6);
         Edge e2 = g.addEdge("N3", "N4", 10);
-        Edge e3 = g.addEdge("N4", "N5", 1);
+        Edge e3 = g.addEdge("N4", "N5", 20);
 
         MaxFlow maxFlow = new MaxFlow(g, "N1", "N5");
 

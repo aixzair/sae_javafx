@@ -14,11 +14,8 @@ public class PathElement {
 	public PathElement(PathElement parent, Edge edge) {
 		this.parent=parent;
 		this.edge=edge;
-		if(parent == null){
-			this.maxFlow= edge.getCapacity();
-		}else{
-			this.maxFlow = Math.min(edge.getCapacity(), parent.getMaxFlow());
-		}
+		if(parent == null) this.maxFlow = edge.getCapacity();
+		else this.maxFlow = Math.min(edge.getCapacity(), parent.getMaxFlow());
 	}
 	/**
 	 * Gets the maximal flow of the PathElement

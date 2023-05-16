@@ -20,11 +20,8 @@ public class Path {
 	/**
 	 * Path constructor
 	 * @param nodes list used to create edges
-	 * @throws IncoherentSuccessivityException if two successive edges in the edge list are not linked
 	 */
-	public Path(ArrayList<Edge> nodes) throws IncoherentSuccessivityException {
-
-
+	public Path(ArrayList<Edge> nodes) {
 		/*this.edgeList=new ArrayList<>();
 		Random r = new Random();
 		for(int i=0;i<nodes.length-1;i++) {
@@ -65,9 +62,7 @@ public class Path {
 	
 	public void addFirstEdge(Edge edge) {
 		if(edgeList.size() != 0){
-			if(!edge.getToNode().equals(edgeList.get(0).getFromNode())){
-				throw new IllegalArgumentException();
-			}
+			if(!edge.getToNode().equals(edgeList.get(0).getFromNode())) throw new IllegalArgumentException();
 		}
 		edgeList.add(0, edge);
 	}
@@ -79,13 +74,8 @@ public class Path {
 	
 	public void addLastEdge(Edge edge) {
 		if(edgeList.size() != 0){
-			if(!edge.getFromNode().equals(edgeList.get(edgeList.size() - 1).getToNode())){
-				throw new IllegalArgumentException();
-			}
+			if(!edge.getFromNode().equals(edgeList.get(edgeList.size() - 1).getToNode())) throw new IllegalArgumentException();
 		}
 		edgeList.add(edgeList.size(), edge);
 	}
-	
-	
-	
 }
