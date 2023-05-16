@@ -1,11 +1,9 @@
 package main.java.fr.but.info.sae122;
-<<<<<<< HEAD:Projet_SAE_2_02/main/java/fr/but/info/sae122/Path.java
-=======
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
->>>>>>> 8c86f9227ac8501b9845af7222f7892100757769:Projet_SAE_2_02/src/main/java/fr/but/info/sae122/Path.java
 
 public class Path {
 	
