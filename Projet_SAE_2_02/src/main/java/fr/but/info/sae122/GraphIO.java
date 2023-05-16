@@ -1,11 +1,5 @@
 package main.java.fr.but.info.sae122;
 
-<<<<<<<< HEAD:Projet_SAE_2_02/main/java/fr/but/info/sae122/GraphIO.java
-========
-
->>>>>>>> orianne:Projet_SAE_2_02/src/main/java/main/java/fr/but/info/sae122/GraphIO.java
-package main.java.fr.but.info.sae122;
-
 import java.io.*;
 import java.util.Scanner;
 

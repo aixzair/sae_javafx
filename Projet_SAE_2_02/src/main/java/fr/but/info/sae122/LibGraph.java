@@ -1,11 +1,5 @@
 package main.java.fr.but.info.sae122;
 
-<<<<<<<< HEAD:Projet_SAE_2_02/main/java/fr/but/info/sae122/LibGraph.java
-========
-
->>>>>>>> orianne:Projet_SAE_2_02/src/main/java/main/java/fr/but/info/sae122/LibGraph.java
-package main.java.fr.but.info.sae122;
-
 
 import sae122.SimpleGraphDisplay;
 
