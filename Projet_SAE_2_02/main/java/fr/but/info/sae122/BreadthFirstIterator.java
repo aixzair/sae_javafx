@@ -1,10 +1,12 @@
-package fr.but.info.sae122;
+package src.main.java.fr.but.info.sae122;
 
 
 import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import main.java.fr.but.info.sae122.PathElement;
 
 /**
  A Breadth-First Iterator that enumerates all edges, starting from a given node.
