@@ -29,12 +29,11 @@ class TestResidualGraph {
 		ed5.setFlux(5);
 		
 		Graph resGraph = new ResidualGraph().createFromGraph(graph);
-
-		
+/*
 		for(Edge edge : graph.getEdges())
 		{
 			System.out.println(edge.getFromNode() + ", " + edge.getToNode() + ", " + edge.getCapacity());
-		}
+		}*/
 		
 		for(String node : resGraph.getNodes())
 		{

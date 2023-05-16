@@ -54,14 +54,14 @@ class TestPathElement {
 	
 	@Test
 	void testGetMaxFlow() {
-		Edge edge0 = new Edge("N1", "N2", 5);
+		Edge edge0 = new Edge("N0", "N1", 5);
 		
 		Graph graph = new Graph();
 		String node0 = "N0";
 		String node1 = "N1";
 		graph.addNode(node0);
 		graph.addNode(node1);
-		graph.addEdge(node0, node1, 0);
+		graph.addEdge(node0, node1, 5);
 		
 		BreadthFirstIterator BFI= new BreadthFirstIterator(graph,node0);
 		
