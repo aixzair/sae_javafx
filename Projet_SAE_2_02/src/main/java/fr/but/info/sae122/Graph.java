@@ -1,4 +1,5 @@
-package main.java.fr.but.info.sae122;
+package fr.but.info.sae122;
+
 
 import java.util.*;
 

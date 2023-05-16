@@ -1,4 +1,6 @@
-package main.java.fr.but.info.sae122;
+
+package fr.but.info.sae122;
+
 
 /**
  * Simple test class to check displaying of graphs and iterations
