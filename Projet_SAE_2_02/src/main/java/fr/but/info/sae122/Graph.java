@@ -1,4 +1,4 @@
-package src.main.java.fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 
 import java.util.*;
@@ -9,6 +9,7 @@ import java.util.*;
 public class Graph {
   protected final List<String> nodes;
   protected final List<Edge> edges;
+
 
   /** Stores all the outgoing edges for ease of use */
   private final Map<String, List<Edge>> mapFrom;

@@ -1,28 +1,34 @@
-package src.main.java.fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Path {
 	
-	Edge[] edgeList;
+	List<Edge> edgeList;
 	int flow;
 	
 	
 	public Path() {
-		
-		this.edgeList=new Edge[10000];
+		this.edgeList=new ArrayList<>();
 	}
 	
 	public Path(String[] nodes, int capacity) throws IncoherentSuccessivityException {
+		this.edgeList=new ArrayList<>();
 		
-
-		this.edgeList=new Edge[10000];
-		
+	}
+	
+	public Path(String[] nodes) throws IncoherentSuccessivityException {
+		this.edgeList=new ArrayList<>();
+		Random random = new Random();
 		for(int i=0;i<nodes.length-1;i++) {
-			edgeList[i]=new Edge(nodes[i],nodes[i+1],capacity);
+			edgeList.add(i, new Edge(nodes[i],nodes[i+1], random.nextInt(10)+1));
 		}
 		
-		for(int i=0;i<edgeList.length-1;i++) {
+		for(int i=0;i<edgeList.size()-1;i++) {
 			
-			if(this.edgeList[i].getToNode()!=this.edgeList[i+1].getFromNode()) {
+			if(this.edgeList.get(i).getToNode()!= this.edgeList.get(i + 1).getFromNode()) {
 				throw new IncoherentSuccessivityException("Deux arêtes successives n'ont pas de lien");
 			}
 		}
@@ -37,14 +43,13 @@ public class Path {
 	}
 	
 	public void addFirstEdge(Edge edge) {
-		
-		this.edgeList[0]=edge;
+		this.edgeList.set(0, edge);
 		
 	}
 	
 	public void addLastEdge(Edge edge) {
 		
-		this.edgeList[edgeList.length]=edge;
+		this.edgeList.set(edgeList.size(), edge);
 	}
 	
 	

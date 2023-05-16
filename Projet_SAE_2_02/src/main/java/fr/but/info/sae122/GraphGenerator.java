@@ -1,4 +1,4 @@
-package src.main.java.fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 
 import java.util.Random;
@@ -49,7 +49,6 @@ public class GraphGenerator {
                 graph.addEdge("N"+j, "N"+i, random.nextInt(10) + 1);
                 graph.getEdge("N" + j, "N" + i).setFlux(0);
             }
-
         }
         return graph;
     }
