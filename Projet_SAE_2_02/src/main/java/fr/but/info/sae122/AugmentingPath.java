@@ -1,20 +1,21 @@
-
-package fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 
 public class AugmentingPath extends Path {
 
-	Graph graph;
+
+	static Graph graph;
 	String sourceNode;
 	String sinkNode;
 	
 	public AugmentingPath(Graph _graph, String _sourceNode, String _sinkNode){
+
 		this.graph=_graph;
 		this.sourceNode=_sourceNode;
 		this.sinkNode=_sinkNode;
 	}
 	
-	public Graph getResidualGraph() {
+	public static Graph getResidualGraph() {
 		
 		ResidualGraph graph1 = new ResidualGraph();
 		
