@@ -9,11 +9,12 @@ import java.util.Set;
 /**
  A Breadth-First Iterator that enumerates all edges, starting from a given node.
  */
-public class BreadthFirstIterator implements Iterator<Edge> {
+public class BreadthFirstIterator implements Iterator<PathElement> {
 
     private final Set<String> visitedNodes;
     private final ArrayDeque<Edge> queue;
     private final Graph graph;
+    private PathElement pathElement;
 
     /** Builds a new iterator.
      * @param graph the graph to iterate
@@ -24,6 +25,7 @@ public class BreadthFirstIterator implements Iterator<Edge> {
         this.visitedNodes = new HashSet<>();
         this.graph = graph;
         queue.addAll(graph.getEdgesFrom(firstNode));
+        this.pathElement=new PathElement(null,null);
         visitedNodes.add(firstNode);
     }
 
@@ -40,13 +42,17 @@ public class BreadthFirstIterator implements Iterator<Edge> {
      * @throws java.util.NoSuchElementException if there is no more edge to enumerate
      */
     @Override
-    public Edge next() {
+    public PathElement next() {
         var edge = queue.removeFirst();
         var dest = edge.getToNode();
+        if(edge.getFlux()==0 || edge.getCapacity()==pathElement.getMaxFlow()) {
+        	return pathElement;
+        }
         if (! visitedNodes.contains(dest)) {
             queue.addAll(graph.getEdgesFrom(dest));
             visitedNodes.add(dest);
+            pathElement=new PathElement(pathElement,edge);
         }
-        return edge;
+        return pathElement;
     }
 }
