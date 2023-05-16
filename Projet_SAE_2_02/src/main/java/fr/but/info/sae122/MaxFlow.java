@@ -54,12 +54,12 @@ public class MaxFlow {
     }
 
     public int computeMaxFlow() {
-        Path path = new AugmentingPath(graph, sourceNode, sinkNode);
-        boolean good = false;
-        while(!good){
-
+        AugmentingPath path = new AugmentingPath(graph, sourceNode, sinkNode);
+        while(path != path.getAugmentedPath()){
+            increaseFlow(path);
+            path = new AugmentingPath(graph, sourceNode, sinkNode);
         }
-
+        return path.getFlow();
     }
 
     public static void main(String[] args) throws IncoherentSuccessivityException {
