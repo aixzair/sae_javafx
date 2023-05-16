@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Path {
 	
-	List<Edge> edgeList;
-	int flow;
+	protected List<Edge> edgeList;
+	protected int flow;
 	
 	public Path() {
 		
