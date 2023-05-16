@@ -1,7 +1,6 @@
-package main.java.fr.but.info.sae122;
+package main.java.java.fr.but.info.sae122;
 
 import java.util.Collection;
-import java.util.List;
 
 public class MaxFlow {
 

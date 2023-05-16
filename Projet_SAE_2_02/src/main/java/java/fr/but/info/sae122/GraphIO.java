@@ -1,3 +1,5 @@
+package main.java.java.fr.but.info.sae122;
+
 <<<<<<<< HEAD:Projet_SAE_2_02/main/java/fr/but/info/sae122/GraphIO.java
 ========
 
