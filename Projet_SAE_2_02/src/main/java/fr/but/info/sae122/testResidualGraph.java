@@ -24,11 +24,19 @@ class TestResidualGraph {
 		List<String> resGraphNodeList = (List<String>) resGraph.getNodes();
 		List<Edge> graphEdgeList = (List<Edge>) graph.getEdges();
 		List<Edge> resGraphEdgeList = (List<Edge>) resGraph.getEdges();
+
 		
-		for(int i = 0; i < graph.getNodes().size(); i++)
+		for(String node : resGraph.getNodes())
 		{
-			assertTrue(graphNodeList.get(i)  == resGraphNodeList.get(i));
-			assertEquals(graphEdgeList.get(i), resGraphEdgeList.get(i));
+			assertTrue(graph.getNodes().contains(node));
+		}
+		
+		for(Edge edge : resGraph.getEdges())
+		{
+			//Problème à 1er assertTrue : contains ne marche pas à cause de la valeur de capacité
+			Edge invEdge = new Edge(edge.getToNode(), edge.getFromNode(), 0);
+			assertTrue(graph.getEdges().contains(edge) || graph.getEdges().contains(invEdge));
+			assertTrue(edge.getFlux() ==0);
 		}
 	}
 

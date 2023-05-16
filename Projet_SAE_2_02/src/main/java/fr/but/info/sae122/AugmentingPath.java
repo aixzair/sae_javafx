@@ -2,9 +2,9 @@ package src.main.java.fr.but.info.sae122;
 
 public class AugmentingPath {
 
-	Graph graph;
-	String sourceNode;
-	String sinkNode;
+	public Graph graph;
+	public String sourceNode;
+	public String sinkNode;
 	
 	public AugmentingPath(Graph _graph, String _sourceNode, String _sinkNode){
 		
