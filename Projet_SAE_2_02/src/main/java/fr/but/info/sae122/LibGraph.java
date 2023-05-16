@@ -1,4 +1,4 @@
-package fr.but.info.sae122.seance1;
+package main.java.fr.but.info.sae122;
 
 import sae122.SimpleGraphDisplay;
 
