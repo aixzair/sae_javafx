@@ -1,5 +1,4 @@
-package main.java.fr.but.info.sae122;
-
+package fr.but.info.sae122;
 
 /**
  * Simple test class to check displaying of graphs and iterations
@@ -26,14 +25,14 @@ public class TestDisplayGraph {
         var display = LibGraph.display(graph);
         BreadthFirstIterator bfi = new BreadthFirstIterator(graph, "A");
         while (bfi.hasNext()) {
-            Edge edge = bfi.next();
-            System.out.println(edge.toString());
+            PathElement pathElement = bfi.next();
+            System.out.println(pathElement.getEdge().toString());
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            display.markEdge(edge.getFromNode(), edge.getToNode());
+            display.markEdge(pathElement.getEdge().getFromNode(), pathElement.getEdge().getToNode());
             //display.getEdge("%s-%s".formatted(edge.getFromNode(),edge.getToNode())).setAttribute("ui.class","marked");
         }
         System.out.println("Done iterating");

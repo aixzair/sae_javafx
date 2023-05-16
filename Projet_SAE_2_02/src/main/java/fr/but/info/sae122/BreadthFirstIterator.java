@@ -1,4 +1,4 @@
-package main.java.fr.but.info.sae122;
+package fr.but.info.sae122;
 
 
 import java.util.ArrayDeque;
@@ -12,9 +12,8 @@ import java.util.Set;
 public class BreadthFirstIterator implements Iterator<PathElement> {
 
     private final Set<String> visitedNodes;
-    private final ArrayDeque<Edge> queue;
+    private final ArrayDeque<PathElement> queue;
     private final Graph graph;
-    private PathElement pathElement;
 
     /** Builds a new iterator.
      * @param graph the graph to iterate
@@ -24,8 +23,7 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
         this.queue = new ArrayDeque<>();
         this.visitedNodes = new HashSet<>();
         this.graph = graph;
-        queue.addAll(graph.getEdgesFrom(firstNode));
-        this.pathElement=new PathElement(null,null);
+        queue.add(new PathElement(null,graph.getEdge(firstNode, firstNode)));
         visitedNodes.add(firstNode);
     }
 
@@ -43,15 +41,14 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
      */
     @Override
     public PathElement next() {
-        var edge = queue.removeFirst();
-        var dest = edge.getToNode();
-        if(edge.getFlux()==0 || edge.getCapacity()==pathElement.getMaxFlow()) {
+        var pathElement = queue.removeFirst();
+        var dest = pathElement.getEdge().getToNode();
+        if(pathElement.getEdge().getCapacity()==0 || pathElement.getEdge().getCapacity()==pathElement.getMaxFlow()) {
         	return pathElement;
         }
         if (! visitedNodes.contains(dest)) {
-            queue.addAll(graph.getEdgesFrom(dest));
+        	queue.add(new PathElement(pathElement,graph.getEdge(pathElement.getEdge().getFromNode(), dest)));
             visitedNodes.add(dest);
-            pathElement=new PathElement(pathElement,edge);
         }
         return pathElement;
     }
