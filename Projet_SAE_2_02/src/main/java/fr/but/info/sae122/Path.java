@@ -8,9 +8,13 @@ public class Path {
 	
 	public Path() {
 		
+		this.edgeList=new Edge[10000];
+		
 	}
 	
 	public Path(String[] nodes, int capacity) throws IncoherentSuccessivityException {
+		
+		this.edgeList=new Edge[10000];
 		
 		for(int i=0;i<nodes.length-1;i++) {
 			edgeList[i]=new Edge(nodes[i],nodes[i+1],capacity);
