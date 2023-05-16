@@ -15,7 +15,7 @@ public class ResidualGraph {
 		/**Fills node list of the residual graph with the original's**/
 
 
-		resGraph = graph;
+		//resGraph = graph;
 		for(String s : graph.getNodes()){
 			resGraph.addNode(s);
 		}

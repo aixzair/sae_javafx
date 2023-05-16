@@ -6,7 +6,6 @@ public class AugmentingPath extends Path {
 	public String sourceNode;
 	public String sinkNode;
 	
-<<<<<<< HEAD
 	/**
 	 * 
 	 * @param _graph will contain the residual graph needed to get the augmenting path
@@ -14,11 +13,7 @@ public class AugmentingPath extends Path {
 	 * @param _sinkNode node to which we want to go
 	 */
 
-	
-=======
-	
 
->>>>>>> f038343c5081751e0ba365fb64570f73a1de094f
 	public AugmentingPath(Graph _graph, String _sourceNode, String _sinkNode){
 		this.graph=_graph;
 		this.sourceNode=_sourceNode;
@@ -32,7 +27,9 @@ public class AugmentingPath extends Path {
 		}*/
 
 		PathElement pathElement = BFI.next();
-
+		/*
+		 * Throws exception if there are no next element
+		 */
 		while(pathElement.getEdge().getToNode() != sinkNode){
 			if(!BFI.hasNext()) throw new IllegalArgumentException("");
 			pathElement = BFI.next();
