@@ -1,5 +1,5 @@
 
-package fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 
 import java.util.Objects;
@@ -53,6 +53,7 @@ public final class Edge {
     }
 
     public void setFlux(int flux) {
+        if(flux > capacity || flux < 0) throw new IllegalArgumentException();
         this.flux = flux;
     }
 

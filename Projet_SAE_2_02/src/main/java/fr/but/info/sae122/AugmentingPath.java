@@ -1,12 +1,16 @@
-package fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 public class AugmentingPath extends Path {
 
 	public Graph graph;
 	public String sourceNode;
 	public String sinkNode;
+
+	Graph residualGraph;
 	
-	
+	/*
+	* Crée un nouveau path
+	* */
 
 	public AugmentingPath(Graph _graph, String _sourceNode, String _sinkNode){
 		this.graph=_graph;
@@ -14,28 +18,20 @@ public class AugmentingPath extends Path {
 		this.sinkNode=_sinkNode;
 
 		BreadthFirstIterator BFI= new BreadthFirstIterator(getResidualGraph(), sourceNode);
-		/*while (BFI.hasNext()) {
-			PathElement element = BFI.next();
-			path.setFlow(element.getMaxFlow());
-			path.addFirstEdge(element.getEdge());
-		}*/
 
 		PathElement pathElement = BFI.next();
+		PathElement last = null;
+		while(BFI.hasNext()) last = BFI.next();
 
-		while(pathElement.getEdge().getToNode() != sinkNode){
-			if(!BFI.hasNext()) throw new IllegalArgumentException("");
-			pathElement = BFI.next();
+		if(last == null || !(last.getEdge().getToNode().equals(sinkNode))) throw new IllegalArgumentException();
+		this.flow = last.getMaxFlow();
+		while (last != null){
+			graph.getEdge(last.getEdge().getFromNode(), last.getEdge().getToNode()).setFlux(this.flow);
+			addFirstEdge(last.getEdge());
+			last = last.getParent();
 		}
+		this.residualGraph = graph;
 
-		while(pathElement.getParent() != null){
-			Edge e = pathElement.getEdge();
-			try{
-				addFirstEdge(e);
-			}catch (IllegalArgumentException e1){
-				e1.printStackTrace();
-			}
-			pathElement = pathElement.getParent();
-		}
 	}
 	
 	public Graph getResidualGraph() {

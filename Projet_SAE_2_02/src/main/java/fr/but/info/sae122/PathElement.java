@@ -1,25 +1,23 @@
-
-package fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 
 public class PathElement {
 	
 	PathElement parent;
 	Edge edge;
-
+	private int maxFlow;
 	
 	public PathElement(PathElement parent, Edge edge) {
-		
 		this.parent=parent;
 		this.edge=edge;
-		
+		if(parent == null){
+			this.maxFlow= edge.getCapacity();
+		}else{
+			this.maxFlow = Math.min(edge.getCapacity(), parent.getMaxFlow());
+		}
 	}
 
 	public int getMaxFlow() {
-		
-		if(parent.getMaxFlow()<edge.getFlux()) {
-			return parent.getMaxFlow();
-		}
-		return this.edge.getFlux();
+		return maxFlow;
 	}
 
 	
