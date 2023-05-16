@@ -18,7 +18,6 @@ public class ResidualGraph {
 			resGraph.addNode(s);
 		}
 
-
 		for(Edge edge : graph.getEdges())
 		{
 
