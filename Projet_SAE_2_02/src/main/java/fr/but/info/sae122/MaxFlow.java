@@ -47,7 +47,7 @@ public class MaxFlow {
 
     public void increaseFlow(Path path){
         int flow = path.getFlow();
-        for(Edge edge : path.getEdge()){
+        for(Edge edge : path.edgeList){
             if(!(edge.getFlux() + flow > edge.getCapacity())){
                 edge.setFlux(edge.getFlux() + flow);
             }
