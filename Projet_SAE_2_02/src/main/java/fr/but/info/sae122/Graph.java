@@ -6,8 +6,8 @@ import java.util.*;
  * A graph with a list of nodes and a list of edges.
  */
 public class Graph {
-  private final List<String> nodes;
-  private final List<Edge> edges;
+  protected final List<String> nodes;
+  protected final List<Edge> edges;
 
   /** Stores all the outgoing edges for ease of use */
   private final Map<String, List<Edge>> mapFrom;
