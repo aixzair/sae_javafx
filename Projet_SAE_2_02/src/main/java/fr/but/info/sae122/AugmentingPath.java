@@ -1,4 +1,4 @@
-package fr.but.info.sae122;
+package main.java.fr.but.info.sae122;
 public class AugmentingPath extends Path {
 
 	Graph graph;
@@ -10,8 +10,7 @@ public class AugmentingPath extends Path {
 		this.sourceNode=_sourceNode;
 		this.sinkNode=_sinkNode;
 
-		BreadthFirstIterator BFI= new BreadthFirstIterator(this.getResidualGraph(),sinkNode);
-		Path path = new Path();
+		BreadthFirstIterator BFI= new BreadthFirstIterator(getResidualGraph(), sourceNode);
 		/*while (BFI.hasNext()) {
 			PathElement element = BFI.next();
 			path.setFlow(element.getMaxFlow());
@@ -22,6 +21,7 @@ public class AugmentingPath extends Path {
 
 		while(pathElement.getEdge().getToNode() != sinkNode){
 			if(!BFI.hasNext()) throw new IllegalArgumentException("");
+			pathElement = BFI.next();
 		}
 
 		while(pathElement.getParent() != null){
@@ -31,6 +31,7 @@ public class AugmentingPath extends Path {
 			}catch (IllegalArgumentException e1){
 				e1.printStackTrace();
 			}
+			pathElement = pathElement.getParent();
 		}
 	}
 	
@@ -41,29 +42,14 @@ public class AugmentingPath extends Path {
 		return graph1.createFromGraph(this.graph); 
 	}
 	
-	/*public PathElement getAugmentedPath() {
+	/*public Path getAugmentedPath() {
 		BreadthFirstIterator BFI= new BreadthFirstIterator(this.getResidualGraph(),sinkNode);
 		Path path = new Path();
-		*//*while (BFI.hasNext()) {
+		while (BFI.hasNext()) {
 			PathElement element = BFI.next();
 			path.setFlow(element.getMaxFlow());
 			path.addFirstEdge(element.getEdge());
-		}*//*
-
-		PathElement pathElement = BFI.next();
-
-		while(pathElement.getEdge().getToNode() != sinkNode){
-			if(!BFI.hasNext()) throw new IllegalArgumentException("");
 		}
-
-		while(pathElement.getParent() != null){
-			Edge e = pathElement.getEdge();
-			try{
-				addFirstEdge(e);
-			}catch (IllegalArgumentException e1){
-				e1.printStackTrace();
-			}
-		}
-		return pathElement;
+		return path;
 	}*/
 }

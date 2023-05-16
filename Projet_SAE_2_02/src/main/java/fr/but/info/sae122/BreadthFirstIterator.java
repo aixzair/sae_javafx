@@ -25,9 +25,7 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
         this.graph = graph;
 
         for(Edge e : graph.getEdgesFrom(firstNode)){
-            if(e.getFlux() != 0){
-                queue.add(new PathElement(null, e));
-            }
+            queue.add(new PathElement(null, e));
         }
         visitedNodes.add(firstNode);
     }
@@ -46,7 +44,7 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
      */
     public PathElement next() {
 
-        var pathelement = queue.removeFirst();
+        /*var pathelement = queue.removeFirst();
 
         var dest = pathelement.getEdge();
 
@@ -58,6 +56,15 @@ public class BreadthFirstIterator implements Iterator<PathElement> {
                 }
             }
         }
-        return pathelement;
+        return pathelement;*/
+        PathElement element = queue.removeFirst();
+        String dest = element.getEdge().getToNode();
+        if(!visitedNodes.contains(dest)){
+            for(Edge edge : graph.getEdgesFrom(dest)){
+                queue.add(new PathElement(element, edge));
+            }
+            visitedNodes.add(dest);
+        }
+        return element;
     }
 }

@@ -49,20 +49,19 @@ public class MaxFlow {
         int flow = path.getFlow();
         for(Edge edge : path.edgeList){
             if(!(edge.getFlux() + flow > edge.getCapacity())){
-                edge.setFlux(edge.getFlux() + flow);
+                graph.getEdge(edge.getFromNode(), edge.getToNode()).setFlux(edge.getFlux() + path.getFlow());
             }
         }
     }
 
     public int computeMaxFlow() {
-        Path path = new AugmentingPath(graph, sourceNode, sinkNode);
         try{
             while(true){
-                path = new AugmentingPath(graph, sourceNode, sinkNode);
+                AugmentingPath path = new AugmentingPath(graph, sourceNode, sinkNode);
                 increaseFlow(path);
             }
         }catch (IllegalArgumentException e){
-            return path.getFlow();
+            return getSinkFlow();
         }
     }
 
@@ -74,10 +73,8 @@ public class MaxFlow {
         Edge e = g.addEdge("N1", "N2", 5);
         Edge e1 = g.addEdge("N1", "N3", 6);
         System.out.println(g);
-
-        Graph g2 = GraphGenerator.createLinear(5);
-        System.out.println(g2);
-        MaxFlow maxFlow = new MaxFlow(g2, g2.nodes.get(0), g2.nodes.get(4));
+        e1.setFlux(4);
+        MaxFlow maxFlow = new MaxFlow(g, "N1", "N3");
 
         System.out.println(maxFlow.computeMaxFlow());
     }

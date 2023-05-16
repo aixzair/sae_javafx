@@ -3,7 +3,7 @@ package main.java.fr.but.info.sae122;
 
 public class PathElement {
 	
-	PathElement parent = new PathElement(null,null);
+	PathElement parent;
 	Edge edge;
 
 	
