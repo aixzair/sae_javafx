@@ -3,7 +3,7 @@ package main.java.fr.but.info.sae122;
 import java.util.List;
 
 /*
- * Returns a graph of all nodes and not filled edges of a previous graph 
+ * Returns a graph of all nodes and not filled edges of a previous graph  e
  */
 public class ResidualGraph{ 
 	
