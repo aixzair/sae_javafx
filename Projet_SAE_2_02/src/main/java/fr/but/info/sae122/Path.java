@@ -12,7 +12,7 @@ public class Path {
 	public Path(String[] nodes) {
 		
 		for(int i=0;i<nodes.length;i++) {
-			edgeList[i]=new Edge(nodes[i],nodes[i+1],null,null);
+			edgeList[i]=new Edge(nodes[i],nodes[i+1],null);
 		}
 	}
 

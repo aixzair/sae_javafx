@@ -1,7 +1,12 @@
+
 package fr.but.info.sae122;
 
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 public class TestGraphGenerator {
-  public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
     /*
     var linear = GraphGenerator.createLinear(5);
     LibGraphTest.display(linear);
@@ -12,10 +17,10 @@ public class TestGraphGenerator {
     var full = GraphGenerator.createFull(5);
     LibGraphTest.display(full);
      */
-    var random = GraphGenerator.createRandom(5, 0.5);
-    LibGraph.display(random);
-    var large = GraphGenerator.createRandom(50, 0.02);
-    LibGraph.display(large);
+        var random = GraphGenerator.createRandom(5, 0.5);
+        LibGraph.display(random);
+        var large = GraphGenerator.createRandom(50, 0.02);
+        LibGraph.display(large);
 
-  }
+    }
 }
