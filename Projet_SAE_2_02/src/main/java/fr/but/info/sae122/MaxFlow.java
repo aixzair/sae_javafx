@@ -5,9 +5,9 @@ import java.util.Collection;
 
 public class MaxFlow {
 
-    private Graph graph;
-    private String sourceNode;
-    private String sinkNode;
+    private final Graph graph;
+    private final String sourceNode;
+    private final String sinkNode;
 
     public MaxFlow(Graph graph, String sourceNode, String sinkNode) {
         this.graph = graph;
@@ -55,19 +55,29 @@ public class MaxFlow {
     }
 
     public int computeMaxFlow() {
-        AugmentingPath path = new AugmentingPath(graph, sourceNode, sinkNode);
-        while(path != path.getAugmentedPath()){
-            increaseFlow(path);
-            path = new AugmentingPath(graph, sourceNode, sinkNode);
+        Path path = new AugmentingPath(graph, sourceNode, sinkNode);
+        try{
+            while(true){
+                path = new AugmentingPath(graph, sourceNode, sinkNode);
+                increaseFlow(path);
+            }
+        }catch (IllegalArgumentException e){
+            return path.getFlow();
         }
-        return path.getFlow();
     }
 
     public static void main(String[] args) throws IncoherentSuccessivityException {
-        Graph g = GraphGenerator.createLinear(3);
-        g.edges.get(0).setFlux(5);
-        g.edges.get(1).setFlux(6);
-        MaxFlow maxFlow = new MaxFlow(g, g.nodes.get(0), g.nodes.get(2));
+        Graph g = new Graph();
+        g.addNode("N1");
+        g.addNode("N2");
+        g.addNode("N3");
+        Edge e = g.addEdge("N1", "N2", 5);
+        Edge e1 = g.addEdge("N1", "N3", 6);
+        System.out.println(g);
+
+        Graph g2 = GraphGenerator.createLinear(5);
+        System.out.println(g2);
+        MaxFlow maxFlow = new MaxFlow(g2, g2.nodes.get(0), g2.nodes.get(4));
 
         System.out.println(maxFlow.computeMaxFlow());
     }
