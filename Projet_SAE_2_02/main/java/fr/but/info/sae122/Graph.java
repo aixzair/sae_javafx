@@ -10,6 +10,7 @@ public class Graph {
   protected final List<String> nodes;
   protected final List<Edge> edges;
 
+
   /** Stores all the outgoing edges for ease of use */
   private final Map<String, List<Edge>> mapFrom;
   /** Stores all the ingoing edges for ease of use */
