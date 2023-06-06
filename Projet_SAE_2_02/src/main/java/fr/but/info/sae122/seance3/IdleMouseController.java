@@ -1,14 +1,14 @@
 package fr.but.info.sae122.seance3;
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 public class IdleMouseController extends MouseController{
 
-	public IdleMouseController()
+	public IdleMouseController(MouseController controller)
 	{
 		
 	}
@@ -40,6 +40,12 @@ public class IdleMouseController extends MouseController{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setController(MouseController controller) {
 		// TODO Auto-generated method stub
 		
 	}
