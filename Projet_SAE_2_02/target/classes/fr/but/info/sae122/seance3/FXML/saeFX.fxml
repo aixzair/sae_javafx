@@ -16,17 +16,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<<<<<<< HEAD
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.but.info.sae122.seance3.Controller">
-   <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <items>
-          <Button mnemonicParsing="false" text="Charge" />
-            <Button mnemonicParsing="false" text="+Noeud" />
-            <Button mnemonicParsing="false" text="+Flux" fx:id="ajtFlux"/>
-            <Button mnemonicParsing="false" text="-Flux" fx:id="rtrFlux"/>
-            <Button mnemonicParsing="false" text="Sauve" />
-=======
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"  fx:id="borderPane">
    <top>
@@ -37,7 +26,6 @@
             <Button mnemonicParsing="false" text="+Flux" fx:id="ajtFlux" />
             <Button mnemonicParsing="false" text="-Flux" fx:id="rtrFlux"/>
             <Button mnemonicParsing="false" text="Sauve" fx:id="sauve"/>
->>>>>>> 8b3d6965fd956ba791d5d941f73f28b19df2e001
             <ToggleButton mnemonicParsing="false" text="Calcule" fx:id="calcule">
                <opaqueInsets>
                   <Insets />
@@ -68,7 +56,7 @@
                   <Label text="Destination :" GridPane.rowIndex="1" />
                   <ComboBox prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="liste2"/>
                   <Label text="Flux :" GridPane.rowIndex="2" />
-                  <TextField disable="true" prefHeight="25.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField disable="true" prefHeight="25.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="flotmax"/>
                </children>
             </GridPane>
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS" fx:id="augmentingpath">

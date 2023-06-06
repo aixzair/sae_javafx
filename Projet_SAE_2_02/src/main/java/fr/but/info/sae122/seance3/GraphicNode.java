@@ -51,4 +51,8 @@ public class GraphicNode {
     public SimpleObjectProperty<Color> colorProperty() {
         return color;
     }
+
+    public void setColor(Color color) {
+        this.color.set(color);
+    }
 }
