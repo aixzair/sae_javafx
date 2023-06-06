@@ -18,6 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<<<<<<< HEAD
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
 	<top>
@@ -131,4 +132,79 @@
 			</children>
 		</Pane>
 	</center>
+=======
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="charge" mnemonicParsing="false" text="Charge" />
+            <Button fx:id="noeud" mnemonicParsing="false" onAction="#noeud" text="+Noeud" />
+            <Button fx:id="ajtFlux" mnemonicParsing="false" onAction="#ajtFlux" text="+Flux" />
+            <Button fx:id="rtrFlux" mnemonicParsing="false" onAction="#rtrFlux" text="-Flux" />
+            <Button fx:id="sauve" mnemonicParsing="false" text="Sauve" />
+            <ToggleButton fx:id="calcule" mnemonicParsing="false" text="Calcule">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </ToggleButton>
+        </items>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </ToolBar>
+   </top>
+   <right>
+      <VBox fx:id="vbox" alignment="CENTER_LEFT" prefHeight="331.0" prefWidth="208.0" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Source :" />
+                  <ComboBox fx:id="liste1" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" />
+                  <Label text="Destination :" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="liste2" prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Flux :" GridPane.rowIndex="2" />
+                  <TextField disable="true" prefHeight="25.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <Button fx:id="augmentingpath" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="ameliore" mnemonicParsing="false" text="Améliorer Flux">
+               <VBox.margin>
+                  <Insets left="55.0" top="30.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <Canvas fx:id="canvas" height="200.0" width="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <VBox prefHeight="29.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator prefWidth="200.0" />
+            <Label fx:id="etat" text="Label" />
+         </children>
+      </VBox>
+   </bottom>
+   <center>
+      <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas fx:id="canvas" height="200.0" width="200.0" />
+         </children>
+      </Pane>
+   </center>
+>>>>>>> edition_lukas
 </BorderPane>

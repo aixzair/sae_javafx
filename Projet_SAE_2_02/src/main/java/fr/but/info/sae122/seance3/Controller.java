@@ -1,5 +1,9 @@
 package fr.but.info.sae122.seance3;
 
+import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
 import fr.but.info.sae122.seance3.model.*;
 import fr.but.info.sae122.seance3.model.Edge;
 import fr.but.info.sae122.seance3.model.Graph;
@@ -8,13 +12,16 @@ import fr.but.info.sae122.seance3.model.Path;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-import javafx.fxml.Initializable;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
+
 import javafx.scene.control.*;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ToggleButton;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -23,7 +30,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.ArcType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -31,7 +37,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,6 +44,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,12 +87,17 @@ public class Controller implements Initializable {
 
     @FXML private BorderPane borderPane;
     @FXML private Label etat;
-    
     private MouseController mouseController;
 
-    /** Creates a Controller.
+    protected int btToggle;
+    private String nd1;
+    private String nd2;
+    private double radius;
+    /** Créer un Controller.
+
      * @param stage
      */
+    
     public Controller(Stage stage) {
         name = new HashMap<>();
         graph = new Graph();
@@ -99,7 +110,9 @@ public class Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    	
+
+        mouseController = new IdleMouseController(this);
+
         canvas.heightProperty().bind(pane.heightProperty());
         canvas.widthProperty().bind(pane.widthProperty());
         
@@ -166,7 +179,27 @@ public class Controller implements Initializable {
         
         sauve.setOnAction(event-> save(graphe));
 
-
+	canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
+        {
+        	onMouseClicked(event);
+        });
+        
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event ->
+        {
+        	onMouseDragged(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event ->
+        {
+        	onMouseMoved(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event ->
+        {
+        	onMouseReleased(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
+        {
+        	onMousePressed(event);
+        });
     }
 
  
@@ -198,6 +231,7 @@ public class Controller implements Initializable {
 	public void setMouseController(MouseController mouseController) {
 		this.mouseController = mouseController;
 	}
+
 	
 	/** Gets the canvas with all the elements
 	 * @return canvas
@@ -237,6 +271,7 @@ public class Controller implements Initializable {
         double radius = name.get(s).getRadius();
         double width = radius*2;
         Color color = name.get(s).getColor();
+        this.radius = width;
 
         canvas.getGraphicsContext2D().strokeRoundRect(x1, y1, width, width, radius, radius);
         canvas.getGraphicsContext2D().setFill(color);
@@ -285,6 +320,36 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().restore();
 
     }
+	
+    public void noeud()
+    {
+    	btToggle = 1;
+		this.getCanvas().setCursor(Cursor.CROSSHAIR);
+		
+    }
+	
+    public void ajtFlux()
+    {
+    	btToggle = 2;
+		this.getCanvas().setCursor(Cursor.CROSSHAIR);
+    }
+	
+    public void rtrFlux()
+    {
+    	btToggle = 3;
+		this.getCanvas().setCursor(Cursor.CROSSHAIR);
+    }
+	
+	public Graph getGraph()
+	{
+		return this.graph;
+	}
+	
+	public HashMap<String, GraphicNode> getName()
+	{
+		return this.name;
+	}
+
     
 
     /**
@@ -415,7 +480,82 @@ public class Controller implements Initializable {
      /** Variable behavior event
       * @param event
       */
-     public void onMouseClicked(MouseEvent event) {
-     	this.mouseController.onMouseClicked(event);
+     public void onMouseClicked(MouseEvent event) {//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+ 		if( this.btToggle == 1)
+ 		{
+ 			setMouseController(new PlaceMouseController(this));
+ 			mouseController.onMousePressed(event);
+ 		}
+ 		if(this.btToggle == 2)
+ 		{
+ 			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+ 			setMouseController(new LinkMouseController(this, true));
+ 			double x = event.getX();
+ 			double y = event.getY();
+
+ 			this.getEtat().setText("Cliquez sur le noeud source");
+ 			if(nd1 == null)
+ 			{
+	 			name.forEach((t, u) ->{
+	 				double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if( z < radius) {
+	 					nd1 = t;
+	 				}
+	 			});
+	 			
+ 			}
+ 			else if(nd2 == null)
+ 			{
+ 				this.getEtat().setText("Cliquez sur le noeud source");
+ 				name.forEach((t, u) ->{
+ 					double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if(z < radius) {
+	 					nd2 = t;
+	 				}
+	 			});
+ 				
+ 			}
+ 			this.mouseController.onMousePressed(event);
+ 		}
+ 		if(this.btToggle == 3)
+ 		{
+ 			
+ 			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+ 			setMouseController(new LinkMouseController(this, false));
+ 			double x = event.getX();
+ 			double y = event.getY();
+
+ 			this.getEtat().setText("Cliquez sur le noeud source");
+ 			if(nd1 == null)
+ 			{
+	 			name.forEach((t, u) ->{
+	 				double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if( z < radius) {
+	 					nd1 = t;
+	 				}
+	 			});
+	 			
+ 			}
+ 			else if(nd2 == null)
+ 			{
+ 				this.getEtat().setText("Cliquez sur le noeud source");
+ 				name.forEach((t, u) ->{
+ 					double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if(z < radius) {
+	 					nd2 = t;
+	 				}
+	 			});
+ 				
+ 			}
+ 			this.mouseController.onMousePressed(event);
+
+ 		}
+     }
+     
+     public String getNd1() {
+    	 return nd1;
+     }
+     public String getNd2() {
+    	 return nd2;
      }
 }

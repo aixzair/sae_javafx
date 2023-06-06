@@ -18,7 +18,12 @@ target/
 .loadpath
 .recommenders
 *.launch
+<<<<<<< HEAD
+.classpath
+.project
+=======
 **/target/
+>>>>>>> edition_stable
 **/bin/
 **/out/
 **/target/

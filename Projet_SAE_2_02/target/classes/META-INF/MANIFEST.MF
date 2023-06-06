@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Built-By: essient221
 Build-Jdk: 17.0.4.1
 Created-By: Maven Integration for Eclipse
 
+=======
+Manifest-Version: 1.0
+Built-By: siopath221
+Build-Jdk: 17.0.4.1
+Created-By: Maven Integration for Eclipse
+
+>>>>>>> edition_lukas
