@@ -15,12 +15,16 @@ extends MouseController {
 		super(controller);
 	}
 	
+	// ------------ Evenement ------------
+	
 	/** Déplace le noeud pointé.
 	 * @param event
 	 */
 	@Override
 	public void onMouseDragged(MouseEvent event) {
 		GraphicNode noeud;
+		
+		System.out.println(event.getTarget().getClass());
 		
 		if (event.getTarget() instanceof GraphicNode) {
 			noeud = (GraphicNode) event.getTarget();
