@@ -58,46 +58,23 @@ public class PlaceMouseController extends MouseController{
 	}
 	
 	private void showInputTextDialog() {
+		char defaultNode = 'd';
+		for(int i = 0; i < 47; i++) 
+		{
+			if(this.controller.getName().containsKey(""+defaultNode))
+			{
+				defaultNode +=1;
+			}
+			else
+			{
+				break;
+			}
+		}
 		
-        TextInputDialog dialog = new TextInputDialog("Création");
+        TextInputDialog dialog = new TextInputDialog(""+defaultNode);
         boolean looped = false;
         while(this.creaNoeud)	//Boucle jusqu'à ce que le noeud soit créé ou bouton annuler
         {
-	       /* dialog.setTitle("Noeud");
-	        dialog.setHeaderText("Entrez le nom du noeud");
-	        //dialog.setContentText("Nom du noeud:");
-
-	        Optional<String> result = dialog.showAndWait();
-	
-	        if(!result.isEmpty())
-	        {
-		        result.ifPresent(nom -> {
-		        	if(!this.controller.getName().containsKey(nom))
-		        	{
-	        			GraphicNode noeud = new GraphicNode(cursX, cursY, 20, Color.BLACK);
-	        			this.controller.getGraph().addNode(nom);
-	        			this.controller.getName().put(nom, noeud);
-	        			this.controller.reDraw();
-	        			this.creaNoeud = false;
-	        			dialog.close();
-	        			
-		        	}
-		        	else
-		        	{
-		        		dialog.setContentText("Veuillez entrer un nom non utilisé");	//TO DO : Le mettre en rouge
-		        	}
-		        });
-	        }
-	        else if(result.isEmpty())
-	        {
-	        	dialog.setContentText("Veuillez entrer un nom non-vide");	//TO DO : Le mettre en rouge
-	        	//dialog.getEditor()(Color.red);
-	        }
-	        else		//Bouton annuler ou quitter
-	        {
-	        	this.creaNoeud = false;
-	        	dialog.close();
-	        }*/
         	dialog.setTitle("Noeud");
         	
         	Optional<String> res = dialog.showAndWait();
