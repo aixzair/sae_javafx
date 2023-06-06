@@ -157,16 +157,27 @@ public class Controller implements Initializable {
             liste2.setOnAction(actionEvent -> maxFlow.set(prepareCalcul()));
 
             augmentingpath.setOnAction(actionEvent -> {
-                name.get(liste1.getSelectionModel().getSelectedItem()).setColor(Color.BLUE);
-                name.get(liste2.getSelectionModel().getSelectedItem()).setColor(Color.GREEN);
+                name.get(liste1.getSelectionModel().getSelectedItem()).setColor(Color.CORAL);
+                name.get(liste2.getSelectionModel().getSelectedItem()).setColor(Color.AQUA);
                 reDraw();
                 path = maxFlow.get().getAugmentingPath();
                 if(path != null) ameliore.setDisable(false);
+                for(Edge edge : path.getPath()){
+                    canvas.getGraphicsContext2D().setStroke(Color.CYAN);
+                    drawEdge(edge.getFromNode(), edge.getToNode());
+                }
+                canvas.getGraphicsContext2D().setStroke(Color.BLACK);
+
                 ameliore.setOnMouseClicked(event -> {
                     maxFlow.get().increaseFlow(path);
                     flotmax.setText(String.valueOf(path.getFlow()));
-                    path = null;
                     reDraw();
+                    for(Edge edge : path.getPath()){
+                        canvas.getGraphicsContext2D().setStroke(Color.CYAN);
+                        drawEdge(edge.getFromNode(), edge.getToNode());
+                    }
+                    canvas.getGraphicsContext2D().setStroke(Color.BLACK);
+                    path = null;
                 });
             });
         });
@@ -203,12 +214,16 @@ public class Controller implements Initializable {
                 liste2.getSelectionModel().getSelectedItem());
     }
 
+    /**
+     * Clear the ComboxBox
+     * @param list the combo box that it need to be clear
+     * */
     public void clearList(ComboBox<String> list){
         list.getItems().forEach(s -> list.getItems().remove(s));
     }
 
     /** Sets the mouseController
-	 * @param mouseController
+	 * @param mouseController the controller that it need to be
 	 */
 	public void setMouseController(MouseController mouseController) {
 		this.mouseController = mouseController;
@@ -216,14 +231,14 @@ public class Controller implements Initializable {
 
 	
 	/** Gets the canvas with all the elements
-	 * @return canvas
+	 * @return canvas the canvas
 	 */
 	public Canvas getCanvas() {
 		return this.canvas;
 	}
 	
 	/** Gets the status (partie basse de l'interface)
-	 * @return etat
+	 * @return etat the bar at the bottom
 	 */
 	public Label getEtat() {
 		return this.etat;
