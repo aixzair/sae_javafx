@@ -2,6 +2,7 @@ package fr.but.info.sae122.seance3;
 
 import java.awt.event.MouseEvent;
 
+import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.*;
 
@@ -11,7 +12,7 @@ import javafx.scene.canvas.*;
 public class IdleMouseController
 extends MouseController {
 	private final MouseController controleur;
-	private Canvas canvas;
+	private @FXML Canvas canvas;
 
 	public IdleMouseController(MouseController _controleur) {
 		this.controleur = _controleur;
@@ -21,12 +22,12 @@ extends MouseController {
 	 * @param MouseEvent event
 	 */
 	public void onMouseMoved(MouseEvent event) {
-		this.canvas.getGraphicsContext2D().strokeText(
+		/*this.canvas.getGraphicsContext2D().strokeText(
 			null,
 			event.getX(),
 			event.getY()
 		);
-		this.canvas.setCursor(Cursor.DEFAULT);
+		this.canvas.setCursor(Cursor.DEFAULT);*/
 	}
 	
 	public void onMouseDragged(MouseEvent event){
@@ -39,7 +40,7 @@ extends MouseController {
 	public void onMousePressed(MouseEvent event){
 		
 		//this.controleur.set DragMouseController(“Déposez le noeud où vous voulez...”);
-		this.controleur.canvas.setCursor(Cursor.CLOSED_HAND);
+		// this.controleur.canvas.setCursor(Cursor.CLOSED_HAND);
 	}
 	
 	public void onMouseReleased(MouseEvent event) {
