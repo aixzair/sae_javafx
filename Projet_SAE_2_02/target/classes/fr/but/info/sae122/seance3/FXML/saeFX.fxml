@@ -22,10 +22,10 @@
         <items>
           <Button mnemonicParsing="false" text="Charge" />
             <Button mnemonicParsing="false" text="+Noeud" />
-            <Button mnemonicParsing="false" text="+Flux" />
-            <Button mnemonicParsing="false" text="-Flux" />
+            <Button mnemonicParsing="false" text="+Flux" fx:id="ajtFlux"/>
+            <Button mnemonicParsing="false" text="-Flux" fx:id="rtrFlux"/>
             <Button mnemonicParsing="false" text="Sauve" />
-            <ToggleButton mnemonicParsing="false" text="Calcule">
+            <ToggleButton mnemonicParsing="false" text="Calcule" fx:id="calcule">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -37,7 +37,7 @@
       </ToolBar>
    </top>
    <right>
-      <VBox alignment="CENTER_LEFT" prefHeight="331.0" prefWidth="208.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER_LEFT" prefHeight="331.0" prefWidth="208.0" BorderPane.alignment="CENTER" fx:id="vbox">
          <children>
             <GridPane>
               <columnConstraints>
@@ -63,7 +63,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Améliorer Flux">
+            <Button mnemonicParsing="false" text="Améliorer Flux" fx:id="ameliore">
                <VBox.margin>
                   <Insets left="55.0" top="30.0" />
                </VBox.margin>

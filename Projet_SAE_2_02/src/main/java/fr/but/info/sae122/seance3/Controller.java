@@ -6,8 +6,11 @@ import fr.but.info.sae122.seance3.model.Path;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
@@ -21,6 +24,11 @@ public class Controller implements Initializable {
     Canvas canvas;
     @FXML private BorderPane borderPane;
     @FXML private Pane pane;
+    @FXML private ToggleButton calcule;
+    @FXML private VBox vbox;
+    @FXML private Button rtrFlux;
+    @FXML private Button ajtFlux;
+    @FXML private Button ameliore;
 
     private Graph graph;
     private Path path;
@@ -39,6 +47,20 @@ public class Controller implements Initializable {
 
         canvas.widthProperty().addListener(observable -> reDraw());
         canvas.heightProperty().addListener(observable -> reDraw());
+        if(path == null) ameliore.setDisable(true);
+        else ajtFlux.setDisable(false);
+        calcule.selectedProperty().addListener(observable -> {
+            if(calcule.isSelected()){
+                vbox.setVisible(true);
+                rtrFlux.setDisable(true);
+                if(path == null) ameliore.setDisable(true);
+                else ajtFlux.setDisable(false);
+            }else{
+                vbox.setVisible(false);
+                rtrFlux.setDisable(false);
+            }
+        });
+
     }
 
     public void reDraw(){
