@@ -48,6 +48,7 @@ import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -145,28 +146,35 @@ public class Controller implements Initializable {
             liste2.setOnAction(actionEvent -> maxFlow.set(prepareCalcul()));
 
             augmentingpath.setOnAction(actionEvent -> {
-                name.get(liste1.getSelectionModel().getSelectedItem()).setColor(Color.CORAL);
-                name.get(liste2.getSelectionModel().getSelectedItem()).setColor(Color.AQUA);
-                reDraw();
-                path = maxFlow.get().getAugmentingPath();
-                if(path != null) ameliore.setDisable(false);
-                for(Edge edge : path.getPath()){
-                    canvas.getGraphicsContext2D().setStroke(Color.CYAN);
-                    drawEdge(edge.getFromNode(), edge.getToNode());
-                }
-                canvas.getGraphicsContext2D().setStroke(Color.BLACK);
-
-                ameliore.setOnMouseClicked(event -> {
-                    maxFlow.get().increaseFlow(path);
-                    flotmax.setText(String.valueOf(path.getFlow()));
+                try{
+                    name.get(liste1.getSelectionModel().getSelectedItem()).setColor(Color.CORAL);
+                    name.get(liste2.getSelectionModel().getSelectedItem()).setColor(Color.AQUA);
                     reDraw();
+                    path = maxFlow.get().getAugmentingPath();
+                    if(path != null) ameliore.setDisable(false);
                     for(Edge edge : path.getPath()){
                         canvas.getGraphicsContext2D().setStroke(Color.CYAN);
                         drawEdge(edge.getFromNode(), edge.getToNode());
                     }
                     canvas.getGraphicsContext2D().setStroke(Color.BLACK);
-                    path = null;
-                });
+
+                    ameliore.setOnMouseClicked(event -> {
+                        maxFlow.get().increaseFlow(path);
+                        flotmax.setText(String.valueOf(path.getFlow()));
+                        reDraw();
+                        for(Edge edge : path.getPath()){
+                            canvas.getGraphicsContext2D().setStroke(Color.CYAN);
+                            drawEdge(edge.getFromNode(), edge.getToNode());
+                        }
+                        canvas.getGraphicsContext2D().setStroke(Color.BLACK);
+                        path = null;
+                        if(path != null) ameliore.setDisable(false);
+                        else ameliore.setDisable(true);
+                    });
+                }catch (NoSuchElementException e){
+                    Alert alert = new Alert(AlertType.ERROR, "No much more augmenting path");
+                    alert.showAndWait();
+                }
             });
         });
 
@@ -489,8 +497,6 @@ public class Controller implements Initializable {
 	 			});
  				
  			}
-            System.out.println(nd1);
-            System.out.println(nd2);
  			this.mouseController.onMousePressed(event);
  		}
  		if(this.btToggle == 3)

@@ -56,7 +56,7 @@ public class LinkMouseController extends MouseController{
 	}
 
 	public void showInputTextDialog() {
-		TextInputDialog dialog = new TextInputDialog();
+		TextInputDialog dialog = new TextInputDialog("10");
         //boolean looped = false;
         
         dialog.setTitle("Arrête");
