@@ -15,5 +15,10 @@ public class Controller {
 	public void setMouseController(MouseController _mouseController) {
 		this.mouseController = _mouseController;
 	}
+	
+	public Canvas getCanvas()
+	{
+		return this.canvas;
+	}
 
 }

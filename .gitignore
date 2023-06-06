@@ -18,6 +18,7 @@ bin/
 .recommenders
 *.launch
 **/target/
+target/
 .classpath
 .project
 
