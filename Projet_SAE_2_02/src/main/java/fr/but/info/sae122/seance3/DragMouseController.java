@@ -15,6 +15,8 @@ extends MouseController {
 		super(controller);
 	}
 	
+	// ------------ Evenement ------------
+	
 	/** Déplace le noeud pointé.
 	 * @param event
 	 */

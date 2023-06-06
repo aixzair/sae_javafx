@@ -17,6 +17,8 @@ extends MouseController {
 		super.controller.getEtat().setText("");
 	}
 	
+	// ------------ Evenement ------------
+	
 	/** Affiche rien et règle le curseur à "DEFAULT".
 	 * @param event
 	 */

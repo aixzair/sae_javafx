@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -97,4 +98,42 @@ implements Initializable {
         canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).toString(), x2-x1, y2-y1);
 
     }
+    
+    // ------------ Evènement ------------
+    
+    /** Evènement à comportement variable.
+     * @param event
+     */
+    public void onMouseMoved(MouseEvent event) {
+    	this.mouseController.onMouseMoved(event);
+    }
+    
+    /** Evènement à comportement variable.
+     * @param event
+     */
+    public void onMouseDragged(MouseEvent event) {
+    	this.mouseController.onMouseDragged(event);
+    }
+    
+    /** Evènement à comportement variable.
+     * @param event
+     */
+    public void onMousePressed(MouseEvent event) {
+    	this.mouseController.onMousePressed(event);
+    }
+    
+    /** Evènement à comportement variable.
+     * @param event
+     */
+    public void onMouseReleased(MouseEvent event) {
+    	this.mouseController.onMouseReleased(event);
+    }
+    
+    /** Evènement à comportement variable.
+     * @param event
+     */
+    public void onMouseClicked(MouseEvent event) {
+    	this.mouseController.onMouseClicked(event);
+    }
+     
 }
