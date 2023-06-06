@@ -1,47 +1,63 @@
 package fr.but.info.sae122.seance3;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
+/** Gère le déplacement d'un noeud.
+ * @author Alexandre Lerosier
+ */
 public class DragMouseController
 extends MouseController {
-	private final String texte;
 
 	/** Créer une instance avec un texet à afficher.
 	 * @param controller
-	 * @param texte
 	 */
-	public DragMouseController(Controller controller, String texte) {
+	public DragMouseController(Controller controller) {
 		super(controller);
-		this.texte = texte;
 	}
 	
-	public void onMouseMoved(MouseEvent event)
-	{
+	/** Déplace le noeud pointé.
+	 * @param event
+	 */
+	@Override
+	public void onMouseDragged(MouseEvent event) {
+		GraphicNode noeud;
 		
-	}
-	
-	public void onMouseDragged(MouseEvent event)
-	{
+		if (event.getTarget() instanceof GraphicNode) {
+			noeud = (GraphicNode) event.getTarget();
+		} else {
+			return;
+		}
 		
+		noeud.setXY(event.getSceneX(), event.getSceneY());
+		super.controller.reDraw();
 	}
 	
-	public void onMousePressed(MouseEvent event)
-	{
-		
+	/** Change les fonctions pour la souris du controleur.
+	 * @param event
+	 */
+	@Override
+	public void onMouseReleased(MouseEvent event) {
+		super.controller.setMouseController(new IdleMouseController(super.controller));
 	}
 	
-	public void onMouseReleased(MouseEvent event)
-	{
-		
+	/** Ne fait rien.
+	 */
+	@Override
+	public void onMouseMoved(MouseEvent event) {
+		// Vide.
 	}
 	
-	public void onMouseClicked(MouseEvent event)
-	{
-		
+	/** Ne fait rien.
+	 */
+	@Override
+	public void onMousePressed(MouseEvent event) {
+		// Vide.
 	}
 	
+	/** Ne fait rien.
+	 */
+	@Override
+	public void onMouseClicked(MouseEvent event) {
+		// Vide.
+	}
 }
