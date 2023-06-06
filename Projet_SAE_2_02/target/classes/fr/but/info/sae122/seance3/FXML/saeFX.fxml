@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -19,12 +20,12 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Charge" />
-            <Button mnemonicParsing="false" text="+Noeud" />
-            <Button mnemonicParsing="false" text="+Flux" />
-            <Button mnemonicParsing="false" text="-Flux" />
-            <Button mnemonicParsing="false" text="Sauve" />
-            <ToggleButton mnemonicParsing="false" text="Calcule">
+          <Button mnemonicParsing="false" text="Charge" fx:id="charge"/>
+            <Button mnemonicParsing="false" text="+Noeud" fx:id="noeud"/>
+            <Button mnemonicParsing="false" text="+Flux" fx:id="ajtFlux" />
+            <Button mnemonicParsing="false" text="-Flux" fx:id="rtrFlux"/>
+            <Button mnemonicParsing="false" text="Sauve" fx:id="sauve"/>
+            <ToggleButton mnemonicParsing="false" text="Calcule" fx:id="calcule">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -36,7 +37,7 @@
       </ToolBar>
    </top>
    <right>
-      <VBox alignment="CENTER_LEFT" prefHeight="331.0" prefWidth="208.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER_LEFT" prefHeight="331.0" prefWidth="208.0" BorderPane.alignment="CENTER" fx:id="vbox">
          <children>
             <GridPane>
               <columnConstraints>
@@ -50,19 +51,19 @@
               </rowConstraints>
                <children>
                   <Label text="Source :" />
-                  <ComboBox prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" />
+                  <ComboBox prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" fx:id="liste1"/>
                   <Label text="Destination :" GridPane.rowIndex="1" />
-                  <ComboBox prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="liste2"/>
                   <Label text="Flux :" GridPane.rowIndex="2" />
                   <TextField disable="true" prefHeight="25.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS" fx:id="augmentingpath">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Améliorer Flux">
+            <Button mnemonicParsing="false" text="Améliorer Flux" fx:id="ameliore">
                <VBox.margin>
                   <Insets left="55.0" top="30.0" />
                </VBox.margin>
@@ -81,4 +82,11 @@
          </children>
       </VBox>
    </bottom>
+   <center>
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" fx:id="pane">
+         <children>
+            <Canvas fx:id="canvas" height="200.0" width="200.0" />
+         </children>
+      </Pane>
+   </center>
 </BorderPane>

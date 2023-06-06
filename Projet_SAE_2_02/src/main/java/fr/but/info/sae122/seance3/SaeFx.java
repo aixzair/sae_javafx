@@ -35,98 +35,20 @@ public class SaeFx extends Application {
   @Override
   public void start(Stage primaryStage) {
 	  
-	  this.stage=primaryStage;
+	this.stage = primaryStage;
 	  
     try {
     	
       FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/saeFX.fxml"));
+      Controller controller = new Controller(stage);
+      
+      fxmlLoader.setController(controller);
       Scene scene = new Scene(fxmlLoader.load());
       primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {
       throw new RuntimeException(e);
-    }
-    /*Graph graphe = new Graph();
-   
-    graphe.addNode("A");
-    graphe.addNode("B");
-    graphe.addEdge("A","B", 0);
+    }  
     
-    save(graphe);*/
-    
-  
-    
-  }
-  
-  public void save(Graph graphe) {
-	  
-  	 FileChooser fileChooser = new FileChooser();
-  	 fileChooser.setTitle("Save as");
-  	 
-  	 File file = fileChooser.showSaveDialog(stage);
-  	 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
-  	 
-  	 OutputStream fileStream;
-	try {
-		fileStream = new FileOutputStream(file);
-	  	 GraphIO.write(graphe,fileStream);
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		Alert alert =new Alert(AlertType.ERROR,"Problems during saving...");
-		alert.showAndWait();
-		
-	}
-	 
-
-  	   }
-  
-  public void load(Graph graphe) {
-	  
-	  	 FileChooser fileChooser = new FileChooser();
-	  	 fileChooser.setTitle("Open");
-	  	 
-	  	 File file = fileChooser.showOpenDialog(stage);
-	  	 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
-	  	 
-	  	InputStream fileStream;
-	  	
-	  	try {
-		  		
-			fileStream = new FileInputStream(file);
-			try {
-				GraphIO.read(fileStream);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	  	} catch(FileNotFoundException e){
-			Alert alert =new Alert(AlertType.ERROR,"Problems during loading...");
-			alert.showAndWait();
-	  	}
-	  	System.out.println(graphe);
-	  	
-	  	ArrayList<GraphicNode> list= new ArrayList<GraphicNode>();
-	  	
-	  	int x=0;
-	  	int y=0;
-	  	double rad = 5;
-	  	Color color= Color.ALICEBLUE;
-	  	
-	  	for(String s : graphe.getNodes()) {
-	  		
-	  		
-	  		list.add(new GraphicNode(x,y,rad,color));
-	  		
-	  	}
-	  	
-	  	
-
-		}
-		 
-
-	  
-  
-  
-
-  
+  } 
 }
