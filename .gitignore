@@ -18,6 +18,7 @@ target/
 .loadpath
 .recommenders
 *.launch
+**/target/
 **/bin/
 **/out/
 **/target/

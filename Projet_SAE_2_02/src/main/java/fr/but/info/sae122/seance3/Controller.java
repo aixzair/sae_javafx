@@ -7,6 +7,12 @@ import fr.but.info.sae122.seance3.model.GraphIO;
 import fr.but.info.sae122.seance3.model.Path;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
+import javafx.fxml.Initializable;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +22,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.ArcType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -34,12 +45,9 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicReference;
 
-
 public class Controller implements Initializable {
 
-    @FXML
-    Canvas canvas;
-    @FXML private BorderPane borderPane;
+    @FXML private Canvas canvas;
     @FXML private Pane pane;
     @FXML private ToggleButton calcule;
     @FXML private VBox vbox;
@@ -70,14 +78,25 @@ public class Controller implements Initializable {
 
     private HashMap<String, GraphicNode> name;
 
+    @FXML private Button charge;
+    @FXML private Button noeud;
+    @FXML private Button sauve;
+    @FXML private BorderPane borderPane;
+    @FXML private Label etat;
+    
+    private MouseController mouseController;
+
+    /** Créer un Controller.
+     * @param stage
+     */
     public Controller(Stage stage) {
         name = new HashMap<>();
         graph = new Graph();
         this.stage=stage;
-
-
     }
 
+    /** Initialise le controleur.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         canvas.heightProperty().bind(pane.heightProperty());
@@ -141,7 +160,7 @@ public class Controller implements Initializable {
 
         charge.setOnAction(event -> load());
         sauve.setOnAction(event-> save(graphe));
-      
+
     }
 
     public MaxFlowWithoutResidualGraph prepareCalcul(){
@@ -160,8 +179,29 @@ public class Controller implements Initializable {
         list.getItems().forEach(s -> list.getItems().remove(s));
     }
 
-   
-    
+    /** Règle le controleur de la souris
+	 * @param mouseController
+	 */
+	public void setMouseController(MouseController mouseController) {
+		this.mouseController = mouseController;
+	}
+	
+	/** Renvoie le canvas avec les éléments
+	 * @return canvas
+	 */
+	public Canvas getCanvas() {
+		return this.canvas;
+	}
+	
+	/** Renvoie l'état (partie basse de l'interface)
+	 * @return etat
+	 */
+	public Label getEtat() {
+		return this.etat;
+	}
+
+	/** Met à jours les éléments du canvas
+	 */
     public void reDraw(){
         canvas.getGraphicsContext2D().clearRect(0, 0, pane.getHeight(), pane.getWidth());
        for(String s : graph.getNodes()){
@@ -172,6 +212,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /** Dessine un noeud.
+     * @param nom
+     */
     public void drawNode(String s){
         double x1 = name.get(s).getX();
         double y1 = name.get(s).getY();
@@ -185,6 +228,10 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().strokeText(s, x1 + radius, y1 + radius);
     }
 
+    /** Dessine une arrête
+     * @param source
+     * @param fin
+     */
     public void drawEdge(String source, String fin){
         canvas.getGraphicsContext2D().save();
 
@@ -208,7 +255,10 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().restore();
 
     }
-   
+    
+    /** Sauvegarde le graphique.
+     * @param graphe
+     */
     public void save(Graph graphe) {
   	  
      	 FileChooser fileChooser = new FileChooser();
@@ -232,6 +282,8 @@ public class Controller implements Initializable {
 
      	   }
      
+    /** Charge le graphique.
+     */
      public void load() {
    	  
    	  	 FileChooser fileChooser = new FileChooser();
@@ -288,6 +340,46 @@ public class Controller implements Initializable {
    	  		
    	    	  
    	  		}
-
     }
+
+   	  	
+   	  	
+   		}
+     
+     // ------------ Evènement ------------
+     
+     /** Evènement à comportement variable.
+      * @param event
+      */
+     public void onMouseMoved(MouseEvent event) {
+     	this.mouseController.onMouseMoved(event);
+     }
+     
+     /** Evènement à comportement variable.
+      * @param event
+      */
+     public void onMouseDragged(MouseEvent event) {
+     	this.mouseController.onMouseDragged(event);
+     }
+     
+     /** Evènement à comportement variable.
+      * @param event
+      */
+     public void onMousePressed(MouseEvent event) {
+     	this.mouseController.onMousePressed(event);
+     }
+     
+     /** Evènement à comportement variable.
+      * @param event
+      */
+     public void onMouseReleased(MouseEvent event) {
+     	this.mouseController.onMouseReleased(event);
+     }
+     
+     /** Evènement à comportement variable.
+      * @param event
+      */
+     public void onMouseClicked(MouseEvent event) {
+     	this.mouseController.onMouseClicked(event);
+     }
 }
