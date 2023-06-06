@@ -7,11 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
-<<<<<<< HEAD
-import javafx.stage.FileChooser;
-=======
 import javafx.scene.paint.Color;
->>>>>>> 13fad6ada4335f1ee6d9aa3ca1142f02b34e3582
 
 import java.io.File;
 import java.net.URL;
@@ -33,13 +29,9 @@ public class Controller implements Initializable {
         name = new HashMap<>();
         graph = new Graph();
         graph.addNode("aa");
-<<<<<<< HEAD
-        graph.getNodes().forEach(s -> name.put(s, new GraphicNode()));
-        
-        
-=======
+
         graph.getNodes().forEach(s -> name.put(s, new GraphicNode(100, 10, 50, Color.RED)));
->>>>>>> 13fad6ada4335f1ee6d9aa3ca1142f02b34e3582
+
     }
 
     @Override
