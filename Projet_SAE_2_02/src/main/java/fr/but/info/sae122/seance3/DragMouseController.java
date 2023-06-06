@@ -1,23 +1,22 @@
 package fr.but.info.sae122.seance3;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * @author Alexandre Lerosier
+ */
 public class DragMouseController
 extends MouseController {
-	private final String texte;
+	private String texte;
 
 	/** Créer une instance avec un texet à afficher.
 	 * @param controller
 	 * @param texte
 	 */
-	public DragMouseController(Controller controller, String texte) {
+	public DragMouseController(Controller controller) {
 		super(controller);
-		this.texte = texte;
 	}
+
 	
 	public void onMouseMoved(MouseEvent event)
 	{

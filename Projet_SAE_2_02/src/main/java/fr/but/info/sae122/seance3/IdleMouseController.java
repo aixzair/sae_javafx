@@ -31,18 +31,34 @@ extends MouseController {
 	/** Active le contrôleur de déplacement et régle le curseur à "CLOSED_HAND".
 	 * @param event
 	 */
-	public void onMousePressed(MouseEvent event){
-		super.controller.setMouseController(new DragMouseController(
-			super.controller,
-			"Déposez le noeud où vous voulez..."
-		));
+	public void onMouseClicked(MouseEvent event){
+		if (!(event.getTarget() instanceof DragMouseController)) {
+			return;
+		}
+		
+		super.controller.setMouseController(new DragMouseController(super.controller));
+		super.controller.getCanvas().getGraphicsContext2D().strokeText(
+			"Déposez le noeud où vous voulez...",
+			event.getX(),
+			event.getY()
+		);
 		super.controller.getCanvas().setCursor(Cursor.CLOSED_HAND);
 	}
 	
-	/** Ne fait rien.
+	/** Indique que l'ont peut faire glisser le noeud si on est sur un noeud
+	 * @param event
 	 */
 	public void onMouseDragged(MouseEvent event){
-		// Vide.
+		if (!(event.getTarget() instanceof DragMouseController)) {
+			return;
+		}
+		
+		super.controller.getCanvas().getGraphicsContext2D().strokeText(
+			"Vous pouvez glisser le noeud...",
+			event.getX(),
+			event.getY()
+		);
+		super.controller.getCanvas().setCursor(Cursor.OPEN_HAND);
 	}
 	
 	/** Ne fait rien.
@@ -53,7 +69,7 @@ extends MouseController {
 	
 	/** Ne fait rien.
 	 */
-	public void onMouseClicked(MouseEvent event) {
+	public void onMousePressed(MouseEvent event) {
 		// Vide.
 	}
 }
