@@ -1,10 +1,6 @@
 package fr.but.info.sae122.seance3;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.canvas.*;
 import javafx.scene.input.MouseEvent;
 
