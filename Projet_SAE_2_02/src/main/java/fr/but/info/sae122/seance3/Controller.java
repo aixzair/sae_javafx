@@ -1,20 +1,16 @@
 package fr.but.info.sae122.seance3;
 
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 
 import fr.but.info.sae122.seance3.model.Edge;
 import fr.but.info.sae122.seance3.model.Graph;
 import fr.but.info.sae122.seance3.model.Path;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -130,5 +126,15 @@ public class Controller implements Initializable {
 	public Canvas getCanvas()
 	{
 		return this.canvas;
+	}
+	
+	public Graph getGraph()
+	{
+		return this.graph;
+	}
+	
+	public HashMap<String, GraphicNode> getName()
+	{
+		return this.name;
 	}
 }

@@ -1,6 +1,5 @@
 package fr.but.info.sae122.seance3;
 
-import java.awt.Color;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -8,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.scene.Cursor;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 public class PlaceMouseController extends MouseController{
 	
@@ -68,10 +68,13 @@ public class PlaceMouseController extends MouseController{
 	        if(result.isPresent() && !result.isEmpty())
 	        {
 		        result.ifPresent(nom -> {
-		        	if(this.creaNoeud /*TO DO : remplacer par "nom de noeud existe déjà"*/)
+		        	if(!this.controller.getName().containsKey(nom))
 		        	{
-		        		//TO DO : Méthode qui crée un noeud avec cursX et cursY
-		        		this.creaNoeud = false;
+	        			GraphicNode noeud = new GraphicNode(cursX, cursY, 20, Color.BLACK);
+	        			this.controller.getGraph().addNode(nom);
+	        			this.controller.getName().put(nom, noeud);
+	        			this.controller.reDraw();
+	        			this.creaNoeud = false;
 		        	}
 		        	else
 		        	{
