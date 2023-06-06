@@ -27,31 +27,31 @@
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="fr/but/info/sae122/seance3/open.png" />
+                        <!--<Image url="fr/but/info/sae122/seance3/open.png" />-->
                      </image>
                   </ImageView>
                </graphic></Button>
-				<Button fx:id="noeud" mnemonicParsing="false" text="+Noeud">
+				<Button fx:id="noeud" mnemonicParsing="false" text="+Noeud" onAction="#noeud">
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="23.0">
                      <image>
-                        <Image url="fr/but/info/sae122/seance3/Rond_bleu.png" />
+                        <!--<Image url="fr/but/info/sae122/seance3/Rond_bleu.png" />-->
                      </image>
                   </ImageView>
                </graphic></Button>
-				<Button fx:id="ajtFlux" mnemonicParsing="false" text="+Arête">
+				<Button fx:id="ajtFlux" mnemonicParsing="false" text="+Arête" onAction="#ajtFlux">
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="fr/but/info/sae122/seance3/flechenoire.png" />
+                        <!--<Image url="fr/but/info/sae122/seance3/flechenoire.png" />-->
                      </image>
                   </ImageView>
                </graphic></Button>
-				<Button fx:id="rtrFlux" mnemonicParsing="false" prefHeight="15.0" prefWidth="97.0" text="-Arête">
+				<Button fx:id="rtrFlux" mnemonicParsing="false" prefHeight="15.0" prefWidth="97.0" text="-Arête" onAction="#rtrFlux">
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="36.0">
                      <image>
-                        <Image url="fr/but/info/sae122/seance3/flecherouge.png" />
+                       <!-- <Image url="fr/but/info/sae122/seance3/flecherouge.png" />-->
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -59,7 +59,7 @@
                <graphic>
                   <ImageView>
                      <image>
-                        <Image url="fr/but/info/sae122/seance3/saveAs.png" />
+                        <!--<Image url="fr/but/info/sae122/seance3/saveAs.png" />-->
                      </image>
                   </ImageView>
                </graphic></Button>
@@ -70,7 +70,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="23.0">
                      <image>
-                        <Image url="fr/but/info/sae122/seance3/compute.png" />
+                        <!--<Image url="fr/but/info/sae122/seance3/compute.png" />-->
                      </image>
                   </ImageView>
                </graphic>
@@ -120,7 +120,7 @@
 		<VBox prefHeight="29.0" prefWidth="600.0" BorderPane.alignment="CENTER">
 			<children>
 				<Separator prefWidth="200.0" />
-				<Label text="Label" />
+				<Label text="Label" fx:id="etat"/>
 			</children>
 		</VBox>
 	</bottom>
@@ -131,3 +131,4 @@
 			</children>
 		</Pane>
 	</center>
+</BorderPane>

@@ -128,9 +128,9 @@ public class Controller implements Initializable {
         graph.addEdge("c", "a", 4);
 
 
-
-        vbox.setVisible(false);
         calcule.setSelected(false);
+        vbox.setDisable(true);
+        vbox.setVisible(false);
         canvas.widthProperty().addListener(observable -> reDraw());
         canvas.heightProperty().addListener(observable -> reDraw());
         if(path == null) ameliore.setDisable(true);
@@ -179,35 +179,16 @@ public class Controller implements Initializable {
         
         sauve.setOnAction(event-> save(graphe));
 
-	canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
-        {
-        	onMouseClicked(event);
-        });
-        
-        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event ->
-        {
-        	onMouseDragged(event);
-        });
-        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event ->
-        {
-        	onMouseMoved(event);
-        });
-        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event ->
-        {
-        	onMouseReleased(event);
-        });
-        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
-        {
-        	onMousePressed(event);
-        });
+	    canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onMouseClicked);
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::onMouseDragged);
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, this::onMouseMoved);
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, this::onMouseReleased);
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, this::onMousePressed);
     }
 
- 
     /**
      * Enables the resize of the draw while the maximizing or the minimizing of the window
      */
-    
-
 
     public MaxFlowWithoutResidualGraph prepareCalcul(){
         if(liste1.getItems().size() == 0) graph.getNodes().forEach(nodes -> liste1.getItems().add(nodes));
@@ -264,7 +245,6 @@ public class Controller implements Initializable {
      * Draws a node on the canvas
      * @param s is the name of the node
      */
-
     public void drawNode(String s){
         double x1 = name.get(s).getX();
         double y1 = name.get(s).getY();
@@ -279,14 +259,11 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().strokeText(s, x1 + radius, y1 + radius);
     }
 
-
     /**
      * Draws an edge from the source to the sink(fin) on the canvas
      * @param source from which node we start
      * @param fin from which node we finish
      */
-
-
     public void drawEdge(String source, String fin){
     	
         canvas.getGraphicsContext2D().save();
@@ -315,7 +292,7 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().setStroke(Color.BLACK);
         canvas.getGraphicsContext2D().setLineWidth(1);
         
-        canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).getFlow() +  "/" +graph.getEdge(source, fin).getCapacity(), (x2-x1+radius), (y2-y1+radius));
+        canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).getFlow() +  "/" +graph.getEdge(source, fin).getCapacity(), (radius), (radius));
         
         canvas.getGraphicsContext2D().restore();
 
@@ -349,12 +326,9 @@ public class Controller implements Initializable {
 	{
 		return this.name;
 	}
-
-    
-
     /**
      * Saves a graph on the disk
-     * @param graph wanted to be save
+     * @param graphe wanted to be save
      * 
      */
    
@@ -377,8 +351,6 @@ public class Controller implements Initializable {
    		alert.showAndWait();
    		
    	}
-   	 
-
      	   }
      
     /**
@@ -441,9 +413,6 @@ public class Controller implements Initializable {
    	  			x=0;
    	  			y+=100;
    	  		}
-   	  		
-   	  		
-   	    	  
    	  		}
     }
 
@@ -460,6 +429,7 @@ public class Controller implements Initializable {
       * @param event
       */
      public void onMouseDragged(MouseEvent event) {
+         setMouseController(new DragMouseController(this));
      	this.mouseController.onMouseDragged(event);
      }
      
@@ -515,6 +485,8 @@ public class Controller implements Initializable {
 	 			});
  				
  			}
+            System.out.println(nd1);
+            System.out.println(nd2);
  			this.mouseController.onMousePressed(event);
  		}
  		if(this.btToggle == 3)
@@ -558,4 +530,12 @@ public class Controller implements Initializable {
      public String getNd2() {
     	 return nd2;
      }
+
+    public void setNd1(String nd1) {
+        this.nd1 = nd1;
+    }
+
+    public void setNd2(String nd2) {
+        this.nd2 = nd2;
+    }
 }

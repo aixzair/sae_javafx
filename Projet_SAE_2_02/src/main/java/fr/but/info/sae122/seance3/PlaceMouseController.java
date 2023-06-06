@@ -20,24 +20,36 @@ public class PlaceMouseController extends MouseController{
 	private double cursY;
 	
 	/**
-	 * 
+	 * Allow to link this controller to the main controller
 	 * @param controller
 	 */
 	public PlaceMouseController(Controller controller)
 	{
 		super(controller);
 	}
-	
+
+
+	/**
+	 * Allow to bind some actions when the mouse is moved
+	 * @param event the event that need to be bind
+	 * */
 	public void onMouseMoved(MouseEvent event)
 	{
 		
 	}
-	
+	/**
+	 * Allow to bind some actions when the mouse is dragged
+	 * @param event the event that need to be bind
+	 * */
 	public void onMouseDragged(MouseEvent event)
 	{
 		
 	}
-	
+
+	/**
+	 * Allow to bind some actions when the mouse is pressed
+	 * @param event the event that need to be bind
+	 * */
 	public void onMousePressed(MouseEvent event)
 	{
 		this.creaNoeud = true;
@@ -47,17 +59,28 @@ public class PlaceMouseController extends MouseController{
 		this.controller.setMouseController(new IdleMouseController(this.controller));
 		this.controller.getCanvas().setCursor(Cursor.DEFAULT);
 	}
-	
+
+	/**
+	 * Allow to bind some actions when the mouse is released
+	 * @param event the event that need to be bind
+	 * */
 	public void onMouseReleased(MouseEvent event)
 	{
 		
 	}
-	
+
+	/**
+	 * Allow to bind some actions when the mouse is clicked
+	 * @param event the event that need to be bind
+	 * */
 	public void onMouseClicked(MouseEvent event)
 	{
 		
 	}
-	
+
+	/**
+	 * Allow to show the dialog that allow the user to enter a name for the node
+	 * */
 	private void showInputTextDialog() {
 		char defaultNode = 'd';
 		for(int i = 0; i < 47; i++) 
@@ -82,7 +105,7 @@ public class PlaceMouseController extends MouseController{
         	try {
         		if(!res.isEmpty() && res.isPresent()) {
             		try {
-            			GraphicNode node = new GraphicNode(cursX, cursY, 20, Color.BLACK);
+            			GraphicNode node = new GraphicNode(cursX, cursY, 20, Color.BEIGE);
                 		this.controller.getGraph().addNode(res.get());
             			this.controller.getName().put(res.get(), node);
             			controller.reDraw();

@@ -14,7 +14,9 @@ public class LinkMouseController extends MouseController{
 	
 	public LinkMouseController(Controller controller, boolean destr)
 	{
+
 		super(controller);
+		creaArrete = true;
 		this.destr = destr;
 	}
 	
@@ -60,14 +62,18 @@ public class LinkMouseController extends MouseController{
         dialog.setHeaderText("Entrez une capacité");
         if(controller.getNd1() != null && controller.getNd2() != null) {
         	while(this.creaArrete)	//Boucle jusqu'à ce que l'arrête soit créée ou bouton annuler
-            {    
+            {
     	        dialog.setTitle("Noeud");
             	
             	Optional<String> res = dialog.showAndWait();
             	try {
-            		if(this.controller.getGraph().getEdge(controller.getNd1(), controller.getNd2()) != null) {
-            			controller.getGraph().removeEdge(controller.getNd1(), controller.getNd2());
-            		}
+					try{
+						if(this.controller.getGraph().getEdge(controller.getNd1(), controller.getNd2()) != null) {
+							controller.getGraph().removeEdge(controller.getNd1(), controller.getNd2());
+						}
+					}catch (IllegalArgumentException e){
+
+					}
 	            		if(!res.isEmpty() && res.isPresent()) {
 	                		try {
 	    		        		this.creaArrete = false;
@@ -91,9 +97,12 @@ public class LinkMouseController extends MouseController{
 	            		this.creaArrete = false;
 	    	        	dialog.close();
 	    			}
-    	        
+
+				controller.setNd1(null);
+				controller.setNd2(null);
             }
         }
+
         this.controller.getEtat().setText("Arrête créée");
         
     }
