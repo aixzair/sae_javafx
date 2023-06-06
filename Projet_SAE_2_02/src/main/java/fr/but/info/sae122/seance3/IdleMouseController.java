@@ -1,11 +1,6 @@
 package fr.but.info.sae122.seance3;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.*;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -13,41 +8,51 @@ import javafx.scene.input.MouseEvent;
  */
 public class IdleMouseController
 extends MouseController {
-	private @FXML Canvas canvas;
 
+	/** Créer une instance avec un Controller
+	 * @param controleur
+	 */
 	public IdleMouseController(Controller _controleur) {
 		super(_controleur);
 	}
 	
 	/** Affiche rien et règle le curseur à "DEFAULT".
-	 * @param MouseEvent event
+	 * @param event
 	 */
 	public void onMouseMoved(MouseEvent event) {
-		/*this.canvas.getGraphicsContext2D().strokeText(
+		super.controller.getCanvas().getGraphicsContext2D().strokeText(
 			null,
 			event.getX(),
 			event.getY()
 		);
-		this.canvas.setCursor(Cursor.DEFAULT);*/
+		super.controller.getCanvas().setCursor(Cursor.DEFAULT);
 	}
 	
+	/** Active le contrôleur de déplacement et régle le curseur à "CLOSED_HAND".
+	 * @param event
+	 */
+	public void onMousePressed(MouseEvent event){
+		super.controller.setMouseController(new DragMouseController(
+			super.controller,
+			"Déposez le noeud où vous voulez..."
+		));
+		super.controller.getCanvas().setCursor(Cursor.CLOSED_HAND);
+	}
+	
+	/** Ne fait rien.
+	 */
 	public void onMouseDragged(MouseEvent event){
 		// Vide.
 	}
 	
-	/** Active le contrôleur de déplacement et régle le curseur à "CLOSED_HAND".
-	 * @param MouseEvent event
+	/** Ne fait rien.
 	 */
-	public void onMousePressed(MouseEvent event){
-		
-		//this.controleur.set DragMouseController(“Déposez le noeud où vous voulez...”);
-		// this.controleur.canvas.setCursor(Cursor.CLOSED_HAND);
-	}
-	
 	public void onMouseReleased(MouseEvent event) {
 		// Vide.
 	}
 	
+	/** Ne fait rien.
+	 */
 	public void onMouseClicked(MouseEvent event) {
 		// Vide.
 	}

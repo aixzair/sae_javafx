@@ -12,6 +12,9 @@ public class Controller {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * @param mouseController
+	 */
 	public void setMouseController(MouseController _mouseController) {
 		this.mouseController = _mouseController;
 	}
