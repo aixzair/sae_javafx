@@ -1,8 +1,15 @@
 package fr.but.info.sae122.seance3;
 
 import fr.but.info.sae122.seance3.model.*;
+import fr.but.info.sae122.seance3.model.Edge;
+import fr.but.info.sae122.seance3.model.Graph;
+import fr.but.info.sae122.seance3.model.GraphIO;
+import fr.but.info.sae122.seance3.model.Path;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -12,10 +19,31 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
+import java.awt.GridLayout;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+
 
 public class Controller implements Initializable {
 
@@ -32,14 +60,31 @@ public class Controller implements Initializable {
     @FXML private ComboBox<String> liste2;
     @FXML private Button augmentingpath;
 
+    @FXML
+    private Button charge;
+
+    @FXML
+    private Button noeud;
+
+
+
+    @FXML
+    private Button sauve;
+
+
     private Graph graph;
     private Path path;
-
+    private Stage stage;
+   
+    
     private HashMap<String, GraphicNode> name;
 
-    public Controller() {
+    public Controller(Stage stage) {
         name = new HashMap<>();
         graph = new Graph();
+        this.stage=stage;
+
+
     }
 
     @Override
@@ -54,6 +99,7 @@ public class Controller implements Initializable {
         name.put("c", new GraphicNode(200, 500, 25, Color.RED));
         graph.addEdge("a", "b", 3);
         graph.addEdge("b", "c", 2);
+
 
         vbox.setVisible(false);
         canvas.widthProperty().addListener(observable -> reDraw());
@@ -86,11 +132,36 @@ public class Controller implements Initializable {
 
         calcule.setSelected(false);
 
+
+        Graph graphe = new Graph();
+
+        charge.setOnAction(event -> load());
+        sauve.setOnAction(event-> save(graphe));
+       
+        
+        
+        
+        
+        graphe.addNode("A");
+        graphe.addNode("B");
+        graphe.addEdge("A","B", 0);
+        graphe.addNode("C");
+        graphe.addEdge("B","C", 0);
+        graphe.addNode("D");
+        graphe.addEdge("C","D", 0);
+        graphe.addNode("E");
+        graphe.addEdge("D","E", 0);
+        graphe.addNode("F");
+        graphe.addEdge("E","F", 0);
+
+      
     }
 
+   
+    
     public void reDraw(){
         canvas.getGraphicsContext2D().clearRect(0, 0, pane.getHeight(), pane.getWidth());
-        for(String s : graph.getNodes()){
+       for(String s : graph.getNodes()){
             drawNode(s);
         }
         for(Edge edge : graph.getEdges()){
@@ -113,6 +184,8 @@ public class Controller implements Initializable {
 
     public void drawEdge(String source, String fin){
         canvas.getGraphicsContext2D().save();
+
+
         double x1 = name.get(source).getX();
         double x2 = name.get(fin).getX();
         double y1 = name.get(source).getY();
@@ -127,5 +200,92 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().strokeLine(0, radius/2,(x2-x1)+10, (y2-y1)+radius/3);
         canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).getFlow() +  "/" +graph.getEdge(source, fin).getCapacity(), (x2-x1)/2, (y2-y1)/2);
         canvas.getGraphicsContext2D().restore();
+
     }
+   
+    public void save(Graph graphe) {
+  	  
+     	 FileChooser fileChooser = new FileChooser();
+     	 fileChooser.setTitle("Save as");
+     	 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("txt", "*.txt"));
+     	 
+     	 File file = fileChooser.showSaveDialog(stage);
+     	 
+     	 
+     	 OutputStream fileStream;
+   	try {
+   		fileStream = new FileOutputStream(file);
+   	  	 GraphIO.write(graphe,fileStream);
+   	} catch (FileNotFoundException e) {
+   		// TODO Auto-generated catch block
+   		Alert alert =new Alert(AlertType.ERROR,"Problems during saving...");
+   		alert.showAndWait();
+   		
+   	}
+   	 
+
+     	   }
+     
+     public void load() {
+   	  
+   	  	 FileChooser fileChooser = new FileChooser();
+   	  	 fileChooser.setTitle("Open");
+   	  	 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("txt", "*.txt"));
+   	  	 
+   	  	 File file = fileChooser.showOpenDialog(stage);
+   	  	 
+   	  	 
+   	  	 
+   	  	 InputStream fileStream;
+   	  	
+   	  	try {
+   		  		
+   			fileStream = new FileInputStream(file);
+   			try {
+   				graph = GraphIO.read(fileStream);
+   			} catch (IOException e) {
+   				// TODO Auto-generated catch block
+   				e.printStackTrace();
+   			}
+   	  	} catch(FileNotFoundException e){
+   			Alert alert =new Alert(AlertType.ERROR,"Problems during loading...");
+   			alert.showAndWait();
+   	  	}
+   	  	System.out.println(graph);
+   	  	
+   	  	ArrayList<GraphicNode> list= new ArrayList<GraphicNode>();
+   	  	
+   	  	int x=0;
+   	  	int y=0;
+   	  	double rad = 30;
+   	  	Color color= Color.ALICEBLUE;
+   	  	String temporaire=null;
+   	  	
+   	  	GridPane pane = new GridPane();
+   	  	
+   	  	for(String s : graph.getNodes()) {
+   	  		
+   	  		
+   	  		name.put(s,new GraphicNode(x,y,rad,color));
+   	  		
+   	  		//GraphicNode node = new GraphicNode(x,y,rad,color);
+   	  		drawNode(s);
+   	  		
+   	  		x=x+50;
+   	  		if(temporaire!=null){
+   	  			drawEdge(temporaire,s);
+   	  		}
+   	  		temporaire=s;
+   	  		if (name.size()%5==0) {
+   	  			x=0;
+   	  			y+=50;
+   	  		}
+   	  		
+   	  		
+   	    	  
+   	  		}
+   	  	
+   	  	
+   	  	
+   		}
 }
