@@ -51,14 +51,14 @@
               </rowConstraints>
                <children>
                   <Label text="Source :" />
-                  <ComboBox prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" />
+                  <ComboBox prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" fx:id="liste1"/>
                   <Label text="Destination :" GridPane.rowIndex="1" />
-                  <ComboBox prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ComboBox prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="liste2"/>
                   <Label text="Flux :" GridPane.rowIndex="2" />
                   <TextField disable="true" prefHeight="25.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS">
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS" fx:id="augmentingpath">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>

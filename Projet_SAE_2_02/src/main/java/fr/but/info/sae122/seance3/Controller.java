@@ -1,12 +1,11 @@
 package fr.but.info.sae122.seance3;
 
-import fr.but.info.sae122.seance3.model.Edge;
-import fr.but.info.sae122.seance3.model.Graph;
-import fr.but.info.sae122.seance3.model.Path;
+import fr.but.info.sae122.seance3.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -29,6 +28,9 @@ public class Controller implements Initializable {
     @FXML private Button rtrFlux;
     @FXML private Button ajtFlux;
     @FXML private Button ameliore;
+    @FXML private ComboBox<String> liste1;
+    @FXML private ComboBox<String> liste2;
+    @FXML private Button augmentingpath;
 
     private Graph graph;
     private Path path;
@@ -44,7 +46,16 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         canvas.heightProperty().bind(pane.heightProperty());
         canvas.widthProperty().bind(pane.widthProperty());
+        graph.addNode("a");
+        graph.addNode("b");
+        graph.addNode("c");
+        name.put("a", new GraphicNode(10, 10, 25, Color.RED));
+        name.put("b", new GraphicNode(100, 10, 25, Color.RED));
+        name.put("c", new GraphicNode(200, 500, 25, Color.RED));
+        graph.addEdge("a", "b", 3);
+        graph.addEdge("b", "c", 2);
 
+        vbox.setVisible(false);
         canvas.widthProperty().addListener(observable -> reDraw());
         canvas.heightProperty().addListener(observable -> reDraw());
         if(path == null) ameliore.setDisable(true);
@@ -58,8 +69,22 @@ public class Controller implements Initializable {
             }else{
                 vbox.setVisible(false);
                 rtrFlux.setDisable(false);
+                graph.getEdges().forEach(edge -> edge.setFlow(0));
+                if(path != null) path.getPath().forEach(edge -> path.getPath().remove(edge));
+
+                graph.getNodes().forEach(nodes -> liste1.getItems().add(nodes));
+                graph.getNodes().forEach(nodes -> liste2.getItems().add(nodes));
+
+                MaxFlowWithoutResidualGraph maxFlow = new MaxFlowWithoutResidualGraph(graph, liste1.getSelectionModel().getSelectedItem(), liste2.getSelectionModel().getSelectedItem());
+                path = new AugmentingPath(graph, liste1.getSelectionModel().getSelectedItem(), liste2.getSelectionModel().getSelectedItem());
+                augmentingpath.setOnAction(actionEvent -> {
+                    path = maxFlow.getAugmentingPath();
+                    maxFlow.computeMaxFlow();
+                });
             }
         });
+
+        calcule.setSelected(false);
 
     }
 
