@@ -1,13 +1,14 @@
 package fr.but.info.sae122.seance3;
 
+import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
 import fr.but.info.sae122.seance3.model.*;
-
 import javafx.fxml.Initializable;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleButton;
@@ -16,16 +17,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.ArcType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -55,16 +53,16 @@ public class Controller implements Initializable {
     @FXML private Button sauve;
     @FXML private BorderPane borderPane;
     @FXML private Label etat;
-    
     private HashMap<String, GraphicNode> name;
     private MouseController mouseController;
     private Graph graph;
     private Path path;
     private Stage stage;
-   
+    private int btToggle;
     /** Créer un Controller.
      * @param stage
      */
+    
     public Controller(Stage stage) {
         name = new HashMap<>();
         graph = new Graph();
@@ -123,7 +121,28 @@ public class Controller implements Initializable {
 
         charge.setOnAction(event -> load());
         sauve.setOnAction(event-> save(graphe));
-       
+
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
+        {
+        	onMouseClicked(event);
+        });
+        
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event ->
+        {
+        	onMouseDragged(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event ->
+        {
+        	onMouseMoved(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event ->
+        {
+        	onMouseReleased(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
+        {
+        	onMousePressed(event);
+        });
         graphe.addNode("A");
         graphe.addNode("B");
         graphe.addEdge("A","B", 0);
@@ -143,7 +162,6 @@ public class Controller implements Initializable {
 	public void setMouseController(MouseController mouseController) {
 		this.mouseController = mouseController;
 	}
-	
 	/** Renvoie le canvas avec les éléments
 	 * @return canvas
 	 */
@@ -210,6 +228,35 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().restore();
 
     }
+	
+    public void noeud()
+    {
+    	btToggle = 1;
+		this.getCanvas().setCursor(Cursor.CROSSHAIR);
+		
+	
+    }
+	
+    public void ajtFlux()
+    {
+    	btToggle = 2;
+    }
+	
+    public void rtrFlux()
+    {
+    	btToggle = 3;
+    }
+	
+	public Graph getGraph()
+	{
+		return this.graph;
+	}
+	
+	public HashMap<String, GraphicNode> getName()
+	{
+		return this.name;
+	}
+
     
     /** Sauvegarde le graphique.
      * @param graphe
@@ -335,7 +382,21 @@ public class Controller implements Initializable {
      /** Evènement à comportement variable.
       * @param event
       */
-     public void onMouseClicked(MouseEvent event) {
-     	this.mouseController.onMouseClicked(event);
+     public void onMouseClicked(MouseEvent event) {//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+ 		if( this.btToggle == 1)
+ 		{
+ 			setMouseController(new PlaceMouseController(this));
+ 			mouseController.onMousePressed(event);
+ 		}
+ 		if(this.btToggle == 2)
+ 		{
+ 			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+ 			setMouseController(new LinkMouseController(this, true));
+ 		}
+ 		if(this.btToggle == 3)
+ 		{
+ 			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+ 			setMouseController(new LinkMouseController(this, false));
+ 		}
      }
 }
