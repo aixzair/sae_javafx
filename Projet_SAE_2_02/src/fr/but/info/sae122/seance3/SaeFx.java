@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,5 +25,23 @@ public class SaeFx extends Application {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    public void sauve(Graph graphe) {
+  	  
+   	 FileChooser fileChooser = new FileChooser();
+   	 fileChooser.setTitle("Enregistrer sous");
+   	 
+   	 File file = fileChooser.showSaveDialog(getStage());
+   	 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Files", "*.*"));
+   	 
+   	 fileChooser.showOpenDialog(stage);
+   	 
+   	
+   	 
+   	 
+     }
+    
   }
+  
+
+  
 }
