@@ -15,7 +15,7 @@ public class GraphicNode {
      * @param x
      * @param y
      * @param radius (coins)
-     * @param couleur
+     * @param color
      */
     public GraphicNode(double x, double y, double radius, Color color) {
         propertyX = new SimpleDoubleProperty(x);

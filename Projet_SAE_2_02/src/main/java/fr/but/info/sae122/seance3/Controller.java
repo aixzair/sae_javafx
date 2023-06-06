@@ -78,9 +78,6 @@ public class Controller implements Initializable {
 
     private HashMap<String, GraphicNode> name;
 
-    @FXML private Button charge;
-    @FXML private Button noeud;
-    @FXML private Button sauve;
     @FXML private BorderPane borderPane;
     @FXML private Label etat;
     
@@ -213,7 +210,7 @@ public class Controller implements Initializable {
     }
 
     /** Dessine un noeud.
-     * @param nom
+     * @param s : nom du noeud
      */
     public void drawNode(String s){
         double x1 = name.get(s).getX();
@@ -342,10 +339,6 @@ public class Controller implements Initializable {
    	  		}
     }
 
-   	  	
-   	  	
-   		}
-     
      // ------------ Evènement ------------
      
      /** Evènement à comportement variable.
