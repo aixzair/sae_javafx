@@ -11,7 +11,12 @@ public class GraphicNode {
     private SimpleDoubleProperty radius;
     private SimpleObjectProperty<Color> color;
 
-
+    /** Créer un noeud.
+     * @param x
+     * @param y
+     * @param radius (coins)
+     * @param couleur
+     */
     public GraphicNode(double x, double y, double radius, Color color) {
         propertyX = new SimpleDoubleProperty(x);
         propertyY = new SimpleDoubleProperty(y);
@@ -19,34 +24,58 @@ public class GraphicNode {
         this.color = new SimpleObjectProperty<>(color);
     }
 
+    /** Renvoie la coordonnée X
+     * @return X
+     */
     public double getX() {
         return propertyX.get();
     }
 
+    /** Renvoie la propertée X
+     * @return propertyX
+     */
     public SimpleDoubleProperty propertyXProperty() {
         return propertyX;
     }
 
+    /** Renvoie la coordonnée Y
+     * @return Y
+     */
     public double getY() {
         return propertyY.get();
     }
 
+    /** Renvoie la propertée Y
+     * @return propertyY
+     */
     public SimpleDoubleProperty propertyYProperty() {
         return propertyY;
     }
 
+    /** Renvoie la propertée Y
+     * @return propertyY
+     */
     public double getRadius() {
         return radius.get();
     }
 
+    /** Renvoie le radius
+     * @return radius
+     */
     public SimpleDoubleProperty radiusProperty() {
         return radius;
     }
 
+    /** Renvoie la couleur
+     * @return color
+     */
     public Color getColor() {
         return color.get();
     }
 
+    /** Renvoie la propertée couleur
+     * @return SimpleObjectProperty<Color>
+     */
     public SimpleObjectProperty<Color> colorProperty() {
         return color;
     }

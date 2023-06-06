@@ -12,8 +12,8 @@ public abstract class MouseController {
 	/** Créer une instance avec un Controller
 	 * @param controller
 	 */
-	public MouseController(Controller _controller) {
-		this.controller = _controller;
+	public MouseController(Controller controller) {
+		this.controller = controller;
 	}
 	
 	public abstract void onMouseMoved(MouseEvent event);
