@@ -1,9 +1,9 @@
 package fr.but.info.sae122.seance3;
 
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
-
 import fr.but.info.sae122.seance3.model.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,7 +19,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,17 +46,9 @@ public class Controller implements Initializable {
     @FXML private ComboBox<String> liste1;
     @FXML private ComboBox<String> liste2;
     @FXML private Button augmentingpath;
-
-    @FXML
-    private Button charge;
-
-    @FXML
-    private Button noeud;
-
-
-
-    @FXML
-    private Button sauve;
+    @FXML private Button charge;
+    @FXML private Button noeud;
+    @FXML private Button sauve;
 
 
     private Graph graph;
@@ -72,8 +63,6 @@ public class Controller implements Initializable {
         name = new HashMap<>();
         graph = new Graph();
         this.stage=stage;
-
-
     }
 
     @Override
@@ -126,10 +115,27 @@ public class Controller implements Initializable {
 
         charge.setOnAction(event -> load());
         sauve.setOnAction(event-> save(graphe));
-       
-        
-        
-        
+
+        canvas.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->
+        {
+        	onMouseClicked(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event ->
+        {
+        	onMouseDragged(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_MOVED, event ->
+        {
+        	onMouseMoved(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, event ->
+        {
+        	onMouseReleased(event);
+        });
+        canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event ->
+        {
+        	onMousePressed(event);
+        });
         
         graphe.addNode("A");
         graphe.addNode("B");
@@ -209,20 +215,26 @@ public class Controller implements Initializable {
 	
 	public void onMousePressed(MouseEvent event)
 	{
-		//if( le bouton noeud a été pressé)
-		//	setMouseController(new PlaceMouseController(this));
-		//	this.controller.getCanvas().setCursor(Cursor.CROSSHAIR);
-		//if(le bouton arrête+ a été pressé)
-		//	setMouseController(new PlaceMouseController(this, true));
-		//	this.controller.getCanvas().setCursor(Cursor.CROSSHAIR);
-		//if(le bouton arrête- a été pressé)
-		//	setMouseController(new PlaceMouseController(this, false));
-		//	this.controller.getCanvas().setCursor(Cursor.CROSSHAIR);
+		if( this.noeud.isArmed())
+		{
+			setMouseController(new PlaceMouseController(this));
+			this.getCanvas().setCursor(Cursor.CROSSHAIR);
+		}
+		if(this.ajtFlux.isArmed())
+		{
+			setMouseController(new LinkMouseController(this, true));
+			this.getCanvas().setCursor(Cursor.CROSSHAIR);
+		}
+		if(this.rtrFlux.isArmed())
+		{
+			setMouseController(new LinkMouseController(this, false));
+			this.getCanvas().setCursor(Cursor.CROSSHAIR);
+		}
 	}
 	
 	public void onMouseReleased(MouseEvent event)
 	{
-		setMouseController(new IdleMouseController(this));
+		
 	}
 	
 	public void onMouseClicked(MouseEvent event)
