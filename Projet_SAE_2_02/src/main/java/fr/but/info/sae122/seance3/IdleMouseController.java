@@ -1,11 +1,6 @@
 package fr.but.info.sae122.seance3;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.*;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -13,42 +8,65 @@ import javafx.scene.input.MouseEvent;
  */
 public class IdleMouseController
 extends MouseController {
-	private @FXML Canvas canvas;
 
-	public IdleMouseController(Controller _controleur) {
-		super(_controleur);
+	/** Créer une instance avec un Controller
+	 * @param controleur
+	 */
+	public IdleMouseController(Controller controleur) {
+		super(controleur);
+		super.controller.getEtat().setText("");
 	}
+	
+	// ------------ Evenement ------------
 	
 	/** Affiche rien et règle le curseur à "DEFAULT".
-	 * @param MouseEvent event
+	 * @param event
 	 */
+	@Override
 	public void onMouseMoved(MouseEvent event) {
-		/*this.canvas.getGraphicsContext2D().strokeText(
-			null,
-			event.getX(),
-			event.getY()
-		);
-		this.canvas.setCursor(Cursor.DEFAULT);*/
-	}
-	
-	public void onMouseDragged(MouseEvent event){
-		// Vide.
+		super.controller.getEtat().setText("");
+		super.controller.getCanvas().setCursor(Cursor.DEFAULT);
 	}
 	
 	/** Active le contrôleur de déplacement et régle le curseur à "CLOSED_HAND".
-	 * @param MouseEvent event
+	 * @param event
 	 */
-	public void onMousePressed(MouseEvent event){
+	@Override
+	public void onMouseClicked(MouseEvent event){
+		if (!(event.getTarget() instanceof GraphicNode)) {
+			return;
+		}
 		
-		//this.controleur.set DragMouseController(“Déposez le noeud où vous voulez...”);
-		// this.controleur.canvas.setCursor(Cursor.CLOSED_HAND);
+		super.controller.setMouseController(new DragMouseController(super.controller));
+		super.controller.getEtat().setText("Déposez le noeud où vous voulez...");
+		super.controller.getCanvas().setCursor(Cursor.CLOSED_HAND);
 	}
 	
+	/** Indique que l'ont peut faire glisser le noeud si on est sur un noeud
+	 * @param event
+	 */
+	@Override
+	public void onMouseDragged(MouseEvent event){
+		if (!(event.getTarget() instanceof GraphicNode)) {
+			return;
+		}
+		
+		super.controller.getEtat().setText("Vous pouvez glisser le noeud...");
+		super.controller.getCanvas().setCursor(Cursor.OPEN_HAND);
+	}
+	
+	/** Ne fait rien.
+	 *
+	 */
+	@Override
 	public void onMouseReleased(MouseEvent event) {
 		// Vide.
 	}
 	
-	public void onMouseClicked(MouseEvent event) {
+	/** Ne fait rien.
+	 */
+	@Override
+	public void onMousePressed(MouseEvent event) {
 		// Vide.
 	}
 }

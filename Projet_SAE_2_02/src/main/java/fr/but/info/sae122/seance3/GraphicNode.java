@@ -17,7 +17,6 @@ public class GraphicNode {
         propertyY = new SimpleDoubleProperty(y);
         this.radius = new SimpleDoubleProperty(radius);
         this.color = new SimpleObjectProperty<>(color);
-
     }
 
     public double getX() {
@@ -50,5 +49,14 @@ public class GraphicNode {
 
     public SimpleObjectProperty<Color> colorProperty() {
         return color;
+    }
+    
+    /** Change les coordonnées
+     * @param X
+     * @param Y
+     */
+    public void setXY(double X, double Y) {
+    	this.propertyX.set(X);
+    	this.propertyY.set(Y);
     }
 }

@@ -6,6 +6,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import fr.but.info.sae122.seance3.model.*;
 import javafx.fxml.Initializable;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ToggleButton;
@@ -13,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+import javafx.scene.shape.ArcType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
@@ -31,12 +36,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-
 public class Controller implements Initializable {
 
     @FXML
     Canvas canvas;
-    @FXML private BorderPane borderPane;
     @FXML private Pane pane;
     @FXML private ToggleButton calcule;
     @FXML private VBox vbox;
@@ -49,8 +52,8 @@ public class Controller implements Initializable {
     @FXML private Button charge;
     @FXML private Button noeud;
     @FXML private Button sauve;
-
-
+    @FXML private BorderPane borderPane;
+    @FXML private Label etat;
     private Graph graph;
     private Path path;
     private Stage stage;
@@ -152,7 +155,16 @@ public class Controller implements Initializable {
       
     }
 
-   
+    /** Règle le controleur de la souris
+	 * @param mouseController
+	 */
+	public void setMouseController(MouseController mouseController) {
+		this.mouseController = mouseController;
+	}
+	
+	public Label getEtat() {
+		return this.etat;
+	}
     
     public void reDraw(){
         canvas.getGraphicsContext2D().clearRect(0, 0, pane.getHeight(), pane.getWidth());
@@ -195,13 +207,7 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().strokeLine(0, radius/2,(x2-x1)+10, (y2-y1)+radius/3);
         canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).getFlow() +  "/" +graph.getEdge(source, fin).getCapacity(), (x2-x1)/2, (y2-y1)/2);
         canvas.getGraphicsContext2D().restore();
-
     }
-
-	
-	public void setMouseController(MouseController _mouseController) {
-		this.mouseController = _mouseController;
-	}
 	
 	public void onMouseMoved(MouseEvent event)
 	{
@@ -256,7 +262,7 @@ public class Controller implements Initializable {
 	{
 		return this.name;
 	}
-   
+	
     public void save(Graph graphe) {
   	  
      	 FileChooser fileChooser = new FileChooser();
