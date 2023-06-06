@@ -12,11 +12,12 @@ public class GraphicNode {
     private SimpleObjectProperty<Color> color;
 
 
-    public GraphicNode() {
-        propertyX = new SimpleDoubleProperty();
-        propertyY = new SimpleDoubleProperty();
-        radius = new SimpleDoubleProperty();
-        color = new SimpleObjectProperty<>();
+    public GraphicNode(double x, double y, double radius, Color color) {
+        propertyX = new SimpleDoubleProperty(x);
+        propertyY = new SimpleDoubleProperty(y);
+        this.radius = new SimpleDoubleProperty(radius);
+        this.color = new SimpleObjectProperty<>(color);
+
     }
 
     public double getX() {

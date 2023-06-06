@@ -1,12 +1,17 @@
 package fr.but.info.sae122.seance3;
 
+import fr.but.info.sae122.seance3.model.Edge;
 import fr.but.info.sae122.seance3.model.Graph;
 import fr.but.info.sae122.seance3.model.Path;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
+<<<<<<< HEAD
 import javafx.stage.FileChooser;
+=======
+import javafx.scene.paint.Color;
+>>>>>>> 13fad6ada4335f1ee6d9aa3ca1142f02b34e3582
 
 import java.io.File;
 import java.net.URL;
@@ -28,9 +33,13 @@ public class Controller implements Initializable {
         name = new HashMap<>();
         graph = new Graph();
         graph.addNode("aa");
+<<<<<<< HEAD
         graph.getNodes().forEach(s -> name.put(s, new GraphicNode()));
         
         
+=======
+        graph.getNodes().forEach(s -> name.put(s, new GraphicNode(100, 10, 50, Color.RED)));
+>>>>>>> 13fad6ada4335f1ee6d9aa3ca1142f02b34e3582
     }
 
     @Override
@@ -48,17 +57,37 @@ public class Controller implements Initializable {
         for(String s : graph.getNodes()){
             drawNode(s);
         }
+        for(Edge edge : graph.getEdges()){
+            drawEdge(edge.getFromNode(), edge.getToNode());
+        }
     }
 
     public void drawNode(String s){
-        canvas.getGraphicsContext2D().strokeRoundRect(name.get(s).getX(), name.get(s).getY(), name.get(s).getRadius(), name.get(s).getRadius(), 0, 0);
-        canvas.getGraphicsContext2D().fillRoundRect(name.get(s).getX(), name.get(s).getY(), name.get(s).getRadius(), name.get(s).getRadius(), 0, 0);
-        canvas.getGraphicsContext2D().strokeText(s, name.get(s).getX(), name.get(s).getY());
+        double x1 = name.get(s).getX();
+        double y1 = name.get(s).getY();
+        double radius = name.get(s).getRadius();
+        Color color = name.get(s).getColor();
+
+        canvas.getGraphicsContext2D().setFill(color);
+        canvas.getGraphicsContext2D().strokeRoundRect(x1, y1, radius, radius, 8, 8);
+        canvas.getGraphicsContext2D().fillRoundRect(x1, y1, radius, radius, 8, 8);
+        canvas.getGraphicsContext2D().strokeText(s, name.get(s).getX() + radius/2-9, name.get(s).getY() + radius/2+5);
     }
 
     public void drawEdge(String source, String fin){
-        //save();
-        canvas.getGraphicsContext2D().translate(name.get(source).getX(), name.get(source).getY());
-        //Math.atan2();
+
+
+        double x1 = name.get(source).getX();
+        double x2 = name.get(fin).getX();
+        double y1 = name.get(source).getY();
+        double y2 = name.get(fin).getY();
+        canvas.getGraphicsContext2D().translate(x1, y1);
+
+        double res = Math.toDegrees(Math.atan2(y2-y1, x2-x1));
+        canvas.getGraphicsContext2D().rotate(res);
+        canvas.getGraphicsContext2D().beginPath();
+        canvas.getGraphicsContext2D().strokeLine(x1, y1, x2, y2);
+        canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).toString(), x2-x1, y2-y1);
+
     }
 }
