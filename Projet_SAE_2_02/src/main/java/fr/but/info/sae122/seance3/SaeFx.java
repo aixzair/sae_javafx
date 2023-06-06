@@ -23,7 +23,7 @@ public class SaeFx extends Application {
 	  
     try {
     	
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/saeFX.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("saeFX.fxml"));
       Controller controller = new Controller(stage);
       
       fxmlLoader.setController(controller);

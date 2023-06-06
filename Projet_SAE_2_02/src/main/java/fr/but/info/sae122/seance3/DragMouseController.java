@@ -46,7 +46,7 @@ extends MouseController {
 
 		controller.getEtat().setText("Déposez le noeud où vous voulez...");
 
-		controller.getName().replace(nodeDragged.get(), new GraphicNode(mouseEvent.getX(), mouseEvent.getY(), 40, Color.AQUAMARINE));
+		controller.getName().replace(nodeDragged.get(), new GraphicNode(mouseEvent.getX(), mouseEvent.getY(), 25, Color.BEIGE));
 
 		controller.reDraw();
 

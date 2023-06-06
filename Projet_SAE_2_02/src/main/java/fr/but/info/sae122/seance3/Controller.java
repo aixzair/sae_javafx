@@ -139,6 +139,7 @@ public class Controller implements Initializable {
         calcule.selectedProperty().addListener(observable -> {
             if(calcule.isSelected()){
                 vbox.setVisible(true);
+                vbox.setDisable(false);
                 rtrFlux.setDisable(true);
                 vbox.setManaged(true);
                 if(path == null) ameliore.setDisable(true);
@@ -157,7 +158,7 @@ public class Controller implements Initializable {
 
             augmentingpath.setOnAction(actionEvent -> {
                 name.get(liste1.getSelectionModel().getSelectedItem()).setColor(Color.BLUE);
-                name.get(liste2.getSelectionModel().getSelectedItem()).setColor(Color.RED);
+                name.get(liste2.getSelectionModel().getSelectedItem()).setColor(Color.GREEN);
                 reDraw();
                 path = maxFlow.get().getAugmentingPath();
                 if(path != null) ameliore.setDisable(false);
