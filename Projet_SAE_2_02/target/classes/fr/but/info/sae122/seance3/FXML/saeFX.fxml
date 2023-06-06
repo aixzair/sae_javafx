@@ -16,11 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<<<<<<< HEAD
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-=======
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.but.info.sae122.seance3.Controller" fx:id="borderPane">
->>>>>>> alensoJour3
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -76,11 +72,7 @@
       </VBox>
    </right>
    <center>
-<<<<<<< HEAD
-      <Canvas height="200.0" width="200.0" BorderPane.alignment="CENTER" />
-=======
       <Canvas height="200.0" width="200.0" BorderPane.alignment="CENTER" fx:id="canvas"/>
->>>>>>> alensoJour3
    </center>
    <bottom>
       <VBox prefHeight="29.0" prefWidth="600.0" BorderPane.alignment="CENTER">

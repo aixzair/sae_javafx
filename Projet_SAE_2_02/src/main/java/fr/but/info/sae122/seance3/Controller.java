@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -27,6 +29,8 @@ public class Controller implements Initializable {
         graph = new Graph();
         graph.addNode("aa");
         graph.getNodes().forEach(s -> name.put(s, new GraphicNode()));
+        
+        
     }
 
     @Override
@@ -38,6 +42,8 @@ public class Controller implements Initializable {
         canvas.heightProperty().addListener(observable -> reDraw());
     }
 
+   
+    
     public void reDraw(){
         for(String s : graph.getNodes()){
             drawNode(s);
@@ -51,8 +57,8 @@ public class Controller implements Initializable {
     }
 
     public void drawEdge(String source, String fin){
-        save();
-        canvas.getGraphicsContext2D().translate(name.get(s).getX(), name.get(s).getY());
-        Math.atan2();
+        //save();
+        canvas.getGraphicsContext2D().translate(name.get(source).getX(), name.get(source).getY());
+        //Math.atan2();
     }
 }
