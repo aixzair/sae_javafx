@@ -5,9 +5,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Scene;
 
 public class MouseController implements Initializable{
 
+	private Scene scene;
+	
 	public MouseController()
 	{
 		
@@ -42,7 +46,11 @@ public class MouseController implements Initializable{
 		//Création de noeud
 		if(noeudClicked)
 		{
-			
+			this.scene.setCursor(Cursor.CROSSHAIR);
+		}
+		if(arreteClicked)
+		{
+			this.scene.setCursor(Cursor.CROSSHAIR);
 		}*/
 	}
 
