@@ -57,6 +57,7 @@ public class Controller implements Initializable {
     private Graph graph;
     private Path path;
     private Stage stage;
+    private int btToggle;
    
     
     private HashMap<String, GraphicNode> name;
@@ -123,6 +124,7 @@ public class Controller implements Initializable {
         {
         	onMouseClicked(event);
         });
+        
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event ->
         {
         	onMouseDragged(event);
@@ -209,6 +211,24 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().restore();
     }
 	
+    public void noeud()
+    {
+    	btToggle = 1;
+		this.getCanvas().setCursor(Cursor.CROSSHAIR);
+		
+	
+    }
+	
+    public void ajtFlux()
+    {
+    	btToggle = 2;
+    }
+	
+    public void rtrFlux()
+    {
+    	btToggle = 3;
+    }
+    
 	public void onMouseMoved(MouseEvent event)
 	{
 		
@@ -221,21 +241,7 @@ public class Controller implements Initializable {
 	
 	public void onMousePressed(MouseEvent event)
 	{
-		if( this.noeud.isArmed())
-		{
-			setMouseController(new PlaceMouseController(this));
-			this.getCanvas().setCursor(Cursor.CROSSHAIR);
-		}
-		if(this.ajtFlux.isArmed())
-		{
-			setMouseController(new LinkMouseController(this, true));
-			this.getCanvas().setCursor(Cursor.CROSSHAIR);
-		}
-		if(this.rtrFlux.isArmed())
-		{
-			setMouseController(new LinkMouseController(this, false));
-			this.getCanvas().setCursor(Cursor.CROSSHAIR);
-		}
+		
 	}
 	
 	public void onMouseReleased(MouseEvent event)
@@ -245,7 +251,22 @@ public class Controller implements Initializable {
 	
 	public void onMouseClicked(MouseEvent event)
 	{
-		//setMouseController(new PlaceMouseController(this));
+		//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+		if( this.btToggle == 1)
+		{
+			setMouseController(new PlaceMouseController(this));
+			mouseController.onMousePressed(event);
+		}
+		if(this.btToggle == 2)
+		{
+			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+			setMouseController(new LinkMouseController(this, true));
+		}
+		if(this.btToggle == 3)
+		{
+			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
+			setMouseController(new LinkMouseController(this, false));
+		}
 	}
 	
 	public Canvas getCanvas()

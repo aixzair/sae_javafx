@@ -16,16 +16,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.but.info.sae122.seance3.Controller">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Charge" fx:id="charge"/>
-            <Button mnemonicParsing="false" text="+Noeud" fx:id="noeud"/>
-            <Button mnemonicParsing="false" text="+Flux" fx:id="ajtFlux" />
-            <Button mnemonicParsing="false" text="-Flux" fx:id="rtrFlux"/>
-            <Button mnemonicParsing="false" text="Sauve" fx:id="sauve"/>
-            <ToggleButton mnemonicParsing="false" text="Calcule" fx:id="calcule">
+          <Button fx:id="charge" mnemonicParsing="false" text="Charge" />
+            <Button fx:id="noeud" mnemonicParsing="false" onAction="#noeud" text="+Noeud" />
+            <Button fx:id="ajtFlux" mnemonicParsing="false" onAction="#ajtFlux" text="+Flux" />
+            <Button fx:id="rtrFlux" mnemonicParsing="false" onAction="#rtrFlux" text="-Flux" />
+            <Button fx:id="sauve" mnemonicParsing="false" text="Sauve" />
+            <ToggleButton fx:id="calcule" mnemonicParsing="false" text="Calcule">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -37,7 +37,7 @@
       </ToolBar>
    </top>
    <right>
-      <VBox alignment="CENTER_LEFT" prefHeight="331.0" prefWidth="208.0" BorderPane.alignment="CENTER" fx:id="vbox">
+      <VBox fx:id="vbox" alignment="CENTER_LEFT" prefHeight="331.0" prefWidth="208.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane>
               <columnConstraints>
@@ -51,19 +51,19 @@
               </rowConstraints>
                <children>
                   <Label text="Source :" />
-                  <ComboBox prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" fx:id="liste1"/>
+                  <ComboBox fx:id="liste1" prefHeight="25.0" prefWidth="82.0" GridPane.columnIndex="1" />
                   <Label text="Destination :" GridPane.rowIndex="1" />
-                  <ComboBox prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="liste2"/>
+                  <ComboBox fx:id="liste2" prefHeight="25.0" prefWidth="81.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Flux :" GridPane.rowIndex="2" />
                   <TextField disable="true" prefHeight="25.0" prefWidth="99.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS" fx:id="augmentingpath">
+            <Button fx:id="augmentingpath" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Trouver Chemin Augmentant" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Améliorer Flux" fx:id="ameliore">
+            <Button fx:id="ameliore" mnemonicParsing="false" text="Améliorer Flux">
                <VBox.margin>
                   <Insets left="55.0" top="30.0" />
                </VBox.margin>
@@ -83,7 +83,7 @@
       </VBox>
    </bottom>
    <center>
-      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" fx:id="pane">
+      <Pane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
             <Canvas fx:id="canvas" height="200.0" width="200.0" />
          </children>
