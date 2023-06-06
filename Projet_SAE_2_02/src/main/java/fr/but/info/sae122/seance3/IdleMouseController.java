@@ -13,11 +13,10 @@ import javafx.scene.input.MouseEvent;
  */
 public class IdleMouseController
 extends MouseController {
-	private final MouseController controleur;
 	private @FXML Canvas canvas;
 
-	public IdleMouseController(MouseController _controleur) {
-		this.controleur = _controleur;
+	public IdleMouseController(Controller _controleur) {
+		super(_controleur);
 	}
 	
 	/** Affiche rien et règle le curseur à "DEFAULT".
@@ -51,11 +50,5 @@ extends MouseController {
 	
 	public void onMouseClicked(MouseEvent event) {
 		// Vide.
-	}
-
-	@Override
-	public void setController(MouseController controller) {
-		// TODO Auto-generated method stub
-		
 	}
 }

@@ -8,8 +8,9 @@ import javafx.scene.input.MouseEvent;
 
 public class DragMouseController extends MouseController{
 
-	public DragMouseController(MouseController controller)
+	public DragMouseController(Controller controller)
 	{
+		super(controller);
 	}
 	
 	public void onMouseMoved(MouseEvent event)
@@ -34,12 +35,6 @@ public class DragMouseController extends MouseController{
 	
 	public void onMouseClicked(MouseEvent event)
 	{
-		
-	}
-
-	@Override
-	public void setController(MouseController controller) {
-		// TODO Auto-generated method stub
 		
 	}
 	
