@@ -5,6 +5,7 @@ import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class LinkMouseController extends MouseController{
 
@@ -64,8 +65,21 @@ public class LinkMouseController extends MouseController{
         	while(this.creaArrete)	//Boucle jusqu'à ce que l'arrête soit créée ou bouton annuler
             {
     	        dialog.setTitle("Noeud");
-            	
+				dialog.getEditor().textProperty().addListener((observableValue, s, t1) -> {
+					try {
+						if (Integer.parseInt(observableValue.getValue()) < 0 || controller.getName().containsKey(observableValue.getValue())) {
+							dialog.getEditor().setStyle("-fx-text-fill: red");
+						} else {
+							dialog.getEditor().setStyle("-fx-text-fill: black");
+						}
+					}catch (NumberFormatException e){
+						dialog.getEditor().setStyle("-fx-text-fill: red");
+						}
+					});
+
+
             	Optional<String> res = dialog.showAndWait();
+
             	try {
 					try{
 						if(this.controller.getGraph().getEdge(controller.getNd1(), controller.getNd2()) != null) {
@@ -78,7 +92,6 @@ public class LinkMouseController extends MouseController{
 	                		try {
 	    		        		this.creaArrete = false;
 	                    		this.controller.getGraph().addEdge(this.controller.getNd1(), this.controller.getNd2(), Integer.parseInt(res.get()));
-	                			System.out.println(controller.getGraph());
 	                    		controller.drawEdge(this.controller.getNd1(), this.controller.getNd2());
 	                			controller.reDraw();
 	                			dialog.close();

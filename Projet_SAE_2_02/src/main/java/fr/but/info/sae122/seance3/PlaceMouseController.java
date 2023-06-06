@@ -100,7 +100,13 @@ public class PlaceMouseController extends MouseController{
         while(this.creaNoeud)	//Boucle jusqu'à ce que le noeud soit créé ou bouton annuler
         {
         	dialog.setTitle("Noeud");
-        	
+        	dialog.getEditor().textProperty().addListener((observableValue, s, t1) -> {
+				if (!s.equals(t1) && controller.getName().containsKey(t1)) {
+					dialog.getEditor().setStyle("-fx-text-fill: red");
+				} else {
+					dialog.getEditor().setStyle("-fx-text-fill: black");
+				}
+			});
         	Optional<String> res = dialog.showAndWait();
         	try {
         		if(!res.isEmpty() && res.isPresent()) {
