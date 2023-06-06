@@ -65,12 +65,6 @@ public class PlaceMouseController extends MouseController{
 	{
 		
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	private void showInputTextDialog() {
 		

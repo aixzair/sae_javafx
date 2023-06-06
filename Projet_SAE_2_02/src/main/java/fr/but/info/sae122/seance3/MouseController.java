@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 
-public abstract class MouseController implements Initializable{
+public abstract class MouseController{
 
 	protected Canvas canvas;
 	private MouseController controller;
