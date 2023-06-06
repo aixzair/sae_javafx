@@ -6,4 +6,6 @@ module SAE122MaxFlow {
   requires javafx.fxml;
   requires javafx.controls;
 requires javafx.graphics;
+requires javafx.base;
+requires java.desktop;
 }

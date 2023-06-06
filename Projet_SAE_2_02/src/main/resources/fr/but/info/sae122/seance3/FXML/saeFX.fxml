@@ -16,16 +16,16 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.but.info.sae122.seance3.Controller" fx:id="borderPane">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"  fx:id="borderPane">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Charge" />
-            <Button mnemonicParsing="false" text="+Noeud" />
-            <Button mnemonicParsing="false" text="+Flux" />
-            <Button mnemonicParsing="false" text="-Flux" />
-            <Button mnemonicParsing="false" text="Sauve" />
-            <ToggleButton mnemonicParsing="false" text="Calcule">
+          <Button mnemonicParsing="false" text="Charge" fx:id="charge"/>
+            <Button mnemonicParsing="false" text="+Noeud" fx:id="noeud"/>
+            <Button mnemonicParsing="false" text="+Flux" fx:id="ajtFlux" />
+            <Button mnemonicParsing="false" text="-Flux" fx:id="rtrFlux"/>
+            <Button mnemonicParsing="false" text="Sauve" fx:id="sauve"/>
+            <ToggleButton mnemonicParsing="false" text="Calcule" fx:id="calcule">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
