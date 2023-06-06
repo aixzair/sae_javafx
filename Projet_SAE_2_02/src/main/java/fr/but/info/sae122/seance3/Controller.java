@@ -468,7 +468,7 @@ public class Controller implements Initializable {
  			{
 	 			name.forEach((t, u) ->{
 	 				double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
-	 				if( z < radius) {
+	 				if( z < 2*radius) {
 	 					nd1 = t;
 	 				}
 	 			});
@@ -479,7 +479,7 @@ public class Controller implements Initializable {
  				this.getEtat().setText("Cliquez sur le noeud source");
  				name.forEach((t, u) ->{
  					double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
-	 				if(z < radius) {
+	 				if(z < 2*radius) {
 	 					nd2 = t;
 	 				}
 	 			});
@@ -502,7 +502,7 @@ public class Controller implements Initializable {
  			{
 	 			name.forEach((t, u) ->{
 	 				double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
-	 				if( z < radius) {
+	 				if( z < 1.5*radius) {
 	 					nd1 = t;
 	 				}
 	 			});
@@ -513,7 +513,7 @@ public class Controller implements Initializable {
  				this.getEtat().setText("Cliquez sur le noeud source");
  				name.forEach((t, u) ->{
  					double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
-	 				if(z < radius) {
+	 				if(z < 1.5*radius) {
 	 					nd2 = t;
 	 				}
 	 			});

@@ -108,11 +108,13 @@ public class LinkMouseController extends MouseController{
     }
 	
 	public void removeEdge() {
-		
         if(controller.getNd1() != null && controller.getNd2() != null) {
         	controller.getGraph().removeEdge(controller.getNd1(), controller.getNd2());
+			controller.reDraw();
+			controller.setNd1(null);
+			controller.setNd2(null);
         }
         this.controller.getEtat().setText("Arrête détruite");
-        
+
     }
 }
