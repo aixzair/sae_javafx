@@ -18,8 +18,9 @@ public class SaeFx extends Application {
   @Override
   public void start(Stage primaryStage) {
     try {
-      BorderPane borderPane = FXMLLoader.load(Objects.requireNonNull(SaeFx.class.getResource("saeFX.fxml")));
-      primaryStage.setScene(new Scene(borderPane));
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FXML/saeFX.fxml"));
+      Scene scene = new Scene(fxmlLoader.load());
+      primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {
       throw new RuntimeException(e);
