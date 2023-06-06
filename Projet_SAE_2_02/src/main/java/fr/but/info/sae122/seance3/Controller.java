@@ -8,14 +8,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller
 implements Initializable {
-
 
     private @FXML BorderPane borderPane;
     private @FXML Canvas canvas;

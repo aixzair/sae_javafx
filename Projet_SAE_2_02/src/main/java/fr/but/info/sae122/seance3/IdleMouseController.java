@@ -19,6 +19,7 @@ extends MouseController {
 	/** Affiche rien et règle le curseur à "DEFAULT".
 	 * @param event
 	 */
+	@Override
 	public void onMouseMoved(MouseEvent event) {
 		super.controller.getCanvas().getGraphicsContext2D().strokeText(
 			null,
@@ -31,8 +32,9 @@ extends MouseController {
 	/** Active le contrôleur de déplacement et régle le curseur à "CLOSED_HAND".
 	 * @param event
 	 */
+	@Override
 	public void onMouseClicked(MouseEvent event){
-		if (!(event.getTarget() instanceof DragMouseController)) {
+		if (!(event.getTarget() instanceof GraphicNode)) {
 			return;
 		}
 		
@@ -48,8 +50,9 @@ extends MouseController {
 	/** Indique que l'ont peut faire glisser le noeud si on est sur un noeud
 	 * @param event
 	 */
+	@Override
 	public void onMouseDragged(MouseEvent event){
-		if (!(event.getTarget() instanceof DragMouseController)) {
+		if (!(event.getTarget() instanceof GraphicNode)) {
 			return;
 		}
 		
@@ -62,13 +65,16 @@ extends MouseController {
 	}
 	
 	/** Ne fait rien.
+	 *
 	 */
+	@Override
 	public void onMouseReleased(MouseEvent event) {
 		// Vide.
 	}
 	
 	/** Ne fait rien.
 	 */
+	@Override
 	public void onMousePressed(MouseEvent event) {
 		// Vide.
 	}

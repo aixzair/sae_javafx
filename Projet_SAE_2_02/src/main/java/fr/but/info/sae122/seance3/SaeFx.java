@@ -46,13 +46,13 @@ public class SaeFx extends Application {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    Graph graphe = new Graph();
+    /*Graph graphe = new Graph();
    
     graphe.addNode("A");
     graphe.addNode("B");
     graphe.addEdge("A","B", 0);
     
-    save(graphe);
+    save(graphe);*/
     
   
     
