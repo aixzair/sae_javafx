@@ -6,11 +6,17 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
-public class DragMouseController extends MouseController{
+public class DragMouseController
+extends MouseController {
+	private final String texte;
 
-	public DragMouseController(Controller controller)
-	{
+	/** Créer une instance avec un texet à afficher.
+	 * @param controller
+	 * @param texte
+	 */
+	public DragMouseController(Controller controller, String texte) {
 		super(controller);
+		this.texte = texte;
 	}
 	
 	public void onMouseMoved(MouseEvent event)
