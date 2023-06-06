@@ -11,20 +11,23 @@ public class GraphicNode {
     private SimpleDoubleProperty radius;
     private SimpleObjectProperty<Color> color;
 
-
+    /** Créer un noeud.
+     * @param x
+     * @param y
+     * @param radius (coins)
+     * @param color
+     */
     public GraphicNode(double x, double y, double radius, Color color) {
         propertyX = new SimpleDoubleProperty(x);
         propertyY = new SimpleDoubleProperty(y);
         this.radius = new SimpleDoubleProperty(radius);
         this.color = new SimpleObjectProperty<>(color);
-
     }
 
     /**
      * Gets the wrapped value of property X of the graphic node
-     * @return the wrapped value of X property
+     * @return the coordinate X
      */
-    
     public double getX() {
         return propertyX.get();
     }
@@ -40,9 +43,9 @@ public class GraphicNode {
 
     /**
      * Gets the wrapped value of property Y of the graphic node
-     * @return the wrapped value of Y property
+     * @return the coordinate Y
      */
-    
+
     public double getY() {
         return propertyY.get();
     }
@@ -55,10 +58,10 @@ public class GraphicNode {
     public SimpleDoubleProperty propertyYProperty() {
         return propertyY;
     }
-    
-    /**
-     * gets the wrapped value of property Y of the graphic node
-     * @return the wrapped value of Y property
+ 
+
+    /** Gets the wrapped value of the radius
+     * @return the radius value
      */
     public double getRadius() {
         return radius.get();
@@ -84,9 +87,21 @@ public class GraphicNode {
 
     /**
      * the color property of the graphic node
-     * @return the color property
+     * @return SimpleObjectProperty<Color> the color property
      */
     public SimpleObjectProperty<Color> colorProperty() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color.set(color);
+    }
+    /** Changes coordinates
+     * @param X is the value by which we want to set X property
+     * @param Y is the value by which we want to set Y property
+     */
+    public void setXY(double X, double Y) {
+    	this.propertyX.set(X);
+    	this.propertyY.set(Y);
     }
 }

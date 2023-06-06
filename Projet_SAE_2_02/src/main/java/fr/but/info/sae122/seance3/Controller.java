@@ -5,33 +5,33 @@ import fr.but.info.sae122.seance3.model.Edge;
 import fr.but.info.sae122.seance3.model.Graph;
 import fr.but.info.sae122.seance3.model.GraphIO;
 import fr.but.info.sae122.seance3.model.Path;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+
+import javafx.fxml.Initializable;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.ArcType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-import java.awt.GridLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,13 +43,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Controller implements Initializable {
 
-    @FXML
-    Canvas canvas;
-    @FXML private BorderPane borderPane;
+    @FXML private Canvas canvas;
     @FXML private Pane pane;
     @FXML private ToggleButton calcule;
     @FXML private VBox vbox;
@@ -59,6 +57,7 @@ public class Controller implements Initializable {
     @FXML private ComboBox<String> liste1;
     @FXML private ComboBox<String> liste2;
     @FXML private Button augmentingpath;
+    @FXML private TextField flotmax;
 
     @FXML
     private Button charge;
@@ -75,20 +74,28 @@ public class Controller implements Initializable {
     private Graph graph;
     private Path path;
     private Stage stage;
-   
-    
+
+
     private HashMap<String, GraphicNode> name;
     
 
+    @FXML private BorderPane borderPane;
+    @FXML private Label etat;
+    
+    private MouseController mouseController;
+
+    /** Creates a Controller.
+     * @param stage
+     */
     public Controller(Stage stage) {
         name = new HashMap<>();
         graph = new Graph();
         this.stage=stage;
-
-
     }
+
     /**
      * Initializes the controller, every parameters needed to display the view
+
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,43 +106,55 @@ public class Controller implements Initializable {
         graph.addNode("a");
         graph.addNode("b");
         graph.addNode("c");
-        graph.addNode("d");
-        name.put("a", new GraphicNode(10, 10, 25, Color.RED));
-        name.put("b", new GraphicNode(100, 10, 25, Color.RED));
-        name.put("c", new GraphicNode(200, 15, 25, Color.RED));
-        name.put("d", new GraphicNode(300, 400, 25, Color.RED));
+
+        name.put("a", new GraphicNode(20, 20, 25, Color.BEIGE));
+        name.put("b", new GraphicNode(100, 20, 25, Color.BEIGE));
+        name.put("c", new GraphicNode(100, 200, 25, Color.BEIGE));
         graph.addEdge("a", "b", 3);
-        graph.addEdge("b", "c", 2);
-        graph.addEdge("c", "d", 2);
+        graph.addEdge("b", "c", 4);
+        graph.addEdge("c", "a", 4);
+
 
 
         vbox.setVisible(false);
+        calcule.setSelected(false);
         canvas.widthProperty().addListener(observable -> reDraw());
         canvas.heightProperty().addListener(observable -> reDraw());
         if(path == null) ameliore.setDisable(true);
         else ajtFlux.setDisable(false);
+
         calcule.selectedProperty().addListener(observable -> {
             if(calcule.isSelected()){
                 vbox.setVisible(true);
                 rtrFlux.setDisable(true);
+                vbox.setManaged(true);
                 if(path == null) ameliore.setDisable(true);
                 else ajtFlux.setDisable(false);
             }else{
                 vbox.setVisible(false);
                 rtrFlux.setDisable(false);
-                graph.getEdges().forEach(edge -> edge.setFlow(0));
-                if(path != null) path.getPath().forEach(edge -> path.getPath().remove(edge));
-
-                graph.getNodes().forEach(nodes -> liste1.getItems().add(nodes));
-                graph.getNodes().forEach(nodes -> liste2.getItems().add(nodes));
-
-                MaxFlowWithoutResidualGraph maxFlow = new MaxFlowWithoutResidualGraph(graph, liste1.getSelectionModel().getSelectedItem(), liste2.getSelectionModel().getSelectedItem());
-                path = new AugmentingPath(graph, liste1.getSelectionModel().getSelectedItem(), liste2.getSelectionModel().getSelectedItem());
-                augmentingpath.setOnAction(actionEvent -> {
-                    path = maxFlow.getAugmentingPath();
-                    maxFlow.computeMaxFlow();
-                });
+                vbox.setManaged(false);
             }
+        });
+
+        vbox.visibleProperty().addListener(observable -> {
+            AtomicReference<MaxFlowWithoutResidualGraph> maxFlow = new AtomicReference<>(prepareCalcul());
+            liste1.setOnAction(actionEvent -> maxFlow.set(prepareCalcul()));
+            liste2.setOnAction(actionEvent -> maxFlow.set(prepareCalcul()));
+
+            augmentingpath.setOnAction(actionEvent -> {
+                name.get(liste1.getSelectionModel().getSelectedItem()).setColor(Color.BLUE);
+                name.get(liste2.getSelectionModel().getSelectedItem()).setColor(Color.RED);
+                reDraw();
+                path = maxFlow.get().getAugmentingPath();
+                if(path != null) ameliore.setDisable(false);
+                ameliore.setOnMouseClicked(event -> {
+                    maxFlow.get().increaseFlow(path);
+                    flotmax.setText(String.valueOf(path.getFlow()));
+                    path = null;
+                    reDraw();
+                });
+            });
         });
 
         calcule.setSelected(false);
@@ -146,33 +165,57 @@ public class Controller implements Initializable {
         charge.setOnAction(event -> load());
         
         sauve.setOnAction(event-> save(graphe));
-       
-        
-        graphe.addNode("A");
-        graphe.addNode("B");
-        graphe.addEdge("A","B", 0);
-        graphe.addNode("C");
-        graphe.addEdge("B","C", 0);
-        graphe.addNode("D");
-        graphe.addEdge("C","D", 0);
-        graphe.addNode("E");
-        graphe.addEdge("D","E", 0);
-        graphe.addNode("F");
-        graphe.addEdge("E","F", 0);
-        graphe.addNode("G");
-        graphe.addEdge("F","G", 0);
-        graphe.addNode("H");
-        graphe.addEdge("G","H", 0);
-        graphe.addNode("I");
-        graphe.addEdge("H","I", 0);
 
-      
+
     }
+
  
     /**
      * Enables the resize of the draw while the maximizing or the minimizing of the window
      */
     
+
+
+    public MaxFlowWithoutResidualGraph prepareCalcul(){
+        if(liste1.getItems().size() == 0) graph.getNodes().forEach(nodes -> liste1.getItems().add(nodes));
+        if(liste2.getItems().size() == 0) graph.getNodes().forEach(nodes -> liste2.getItems().add(nodes));
+        graph.getEdges().forEach(edge -> edge.setFlow(0));
+
+        flotmax.setDisable(false);
+        flotmax.setText("0");
+        return new MaxFlowWithoutResidualGraph(graph,
+                liste1.getSelectionModel().getSelectedItem(),
+                liste2.getSelectionModel().getSelectedItem());
+    }
+
+    public void clearList(ComboBox<String> list){
+        list.getItems().forEach(s -> list.getItems().remove(s));
+    }
+
+    /** Sets the mouseController
+	 * @param mouseController
+	 */
+	public void setMouseController(MouseController mouseController) {
+		this.mouseController = mouseController;
+	}
+	
+	/** Gets the canvas with all the elements
+	 * @return canvas
+	 */
+	public Canvas getCanvas() {
+		return this.canvas;
+	}
+	
+	/** Gets the status (partie basse de l'interface)
+	 * @return etat
+	 */
+	public Label getEtat() {
+		return this.etat;
+	}
+
+	/** Updates canvas' elements
+	 */
+
     public void reDraw(){
         canvas.getGraphicsContext2D().clearRect(0, 0, pane.getHeight(), pane.getWidth());
        for(String s : graph.getNodes()){
@@ -196,17 +239,19 @@ public class Controller implements Initializable {
         Color color = name.get(s).getColor();
 
         canvas.getGraphicsContext2D().strokeRoundRect(x1, y1, width, width, radius, radius);
-        canvas.getGraphicsContext2D().setFill(Color.BEIGE);
+        canvas.getGraphicsContext2D().setFill(color);
         canvas.getGraphicsContext2D().fillRoundRect(x1, y1, width, width, radius, radius);
         canvas.getGraphicsContext2D().strokeText(s, x1 + radius, y1 + radius);
     }
+
 
     /**
      * Draws an edge from the source to the sink(fin) on the canvas
      * @param source from which node we start
      * @param fin from which node we finish
      */
-    
+
+
     public void drawEdge(String source, String fin){
     	
         canvas.getGraphicsContext2D().save();
@@ -222,6 +267,7 @@ public class Controller implements Initializable {
 
         canvas.getGraphicsContext2D().translate(x1 +radius, y1 + radius);
         canvas.getGraphicsContext2D().rotate(res);
+
 
         canvas.getGraphicsContext2D().strokeLine(0,0,Math.sqrt(Math.pow((y2-y1),2)+Math.pow((x2-x1),2)),0);
         
@@ -240,13 +286,14 @@ public class Controller implements Initializable {
 
     }
     
+
     /**
      * Saves a graph on the disk
      * @param graph wanted to be save
      * 
      */
    
-    public void save(Graph graph) {
+    public void save(Graph graphe) {
   	  
      	 FileChooser fileChooser = new FileChooser();
      	 fileChooser.setTitle("Save as");
@@ -273,7 +320,7 @@ public class Controller implements Initializable {
      * Loads a graph from the disk and displays it
      *  
      */
-    
+
      public void load() {
    	  	
          canvas.getGraphicsContext2D().clearRect(0, 0, pane.getHeight(), pane.getWidth());
@@ -284,9 +331,7 @@ public class Controller implements Initializable {
    	  	 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("txt", "*.txt"));
    	  	 
    	  	 File file = fileChooser.showOpenDialog(stage);
-   	  	 
-   	  	 
-   	  	 
+
    	  	 InputStream fileStream;
    	  	
    	  	try {
@@ -335,8 +380,42 @@ public class Controller implements Initializable {
    	  		
    	    	  
    	  		}
-   	  	
-   	  	
-   	  	
-   		}
+    }
+
+     // ------------ Event ------------
+     
+     /** Variable behavior event
+      * @param event
+      */
+     public void onMouseMoved(MouseEvent event) {
+     	this.mouseController.onMouseMoved(event);
+     }
+     
+     /** Variable behavior event
+      * @param event
+      */
+     public void onMouseDragged(MouseEvent event) {
+     	this.mouseController.onMouseDragged(event);
+     }
+     
+     /** Variable behavior event
+      * @param event
+      */
+     public void onMousePressed(MouseEvent event) {
+     	this.mouseController.onMousePressed(event);
+     }
+     
+     /** Variable behavior event
+      * @param event
+      */
+     public void onMouseReleased(MouseEvent event) {
+     	this.mouseController.onMouseReleased(event);
+     }
+     
+     /** Variable behavior event
+      * @param event
+      */
+     public void onMouseClicked(MouseEvent event) {
+     	this.mouseController.onMouseClicked(event);
+     }
 }
