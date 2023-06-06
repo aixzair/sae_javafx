@@ -5,4 +5,5 @@ module SAE122MaxFlow {
   opens fr.but.info.sae122.seance3.model;
   requires javafx.fxml;
   requires javafx.controls;
+requires java.desktop;
 }
