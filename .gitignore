@@ -17,6 +17,9 @@ bin/
 .loadpath
 .recommenders
 *.launch
+**/target/
+.classpath
+.project
 
 # Pour intelliJ
 .idea
