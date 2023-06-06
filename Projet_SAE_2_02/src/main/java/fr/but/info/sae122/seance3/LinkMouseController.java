@@ -41,7 +41,7 @@ public class LinkMouseController extends MouseController{
 			case 2:
 				if(this.destr)
 				{
-					//détruire l'arrête
+					//détruire l'arrête si elle existe
 				}
 				else
 				{
@@ -50,6 +50,7 @@ public class LinkMouseController extends MouseController{
 				this.ndSelect = 0;
 			break;
 		}
+		this.controller.setMouseController(new IdleMouseController(this.controller));
 	}
 	
 	public void onMouseReleased(MouseEvent event)
@@ -79,7 +80,7 @@ public class LinkMouseController extends MouseController{
 		        	if(Integer.parseInt(capa) > 0 /*|| Integer.parseInt(capa) > flux*/)
 		        	{
 		        		//TO DO : Méthode qui crée une arrête entre nd 1 et nd2 de capacité capa OU qui modifie l'éventuelle arrête existante
-		        		//Si chemin augmentant, le supprimer
+		        		//Si chemin augmentant, le supprimer. Conserver le flux
 		        		this.creaArrete = false;
 		        	}
 		        	else
