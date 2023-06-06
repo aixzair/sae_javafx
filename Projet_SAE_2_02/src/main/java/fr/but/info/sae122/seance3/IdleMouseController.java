@@ -12,8 +12,9 @@ extends MouseController {
 	/** Créer une instance avec un Controller
 	 * @param controleur
 	 */
-	public IdleMouseController(Controller _controleur) {
-		super(_controleur);
+	public IdleMouseController(Controller controleur) {
+		super(controleur);
+		super.controller.getEtat().setText("");
 	}
 	
 	/** Affiche rien et règle le curseur à "DEFAULT".
@@ -21,11 +22,7 @@ extends MouseController {
 	 */
 	@Override
 	public void onMouseMoved(MouseEvent event) {
-		super.controller.getCanvas().getGraphicsContext2D().strokeText(
-			null,
-			event.getX(),
-			event.getY()
-		);
+		super.controller.getEtat().setText("");
 		super.controller.getCanvas().setCursor(Cursor.DEFAULT);
 	}
 	
@@ -39,11 +36,7 @@ extends MouseController {
 		}
 		
 		super.controller.setMouseController(new DragMouseController(super.controller));
-		super.controller.getCanvas().getGraphicsContext2D().strokeText(
-			"Déposez le noeud où vous voulez...",
-			event.getX(),
-			event.getY()
-		);
+		super.controller.getEtat().setText("Déposez le noeud où vous voulez...");
 		super.controller.getCanvas().setCursor(Cursor.CLOSED_HAND);
 	}
 	
@@ -56,11 +49,7 @@ extends MouseController {
 			return;
 		}
 		
-		super.controller.getCanvas().getGraphicsContext2D().strokeText(
-			"Vous pouvez glisser le noeud...",
-			event.getX(),
-			event.getY()
-		);
+		super.controller.getEtat().setText("Vous pouvez glisser le noeud...");
 		super.controller.getCanvas().setCursor(Cursor.OPEN_HAND);
 	}
 	

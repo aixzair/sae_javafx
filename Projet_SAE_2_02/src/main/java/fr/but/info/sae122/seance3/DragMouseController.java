@@ -22,6 +22,8 @@ extends MouseController {
 	public void onMouseDragged(MouseEvent event) {
 		GraphicNode noeud;
 		
+		System.out.println(event.getTarget().getClass());
+		
 		if (event.getTarget() instanceof GraphicNode) {
 			noeud = (GraphicNode) event.getTarget();
 		} else {

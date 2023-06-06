@@ -8,6 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -17,6 +19,7 @@ implements Initializable {
 
     private @FXML BorderPane borderPane;
     private @FXML Canvas canvas;
+    private @FXML Label etat;
     
     private MouseController mouseController;
     private Graph graph;
@@ -42,15 +45,19 @@ implements Initializable {
         canvas.heightProperty().addListener(observable -> reDraw());
     }
 
-    /**
+    /** Règle le controleur de la souris
 	 * @param mouseController
 	 */
-	public void setMouseController(MouseController _mouseController) {
-		this.mouseController = _mouseController;
+	public void setMouseController(MouseController mouseController) {
+		this.mouseController = mouseController;
 	}
 	
 	public Canvas getCanvas() {
 		return this.canvas;
+	}
+	
+	public Label getEtat() {
+		return this.etat;
 	}
     
     public void reDraw(){
