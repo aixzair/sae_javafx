@@ -20,34 +20,72 @@ public class GraphicNode {
 
     }
 
+    /**
+     * Gets the wrapped value of property X of the graphic node
+     * @return the wrapped value of X property
+     */
+    
     public double getX() {
         return propertyX.get();
     }
+    
+    /**
+     * Gets the X property of the graphic node 
+     * @return the X property
+     */
 
     public SimpleDoubleProperty propertyXProperty() {
         return propertyX;
     }
 
+    /**
+     * Gets the wrapped value of property Y of the graphic node
+     * @return the wrapped value of Y property
+     */
+    
     public double getY() {
         return propertyY.get();
     }
 
+    /**
+     * Gets the property Y of the graphic node 
+     * @return the Y property
+     */
+    
     public SimpleDoubleProperty propertyYProperty() {
         return propertyY;
     }
-
+    
+    /**
+     * gets the wrapped value of property Y of the graphic node
+     * @return the wrapped value of Y property
+     */
     public double getRadius() {
         return radius.get();
     }
+    
+    /**
+     * Gets the radius property
+     * @return the radius property
+     */
 
     public SimpleDoubleProperty radiusProperty() {
         return radius;
     }
+    
+    /**
+     * Gets the wrapped color value of the graphic node
+     * @return the wrapped color value
+     */
 
     public Color getColor() {
         return color.get();
     }
 
+    /**
+     * the color property of the graphic node
+     * @return the color property
+     */
     public SimpleObjectProperty<Color> colorProperty() {
         return color;
     }

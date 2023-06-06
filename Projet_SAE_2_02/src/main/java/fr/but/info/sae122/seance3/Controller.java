@@ -78,6 +78,7 @@ public class Controller implements Initializable {
    
     
     private HashMap<String, GraphicNode> name;
+    
 
     public Controller(Stage stage) {
         name = new HashMap<>();
@@ -86,19 +87,26 @@ public class Controller implements Initializable {
 
 
     }
-
+    /**
+     * Initializes the controller, every parameters needed to display the view
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    	
         canvas.heightProperty().bind(pane.heightProperty());
         canvas.widthProperty().bind(pane.widthProperty());
+        
         graph.addNode("a");
         graph.addNode("b");
         graph.addNode("c");
+        graph.addNode("d");
         name.put("a", new GraphicNode(10, 10, 25, Color.RED));
         name.put("b", new GraphicNode(100, 10, 25, Color.RED));
-        name.put("c", new GraphicNode(200, 500, 25, Color.RED));
+        name.put("c", new GraphicNode(200, 15, 25, Color.RED));
+        name.put("d", new GraphicNode(300, 400, 25, Color.RED));
         graph.addEdge("a", "b", 3);
         graph.addEdge("b", "c", 2);
+        graph.addEdge("c", "d", 2);
 
 
         vbox.setVisible(false);
@@ -132,15 +140,13 @@ public class Controller implements Initializable {
 
         calcule.setSelected(false);
 
-
         Graph graphe = new Graph();
+       
 
         charge.setOnAction(event -> load());
+        
         sauve.setOnAction(event-> save(graphe));
        
-        
-        
-        
         
         graphe.addNode("A");
         graphe.addNode("B");
@@ -153,11 +159,19 @@ public class Controller implements Initializable {
         graphe.addEdge("D","E", 0);
         graphe.addNode("F");
         graphe.addEdge("E","F", 0);
+        graphe.addNode("G");
+        graphe.addEdge("F","G", 0);
+        graphe.addNode("H");
+        graphe.addEdge("G","H", 0);
+        graphe.addNode("I");
+        graphe.addEdge("H","I", 0);
 
       
     }
-
-   
+ 
+    /**
+     * Enables the resize of the draw while the maximizing or the minimizing of the window
+     */
     
     public void reDraw(){
         canvas.getGraphicsContext2D().clearRect(0, 0, pane.getHeight(), pane.getWidth());
@@ -168,6 +182,11 @@ public class Controller implements Initializable {
             drawEdge(edge.getFromNode(), edge.getToNode());
         }
     }
+    
+    /**
+     * Draws a node on the canvas
+     * @param s is the name of the node
+     */
 
     public void drawNode(String s){
         double x1 = name.get(s).getX();
@@ -182,7 +201,14 @@ public class Controller implements Initializable {
         canvas.getGraphicsContext2D().strokeText(s, x1 + radius, y1 + radius);
     }
 
+    /**
+     * Draws an edge from the source to the sink(fin) on the canvas
+     * @param source from which node we start
+     * @param fin from which node we finish
+     */
+    
     public void drawEdge(String source, String fin){
+    	
         canvas.getGraphicsContext2D().save();
 
 
@@ -192,18 +218,35 @@ public class Controller implements Initializable {
         double y2 = name.get(fin).getY();
         double radius = name.get(source).getRadius();
 
-        double res = Math.atan2(y2-y1, x2-x1);
+        double res = Math.toDegrees(Math.atan2(y2-y1, x2-x1));
 
-        canvas.getGraphicsContext2D().translate(x1, y1);
+        canvas.getGraphicsContext2D().translate(x1 +radius, y1 + radius);
         canvas.getGraphicsContext2D().rotate(res);
 
-        canvas.getGraphicsContext2D().strokeLine(0, radius/2,(x2-x1)+10, (y2-y1)+radius/3);
-        canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).getFlow() +  "/" +graph.getEdge(source, fin).getCapacity(), (x2-x1)/2, (y2-y1)/2);
+        canvas.getGraphicsContext2D().strokeLine(0,0,Math.sqrt(Math.pow((y2-y1),2)+Math.pow((x2-x1),2)),0);
+        
+        canvas.getGraphicsContext2D().setStroke(Color.RED);
+        canvas.getGraphicsContext2D().setLineWidth(2);
+        
+        canvas.getGraphicsContext2D().strokeLine(Math.sqrt(Math.pow((y2-y1),2)+2+Math.pow((x2-x1),2)),0,Math.sqrt(Math.pow((y2-y1),2)+Math.pow((x2-x1),2)),-10); 
+        canvas.getGraphicsContext2D().strokeLine(Math.sqrt(Math.pow((y2-y1),2)+Math.pow((x2-x1),2)),0,Math.sqrt(Math.pow((y2-y1),2)+Math.pow((x2-x1),2))-5,+5);
+        
+        canvas.getGraphicsContext2D().setStroke(Color.BLACK);
+        canvas.getGraphicsContext2D().setLineWidth(1);
+        
+        canvas.getGraphicsContext2D().strokeText(graph.getEdge(source, fin).getFlow() +  "/" +graph.getEdge(source, fin).getCapacity(), (x2-x1+radius), (y2-y1+radius));
+        
         canvas.getGraphicsContext2D().restore();
 
     }
+    
+    /**
+     * Saves a graph on the disk
+     * @param graph wanted to be save
+     * 
+     */
    
-    public void save(Graph graphe) {
+    public void save(Graph graph) {
   	  
      	 FileChooser fileChooser = new FileChooser();
      	 fileChooser.setTitle("Save as");
@@ -215,8 +258,8 @@ public class Controller implements Initializable {
      	 OutputStream fileStream;
    	try {
    		fileStream = new FileOutputStream(file);
-   	  	 GraphIO.write(graphe,fileStream);
-   	} catch (FileNotFoundException e) {
+   	  	 GraphIO.write(graph,fileStream);
+   	} catch (NullPointerException | FileNotFoundException e) {
    		// TODO Auto-generated catch block
    		Alert alert =new Alert(AlertType.ERROR,"Problems during saving...");
    		alert.showAndWait();
@@ -226,8 +269,16 @@ public class Controller implements Initializable {
 
      	   }
      
+    /**
+     * Loads a graph from the disk and displays it
+     *  
+     */
+    
      public void load() {
-   	  
+   	  	
+         canvas.getGraphicsContext2D().clearRect(0, 0, pane.getHeight(), pane.getWidth());
+
+    	
    	  	 FileChooser fileChooser = new FileChooser();
    	  	 fileChooser.setTitle("Open");
    	  	 fileChooser.getExtensionFilters().addAll(new ExtensionFilter("txt", "*.txt"));
@@ -247,16 +298,16 @@ public class Controller implements Initializable {
    				// TODO Auto-generated catch block
    				e.printStackTrace();
    			}
-   	  	} catch(FileNotFoundException e){
+   	  	} catch(NullPointerException | FileNotFoundException e){
    			Alert alert =new Alert(AlertType.ERROR,"Problems during loading...");
    			alert.showAndWait();
    	  	}
-   	  	System.out.println(graph);
+
    	  	
    	  	ArrayList<GraphicNode> list= new ArrayList<GraphicNode>();
    	  	
    	  	int x=0;
-   	  	int y=0;
+   	  	int y=20;
    	  	double rad = 30;
    	  	Color color= Color.ALICEBLUE;
    	  	String temporaire=null;
@@ -271,14 +322,14 @@ public class Controller implements Initializable {
    	  		//GraphicNode node = new GraphicNode(x,y,rad,color);
    	  		drawNode(s);
    	  		
-   	  		x=x+50;
+   	  		x=x+75;
    	  		if(temporaire!=null){
    	  			drawEdge(temporaire,s);
    	  		}
    	  		temporaire=s;
    	  		if (name.size()%5==0) {
    	  			x=0;
-   	  			y+=50;
+   	  			y+=100;
    	  		}
    	  		
    	  		
