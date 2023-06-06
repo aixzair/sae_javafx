@@ -1,16 +1,15 @@
 package fr.but.info.sae122.seance3;
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 public class DragMouseController extends MouseController{
 
-	public DragMouseController()
+	public DragMouseController(MouseController controller)
 	{
-		
 	}
 	
 	public void onMouseMoved(MouseEvent event)
@@ -40,6 +39,12 @@ public class DragMouseController extends MouseController{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setController(MouseController controller) {
 		// TODO Auto-generated method stub
 		
 	}

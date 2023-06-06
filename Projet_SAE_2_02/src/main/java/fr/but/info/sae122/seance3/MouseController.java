@@ -1,63 +1,58 @@
 package fr.but.info.sae122.seance3;
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
 
-public class MouseController implements Initializable{
+public abstract class MouseController implements Initializable{
 
-	private Scene scene;
-	
-	public MouseController()
+	protected Canvas canvas;
+	private MouseController controller;
+	/*
+	public MouseController(Canvas canvas)
 	{
-		
-	}
+		this.canvas = canvas;
+	}*/
 	
-	public void onMouseMoved(MouseEvent event)
-	{
-		
-	}
+	public abstract void onMouseMoved(MouseEvent event);
+	/*{
+		this.controller.onMouseMoved(event);
+	}*/
 	
-	public void onMouseDragged(MouseEvent event)
-	{
-		
-	}
+	public abstract void onMouseDragged(MouseEvent event);
+	/*{
+		this.controller.onMouseDragged(event);
+	}*/
 	
-	public void onMousePressed(MouseEvent event)
-	{
-		
-	}
+	public abstract void onMousePressed(MouseEvent event);
+	/*{
+		this.setController(new PlaceMouseController(this));
+		this.controller.onMousePressed(event);
+	}*/
 	
-	public void onMouseReleased(MouseEvent event)
-	{
+	public abstract void onMouseReleased(MouseEvent event);
+	/*{
+		this.controller.onMouseReleased(event);
 		
-	}
+	}*/
 	
-	public void onMouseClicked(MouseEvent event)
-	{
-		/*
-		boolean noeudClicked = false;
-		boolean arreteClicked = false;
-		
-		//Création de noeud
-		if(noeudClicked)
-		{
-			this.scene.setCursor(Cursor.CROSSHAIR);
-		}
-		if(arreteClicked)
-		{
-			this.scene.setCursor(Cursor.CROSSHAIR);
-		}*/
-	}
+	public abstract void setController(MouseController controller);
+	/*{
+		this.controller = controller;
+	}*/
+	
+	public abstract void onMouseClicked(MouseEvent event);
+	/*{
+		this.controller.onMouseClicked(event);
+	}*/
 
+	/*
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		this.setController(new IdleMouseController(this));
 		
-	}
-	
+	}*/
 }

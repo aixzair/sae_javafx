@@ -1,10 +1,12 @@
 package fr.but.info.sae122.seance3;
 
-import java.awt.event.MouseEvent;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.*;
+import javafx.scene.input.MouseEvent;
 
 /**
  * @author Alexandre Lerosier
@@ -49,5 +51,17 @@ extends MouseController {
 	
 	public void onMouseClicked(MouseEvent event) {
 		// Vide.
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setController(MouseController controller) {
+		// TODO Auto-generated method stub
+		
 	}
 }
