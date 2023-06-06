@@ -115,18 +115,6 @@ public class Controller implements Initializable {
 
         canvas.heightProperty().bind(pane.heightProperty());
         canvas.widthProperty().bind(pane.widthProperty());
-        
-        graph.addNode("a");
-        graph.addNode("b");
-        graph.addNode("c");
-
-        name.put("a", new GraphicNode(20, 20, 25, Color.BEIGE));
-        name.put("b", new GraphicNode(100, 20, 25, Color.BEIGE));
-        name.put("c", new GraphicNode(100, 200, 25, Color.BEIGE));
-        graph.addEdge("a", "b", 3);
-        graph.addEdge("b", "c", 4);
-        graph.addEdge("c", "a", 4);
-
 
         calcule.setSelected(false);
         vbox.setDisable(true);
