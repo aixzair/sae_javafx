@@ -45,6 +45,7 @@ public class PlaceMouseController extends MouseController{
 		this.cursY = event.getSceneY();
 		showInputTextDialog();
 		this.controller.setMouseController(new IdleMouseController(this.controller));
+		this.controller.getCanvas().setCursor(Cursor.DEFAULT);
 	}
 	
 	public void onMouseReleased(MouseEvent event)
@@ -72,7 +73,7 @@ public class PlaceMouseController extends MouseController{
 		}
 		
         TextInputDialog dialog = new TextInputDialog(""+defaultNode);
-        boolean looped = false;
+        //boolean looped = false;
         while(this.creaNoeud)	//Boucle jusqu'à ce que le noeud soit créé ou bouton annuler
         {
         	dialog.setTitle("Noeud");

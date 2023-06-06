@@ -1,8 +1,10 @@
 package fr.but.info.sae122.seance3;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 public class LinkMouseController extends MouseController{
 
@@ -27,32 +29,19 @@ public class LinkMouseController extends MouseController{
 	}
 	
 	public void onMousePressed(MouseEvent event)
-	{		
-		switch(this.ndSelect)
-		{
-			case 0:
-				//barreStatut.setText("Cliquez sur le noeud source");
-				this.ndSelect++;
-			break;
-			case 1:
-				//barreStatut.setText("Cliquez sur le noeud destination");
-				this.ndSelect++;
-			break;
-			case 2:
-				if(this.destr)
-				{
-					//détruire l'arrête si elle existe
-				}
-				else
-				{
-					showInputTextDialog();	//Création d'arrête
-				}
-				this.ndSelect = 0;
-			break;
+	{	
+		creaArrete = true;
+		if(controller.btToggle == 2) {
+			showInputTextDialog();
+			this.controller.setMouseController(new IdleMouseController(this.controller));
+		}else if(controller.btToggle == 3) {
+			removeEdge();
+			this.controller.setMouseController(new IdleMouseController(controller));
 		}
-		this.controller.setMouseController(new IdleMouseController(this.controller));
+		
 	}
 	
+
 	public void onMouseReleased(MouseEvent event)
 	{
 		
@@ -63,41 +52,58 @@ public class LinkMouseController extends MouseController{
 		
 	}
 
-	private void showInputTextDialog() {
-		TextInputDialog dialog = new TextInputDialog("Création");
-        boolean looped = false;
+	public void showInputTextDialog() {
+		TextInputDialog dialog = new TextInputDialog();
+        //boolean looped = false;
         
         dialog.setTitle("Arrête");
         dialog.setHeaderText("Entrez une capacité");
-        
-        while(this.creaArrete)	//Boucle jusqu'à ce que l'arrête soit créée ou bouton annuler
-        {
-	        Optional<String> result = dialog.showAndWait();
-	
-	        if(result.isPresent() && !result.isEmpty())
-	        {
-		        result.ifPresent(capa -> {
-		        	if(Integer.parseInt(capa) > 0 /*|| Integer.parseInt(capa) > flux*/)
-		        	{
-		        		//TO DO : Méthode qui crée une arrête entre nd 1 et nd2 de capacité capa OU qui modifie l'éventuelle arrête existante
-		        		//Si chemin augmentant, le supprimer. Conserver le flux
-		        		this.creaArrete = false;
-		        	}
-		        	else
-		        	{
-		        		dialog.setContentText("Veuillez entrer une capacité supérieure au flux");	//TO DO : Le mettre en rouge
-		        	}
-		        });
-	        }
-	        else if(result.isEmpty())
-	        {
-	        	dialog.setContentText("Veuillez entrer une capacité");	//TO DO : Le mettre en rouge
-	        	//dialog.getEditor()(Color.red);
-	        }
-	        else		//Bouton annuler ou quitter
-	        {
-	        	this.creaArrete = false;
-	        }
+        if(controller.getNd1() != null && controller.getNd2() != null) {
+        	while(this.creaArrete)	//Boucle jusqu'à ce que l'arrête soit créée ou bouton annuler
+            {    
+    	        dialog.setTitle("Noeud");
+            	
+            	Optional<String> res = dialog.showAndWait();
+            	try {
+            		if(this.controller.getGraph().getEdge(controller.getNd1(), controller.getNd2()) != null) {
+            			controller.getGraph().removeEdge(controller.getNd1(), controller.getNd2());
+            		}
+	            		if(!res.isEmpty() && res.isPresent()) {
+	                		try {
+	    		        		this.creaArrete = false;
+	                    		this.controller.getGraph().addEdge(this.controller.getNd1(), this.controller.getNd2(), Integer.parseInt(res.get()));
+	                			System.out.println(controller.getGraph());
+	                    		controller.drawEdge(this.controller.getNd1(), this.controller.getNd2());
+	                			controller.reDraw();
+	                			dialog.close();
+	                			creaArrete = false;
+	                		}catch (IllegalArgumentException e) {
+	                			dialog.setContentText("Veuillez entrer une capacité supérieure au flux");
+	        				}catch (NoSuchElementException e) {
+	        					dialog.setContentText("Veuillez entrer une capacité");
+	        				}
+	                		
+	                	}else {
+	                		this.creaArrete = false;
+	        	        	dialog.close();
+	                	}
+	            	}catch (NoSuchElementException e) {
+	            		this.creaArrete = false;
+	    	        	dialog.close();
+	    			}
+    	        
+            }
         }
+        this.controller.getEtat().setText("Arrête créée");
+        
+    }
+	
+	public void removeEdge() {
+		
+        if(controller.getNd1() != null && controller.getNd2() != null) {
+        	controller.getGraph().removeEdge(controller.getNd1(), controller.getNd2());
+        }
+        this.controller.getEtat().setText("Arrête détruite");
+        
     }
 }

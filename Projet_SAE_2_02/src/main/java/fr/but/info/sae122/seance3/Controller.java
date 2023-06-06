@@ -31,10 +31,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Controller implements Initializable {
 
@@ -58,7 +60,10 @@ public class Controller implements Initializable {
     private Graph graph;
     private Path path;
     private Stage stage;
-    private int btToggle;
+    protected int btToggle;
+    private String nd1;
+    private String nd2;
+    private double radius;
     /** Créer un Controller.
      * @param stage
      */
@@ -73,6 +78,7 @@ public class Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mouseController = new IdleMouseController(this);
         canvas.heightProperty().bind(pane.heightProperty());
         canvas.widthProperty().bind(pane.widthProperty());
         graph.addNode("a");
@@ -197,6 +203,7 @@ public class Controller implements Initializable {
         double radius = name.get(s).getRadius();
         double width = radius*2;
         Color color = name.get(s).getColor();
+        this.radius = width;
 
         canvas.getGraphicsContext2D().strokeRoundRect(x1, y1, width, width, radius, radius);
         canvas.getGraphicsContext2D().setFill(Color.BEIGE);
@@ -234,17 +241,18 @@ public class Controller implements Initializable {
     	btToggle = 1;
 		this.getCanvas().setCursor(Cursor.CROSSHAIR);
 		
-	
     }
 	
     public void ajtFlux()
     {
     	btToggle = 2;
+		this.getCanvas().setCursor(Cursor.CROSSHAIR);
     }
 	
     public void rtrFlux()
     {
     	btToggle = 3;
+		this.getCanvas().setCursor(Cursor.CROSSHAIR);
     }
 	
 	public Graph getGraph()
@@ -392,11 +400,72 @@ public class Controller implements Initializable {
  		{
  			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
  			setMouseController(new LinkMouseController(this, true));
+ 			double x = event.getX();
+ 			double y = event.getY();
+
+ 			this.getEtat().setText("Cliquez sur le noeud source");
+ 			if(nd1 == null)
+ 			{
+	 			name.forEach((t, u) ->{
+	 				double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if( z < radius) {
+	 					nd1 = t;
+	 				}
+	 			});
+	 			
+ 			}
+ 			else if(nd2 == null)
+ 			{
+ 				this.getEtat().setText("Cliquez sur le noeud source");
+ 				name.forEach((t, u) ->{
+ 					double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if(z < radius) {
+	 					nd2 = t;
+	 				}
+	 			});
+ 				
+ 			}
+ 			this.mouseController.onMousePressed(event);
  		}
  		if(this.btToggle == 3)
  		{
+ 			
  			//this.getCanvas().setCursor(Cursor.CROSSHAIR);
  			setMouseController(new LinkMouseController(this, false));
+ 			double x = event.getX();
+ 			double y = event.getY();
+
+ 			this.getEtat().setText("Cliquez sur le noeud source");
+ 			if(nd1 == null)
+ 			{
+	 			name.forEach((t, u) ->{
+	 				double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if( z < radius) {
+	 					nd1 = t;
+	 				}
+	 			});
+	 			
+ 			}
+ 			else if(nd2 == null)
+ 			{
+ 				this.getEtat().setText("Cliquez sur le noeud source");
+ 				name.forEach((t, u) ->{
+ 					double z = Math.abs((u.getX() -x)) + Math.abs((u.getY() -y)); 
+	 				if(z < radius) {
+	 					nd2 = t;
+	 				}
+	 			});
+ 				
+ 			}
+ 			this.mouseController.onMousePressed(event);
+
  		}
+     }
+     
+     public String getNd1() {
+    	 return nd1;
+     }
+     public String getNd2() {
+    	 return nd2;
      }
 }
